@@ -15,7 +15,7 @@ par(mex=1.2,mar=c(6,4,1,1), mfcol=c(2,2))
 assets <- read.ledger("assets")
 
 ## plot total amounts
-plot.function(X=assets[,c(1,6)],title="Total Assets",FUN=cumsum)
+plot.ledger(X=assets[,c(1,6)],title="Total Assets",FUN=cumsum)
 
 ## split assets on its categories
 assets.split <- split(assets,assets[,4])
@@ -23,7 +23,7 @@ assets.split <- split(assets,assets[,4])
 ## this allows to plot first the most contributed assets/expenses
 ord <- order(sapply(assets.split, function(x) sum(-x$Amount)))
 for (i in ord) {
-    plot.function(X=assets.split[[i]][,c(1,6)],
+    plot.ledger(X=assets.split[[i]][,c(1,6)],
                   title=names(assets.split)[i],
                   FUN=cumsum)
 }
@@ -37,7 +37,7 @@ for (i in ord) {
 expenses <- read.ledger("expenses")
 
 ## total expenses plot
-plot.function(X=expenses[,c(1,6)],title="Total Expenses",
+plot.ledger(X=expenses[,c(1,6)],title="Total Expenses",
               FUN=filter, rep(1,30),sides=1)
 
 ## remove some subtrees from accounts. For example, I also store
@@ -54,7 +54,7 @@ expenses.split <- split(expenses,expenses[,4])
 ## this allows to plot first the most contributed assets/expenses
 ord <- order(sapply(expenses.split, function(x) sum(-x$Amount)))
 for (i in ord) {
-    plot.function(X=expenses.split[[i]][,c(1,6)],
+    plot.ledger(X=expenses.split[[i]][,c(1,6)],
                   title=names(expenses.split)[[i]],
                   FUN=filter, rep(1,30),sides=1)
 }

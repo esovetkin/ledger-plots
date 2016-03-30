@@ -31,9 +31,9 @@ read.ledger <- function(string) {
 ##! \param ... arguments passed to FUN
 ##!
 ##! \return nothing
-plot.function <- function(X,title,FUN=cumsum,...) {
+plot.ledger <- function(X,title,FUN=cumsum,...) {
     dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
-
+    
     data <- data.frame("Date"=dates.series,"Amount"=0)
     data <- rbind(data,X)
     data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
