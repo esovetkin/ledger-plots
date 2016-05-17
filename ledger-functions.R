@@ -13,7 +13,7 @@ read.ledger <- function(string) {
     close(con)
     res[,1] <- as.Date(res[,1])
     
-    colnames(res) = c("Date",NA,"Description","Category","Currency","Amount",NA,"Note")
+    colnames(res) = c("Date",NA,"Description","Category","Currency","Amount",NA,NA)
 
     res
 }
@@ -31,11 +31,8 @@ read.ledger <- function(string) {
 ##! \param ... arguments passed to FUN
 ##!
 ##! \return nothing
-plot.ledger <- function(X,title,start.date=Sys.Date()-365*2,FUN=cumsum,...) {
-    dates.series <- seq(start.date,Sys.Date(),1)
-
-    #X <- X[X[,1] >= min(dates.series),]
-    #X <- rbind(X,data.frame("Date"=min(dates.series),"Amount"=sum(X[X[,1] < min(dates.series),2])))
+plot.ledger <- function(X,title,FUN=cumsum,...) {
+    dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
     
     data <- data.frame("Date"=dates.series,"Amount"=0)
     data <- rbind(data,X)
@@ -54,7 +51,6 @@ plot.ledger <- function(X,title,start.date=Sys.Date()-365*2,FUN=cumsum,...) {
          at=data[seq(1,nrow(data),length.out = 15),1],
          labels=data[seq(1,nrow(data),length.out = 15),1],
          las=3)
-    abline(v=Sys.Date() - 30, col="red")
     grid(nx=ceiling(as.numeric(max(data[,1])-min(data[,1]))/30), ny=25, col="black")
     abline(h=0, col=2)
     legend("topleft",
