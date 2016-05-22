@@ -13,7 +13,7 @@ read.ledger <- function(string) {
     close(con)
     res[,1] <- as.Date(res[,1])
     
-    colnames(res) = c("Date",NA,"Description","Category","Currency","Amount",NA,NA)
+    colnames(res) = c("Date",NA,"Description","Category","Currency","Amount",NA,"Notes")
 
     res
 }
