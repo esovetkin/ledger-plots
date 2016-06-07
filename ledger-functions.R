@@ -160,5 +160,8 @@ food.prices.convert <- function(food,currency) {
     food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Currency"] <-
         paste("\"",currency,"/kg\"",sep="")
 
+    ## remove extra columns
+    food <- food[, !(colnames(food) %in% c("Price","Price.currn"))]
+    
     return(food)
 }
