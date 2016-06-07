@@ -59,3 +59,106 @@ plot.ledger <- function(X,title,FUN=cumsum,...) {
                  sep=""),
            bty="n")   
 }
+
+##! Convert comments in food ledger to the corresponding prices
+##! \param food dataset with food, returns by read.ledger
+##! \param currency sometimes currency in transaction note is given
+food.prices.convert <- function(food,currency) {
+    ## convert names of the shops to a lower case
+    food$Description <- tolower(food$Description)
+    
+    ## paying currency and amount
+    food$Currency <- as.character(food$Currency)
+    food$Amount <- as.numeric(food$Amount)
+    
+    ## add price vectors
+    food$Price <- rep(NA,nrow(food))
+    food$Price.currn <- rep(NA,nrow(food))
+    
+    ## Convert comments to character
+    food$Note <- as.character(food$Note)
+
+### deal with comments like "0.5kg @ 1.99 EUR" or "10x @ 100g" 
+    regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)[ ]?@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
+    str <- regmatches(food$Note,gregexpr(regstr,food$Note))
+
+    ## add extra lines in food \todo remove repitition
+    l <- sapply(str,length)
+    idx <- rep(1,nrow(food))
+    idx[which(l>1)] <- l[l>1]
+    idx.at <- l[rep(1:nrow(food),idx)] > 0
+    food <- food[rep(1:nrow(food),idx),]
+    str <- unlist(str)
+
+    ## obtain the values and currencies
+    at.value <- as.numeric(gsub(regstr,"\\3",str))
+    at.currn <- gsub(regstr,"\\4",str)
+
+    unit.value <- as.numeric(gsub(regstr,"\\1",str))
+    unit.currn <- gsub(regstr,"\\2",str)
+
+    ## index of recorded prices, i.e. currency coincide
+    idx.rec <- at.currn == food$Currency[idx.at]
+
+    food$Price.currn[idx.at][idx.rec] <-
+        paste("\"",at.currn[idx.rec],"/",unit.currn[idx.rec],"\"",sep="")
+    food$Price[idx.at][idx.rec] <- at.value[idx.rec]
+
+    ## for others the following rule applies
+    food$Price[idx.at][!idx.rec] <-
+        food$Amount[idx.at][!idx.rec] / (at.value[!idx.rec]*unit.value[!idx.rec])
+    food$Price.currn[idx.at][!idx.rec] <- 
+        paste("\"",food$Currency[idx.at][!idx.rec],"/",at.currn[!idx.rec],"\"",sep="")
+
+    ## remove captured items
+    food$Note <- gsub(regstr,"",food$Note)
+
+### deal with prices like " @ 0.99 EUR/kg"
+    regstr <- "@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+/[[:alpha:]]+)"
+    m.at <- regexpr(regstr,food$Note)
+    idx.at <- m.at != -1
+    str <- regmatches(food$Note,m.at)
+
+    food$Price[idx.at] <- as.numeric(gsub(regstr,"\\1",str))
+    food$Price.currn[idx.at] <- paste("\"",gsub(regstr,"\\2",str),"\"",sep="")
+
+    ## remove captured items
+    food$Note <- gsub(regstr,"",food$Note)
+
+### deal with other amounts
+    regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
+    str <- regmatches(food$Note,gregexpr(regstr,food$Note))
+
+    ## add extra lines in food
+    l <- sapply(str,length)
+    idx <- rep(1,nrow(food))
+    idx[which(l>1)] <- l[l>1]
+    idx.at <- l[rep(1:nrow(food),idx)] > 0
+    food <- food[rep(1:nrow(food),idx),]
+    str <- unlist(str)
+
+    ## get value and currency
+    unit.value <- as.numeric(gsub(regstr,"\\1",str))
+    unit.currn <- gsub(regstr,"\\2",str)
+
+    food$Price[idx.at] <- food$Amount[idx.at]/as.numeric(unit.value)
+    food$Price.currn[idx.at] <-
+        paste("\"",food$Currency[idx.at],"/",unit.currn,"\"",sep="")
+
+    ## remove capture items. So far I have covered all cases above
+    food$Note <- gsub(regstr,"",food$Note)
+
+    ## write data
+    food$Currency <- food$Price.currn
+    food$Amount <- food$Price
+
+    food <- food[!is.na(food$Amount),]
+
+    ## convert g to kg
+    food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Amount"] <-
+        food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Amount"]*1000
+    food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Currency"] <-
+        paste("\"",currency,"/kg\"",sep="")
+
+    return(food)
+}
