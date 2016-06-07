@@ -76,11 +76,11 @@ food.prices.convert <- function(food,currency) {
     food$Price.currn <- rep(NA,nrow(food))
     
     ## Convert comments to character
-    food$Note <- as.character(food$Note)
+    food$Notes <- as.character(food$Notes)
 
 ### deal with comments like "0.5kg @ 1.99 EUR" or "10x @ 100g" 
     regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)[ ]?@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
-    str <- regmatches(food$Note,gregexpr(regstr,food$Note))
+    str <- regmatches(food$Notes,gregexpr(regstr,food$Notes))
 
     ## add extra lines in food \todo remove repitition
     l <- sapply(str,length)
@@ -111,23 +111,23 @@ food.prices.convert <- function(food,currency) {
         paste("\"",food$Currency[idx.at][!idx.rec],"/",at.currn[!idx.rec],"\"",sep="")
 
     ## remove captured items
-    food$Note <- gsub(regstr,"",food$Note)
+    food$Notes <- gsub(regstr,"",food$Notes)
 
 ### deal with prices like " @ 0.99 EUR/kg"
     regstr <- "@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+/[[:alpha:]]+)"
-    m.at <- regexpr(regstr,food$Note)
+    m.at <- regexpr(regstr,food$Notes)
     idx.at <- m.at != -1
-    str <- regmatches(food$Note,m.at)
+    str <- regmatches(food$Notes,m.at)
 
     food$Price[idx.at] <- as.numeric(gsub(regstr,"\\1",str))
     food$Price.currn[idx.at] <- paste("\"",gsub(regstr,"\\2",str),"\"",sep="")
 
     ## remove captured items
-    food$Note <- gsub(regstr,"",food$Note)
+    food$Notes <- gsub(regstr,"",food$Notes)
 
 ### deal with other amounts
     regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
-    str <- regmatches(food$Note,gregexpr(regstr,food$Note))
+    str <- regmatches(food$Notes,gregexpr(regstr,food$Notes))
 
     ## add extra lines in food
     l <- sapply(str,length)
@@ -146,7 +146,7 @@ food.prices.convert <- function(food,currency) {
         paste("\"",food$Currency[idx.at],"/",unit.currn,"\"",sep="")
 
     ## remove capture items. So far I have covered all cases above
-    food$Note <- gsub(regstr,"",food$Note)
+    food$Notes <- gsub(regstr,"",food$Notes)
 
     ## write data
     food$Currency <- food$Price.currn
