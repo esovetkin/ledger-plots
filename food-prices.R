@@ -1,10 +1,14 @@
 setwd("~/bank/")
 source("ledger-functions.R")
 
+currency <- "EUR"
+
 ## read assets data
 food <- read.ledger(paste("food house bath other -f ~/bank/food-ledger_2013.log ",
                           "-f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log ",
-                          "-f ~/bank/food-ledger.log -H -X EUR -b 2016-03-15"))
+                          "-f ~/bank/food-ledger.log -H -X ",currency," -b 2016-03-15"))
+
+food$Description <- tolower(food$Description)
 
 ## paying currency and amount
 Currency <- as.character(food$Currency)
@@ -18,10 +22,10 @@ Price.currn <- rep(NA,nrow(food))
 Notes <- as.character(food$Note)
 
 ## prices like "0.5kg @ 1.99 EUR" or "10x @ 100g"
-regstr <- "([.0-9]+)[ ]*([[:alpha:]]+)[ ]*@[ ]*([.0-9]+)[ ]*([[:alpha:]]+)"
-m.at <- regexpr(regstr,Notes)
-idx.at <- m.at != -1
-str <- regmatches(Notes,m.at)
+regstr <- "([.0-9]+)[ ]?([[:alpha:]]+)[ ]?@[ ]?([.0-9]+)[ ]?([[:alpha:]]+)"
+str <- regmatches(Notes,gregexpr(regstr,Notes))
+idx.at <- rep(1:nrow(food),sapply(str,length))
+str <- unlist(str)
 
 at.value <- as.numeric(gsub(regstr,"\\3",str))
 at.currn <- gsub(regstr,"\\4",str)
@@ -45,7 +49,7 @@ Price.currn[idx.at][!idx.rec] <-
 Notes <- gsub(regstr,"",Notes)
 
 ## prices like " @ 0.99 EUR/kg"
-regstr <- "@[ ]*([.0-9]+)[ ]*([[:alpha:]]+/[[:alpha:]]+)"
+regstr <- "@[ ]?([.0-9]+)[ ]?([[:alpha:]]+/[[:alpha:]]+)"
 m.at <- regexpr(regstr,Notes)
 idx.at <- m.at != -1
 str <- regmatches(Notes,m.at)
@@ -58,7 +62,7 @@ Price.currn[idx.at] <- paste("\"",gsub(regstr,"\\2",str),"\"",sep="")
 Notes <- gsub(regstr,"",Notes)
 
 ## deal with other amounts
-regstr <- "([.0-9]+)[ ]*([[:alpha:]]+)"
+regstr <- "([.0-9]+)[ ]?([[:alpha:]]+)"
 m.at <- regexpr(regstr,Notes)
 idx.at <- m.at != -1
 str <- regmatches(Notes,m.at)
@@ -80,21 +84,32 @@ food$Amount <- Price
 
 food <- food[!is.na(food$Amount),]
 
-food[food$Currency == "\"EUR/g\"","Amount"] <-
-    food[food$Currency == "\"EUR/g\"","Amount"]*1000
-food[food$Currency == "\"EUR/g\"","Currency"] <- "\"EUR/kg\""
+food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Amount"] <-
+    food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Amount"]*1000
+food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Currency"] <-
+    paste("\"",currency,"/kg\"",sep="")
 
 
-prices <- aggregate(food$Amount,by=list(food$Category,food$Description,food$Currency),min)
-colnames(prices) <- c("category","shop","currency","price")
+prices <- aggregate(food$Amount,by=list(food$Category,food$Description,food$Currency),
+                    function(x) c("min"=min(x),"mean"=mean(x),"max"=max(x)))
+prices$min <- prices$x[,1]
+prices$mean <- prices$x[,2]
+prices$max <- prices$x[,3]
+prices$x <- NULL
+colnames(prices) <- c("category","shop","currency","min","mean","max")
 
 data <- prices[grep("*",prices[,1],ignore.case = TRUE),]
-data <- data[order(data$category,data$price,data$currency),]
+data <- data[order(data$category,data$min,data$currency),]
+
+hline.after <- c(-1,0,which(diff(as.numeric(data$category)) > 0),nrow(data))
 
 require(xtable)
 
-write("\\documentclass[a4paper]{article} \\pagestyle{empty} \\usepackage{longtable} \\usepackage[left=1cm, right=1cm, bottom=1cm,top=1cm]{geometry} \\begin{document}",file="food-prices.tex")
-print(xtable(data,digits=5),type="latex",file="food-prices.tex",append=TRUE,tabular.environment = 'longtable',include.rownames=FALSE,floating=FALSE)
+write("\\documentclass[a4paper]{article} \\pagestyle{empty} \\usepackage[utf8]{inputenc} \\usepackage{longtable} \\usepackage[left=1cm, right=1cm, bottom=1cm,top=1cm]{geometry} \\begin{document}",file="food-prices.tex")
+print(xtable(data,digits=5),type="latex",file="food-prices.tex",
+      append=TRUE,tabular.environment = 'longtable',
+      include.rownames=FALSE,floating=FALSE,
+      hline.after = hline.after)
 write("\\end{document}",file="food-prices.tex",append=TRUE)
 
-system("pdflatex food-prices.tex && pdflatex food-prices.tex")
+system("pdflatex food-prices.tex && pdflatex food-prices.tex && mupdf food-prices.pdf &")
