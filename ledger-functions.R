@@ -18,6 +18,11 @@
 #'
 #' assets <- read.ledger("^assets: -X EUR")
 read.ledger <- function(query) {
+  # check presence of ledger
+  if (0 != system2("command"," -v ledger",stdout=FALSE,stderr=FALSE)) {
+    stop("Ledger command is not found!")
+  }
+
   lines <- system(paste("ledger csv",query), intern=TRUE)
 
   con <- textConnection(lines)
