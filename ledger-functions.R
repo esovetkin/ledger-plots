@@ -35,6 +35,43 @@ read.ledger <- function(query) {
   res
 }
 
+#' @title Plot accounts for a given query
+#'
+#' @description For a given query plot accounts given transaction
+#'   function (see plot.ledger). All plots are done in the current
+#'   device.
+#'
+#' @param query query string that is used in read.ledger function
+#'
+#' @param order.function function that is calculated in order to sort
+#'   the plots for different accounts. The function must take a vector
+#'   and return a single value
+#'
+#' @param ... extra arguments given to plot.ledger function
+#'
+#' @return nothing
+#'
+plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
+  # read transactions
+  transactions <- read.ledger(query)
+
+  # get account tree
+  tree <- subcategories(transactions$Category)
+
+  # get ordering of the accounts
+  ord <- order(-tree[,2],
+               sapply(tree[,1], function(x) {
+                 idx <- grep(x,transactions$Category)
+                 order.function(transactions$Amount[idx])
+               }),
+               decreasing = TRUE)
+
+  # make a plots in the selected order
+  for (i in ord) {
+    idx <- grep(tree[i,1],transactions$Category)
+    plot.ledger(X=transactions[idx,c(1,6)],title=tree[i,1],...)
+  }
+}
 
 #' @title Plot ledger data in a current device
 #'
