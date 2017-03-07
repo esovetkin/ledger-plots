@@ -1,12 +1,24 @@
-##! Function to read from ledger
-
-##! \param string string passes to ledger command. The precise string
-##! which is called in shell is the following:
-##! > ledger csv <string>
-##! One may pass extra argument to ledger this way, see examples.
-read.ledger <- function(string) {
-    lines <- system(paste("ledger csv",string,sep=" "),
-                    intern=TRUE)
+#' @title Make quries to ledger
+#'
+#' @description Call a shell and execute ledger command with a given
+#'   query.
+#'
+#' @param query string query that is used in the ledger call.
+#'
+#' @return data.frame containing the following columns
+#' \code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
+#'
+#' @details The function make the following call in shell:
+#'   \code{ledger csv <query>}
+#'
+#' One may pass extra argument to ledger this way.
+#'
+#' @examples
+#' expenses <- read.ledger("^expenses: -X EUR")
+#'
+#' assets <- read.ledger("^assets: -X EUR")
+read.ledger <- function(query) {
+    lines <- system(paste("ledger csv",query), intern=TRUE)
 
     con <- textConnection(lines)
     res <- read.csv(con, header=FALSE)
@@ -19,18 +31,29 @@ read.ledger <- function(string) {
 }
 
 
-##! Funciton to plot ledger data
-##! Transforms and plots data in some format, providing some extra information
-##!
-##! \param X data. First column date, Second column amount
-##!
-##! \param title title for plot
-##!
-##! \param FUN what to do with data before plotting
-##!
-##! \param ... arguments passed to FUN
-##!
-##! \return nothing
+#' @title Plot ledger data in a current device
+#'
+#' @description Transforms and plots data in some format, providing
+#'   some extra information
+#'
+#' @param X data. First column date, Second column amount
+#'
+#' @param title title for plot
+#'
+#' @param FUN what to do with data before plotting
+#'
+#' @param ... arguments passed to FUN
+#'
+#' @return nothing
+#'
+#' @examples
+#' # read expenses data
+#' expenses <- read.ledger("^expenses: -X EUR")
+#'
+#' # plot cumsum over 30 days expenses
+#' plot.ledger(X=expenses[,c(1,6)],
+#'             title="30 days average expenses",
+#'             FUN=filter, rep(1,30),sides=1)
 plot.ledger <- function(X,title,FUN=cumsum,...) {
     dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
 
@@ -60,13 +83,17 @@ plot.ledger <- function(X,title,FUN=cumsum,...) {
            bty="n")
 }
 
-#! Get list of categories and subcatogories
-#!
-#! \param names character vector containing different account names
-#!
-#! The purpose of the function is to return all possible names on each
-#! level. Function returns list of categories names ordered by the
-#! depth
+#' @title Get list of account tree
+#'
+#' @description For a given character vector of the account names
+#'   generate an ordered data.frame containing account names and the
+#'   depth of the account.
+#'
+#' For example, "Assets:Bank:Current" account has depth 3
+#'
+#' @param names character vector containing different account names
+#'
+#' @return data.frame containing column account and depth
 subcategories <- function(names) {
   names <- as.character(names)
 
@@ -94,32 +121,32 @@ subcategories <- function(names) {
   res
 }
 
-##! Convert comments in food ledger to the corresponding prices
-##! \param food dataset with food, returns by read.ledger
-##! \param currency sometimes currency in transaction note is given
+#' Convert comments in food ledger to the corresponding prices
+#' @param food dataset with food, returns by read.ledger
+#' @param currency sometimes currency in transaction note is given
 food.prices.convert <- function(food,currency) {
-    ## convert names of the shops to a lower case
+    # convert names of the shops to a lower case
     food$Description <- tolower(food$Description)
 
-    ## paying currency and amount
+    # paying currency and amount
     food$Currency <- as.character(food$Currency)
     food$Amount <- as.numeric(food$Amount)
 
-    ## add price vectors
+    # add price vectors
     food$Price <- rep(NA,nrow(food))
     food$Price.currn <- rep(NA,nrow(food))
 
-    ## Convert comments to character
+    # Convert comments to character
     food$Notes <- as.character(food$Notes)
 
     food$Volume <- rep(NA,nrow(food))
     food$Volume.Curr <- rep("",nrow(food))
 
-### deal with comments like "0.5kg @ 1.99 EUR" or "10x @ 100g"
+## deal with comments like "0.5kg @ 1.99 EUR" or "10x @ 100g"
     regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)[ ]?@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
     str <- regmatches(food$Notes,gregexpr(regstr,food$Notes))
 
-    ## add extra lines in food \todo remove repetition
+    # add extra lines in food \todo remove repetition
     l <- sapply(str,length)
     idx <- rep(1,nrow(food))
     idx[which(l>1)] <- l[l>1]
@@ -127,14 +154,14 @@ food.prices.convert <- function(food,currency) {
     food <- food[rep(1:nrow(food),idx),]
     str <- unlist(str)
 
-    ## obtain the values and currencies
+    # obtain the values and currencies
     at.value <- as.numeric(gsub(regstr,"\\3",str))
     at.currn <- gsub(regstr,"\\4",str)
 
     unit.value <- as.numeric(gsub(regstr,"\\1",str))
     unit.currn <- gsub(regstr,"\\2",str)
 
-    ## index of recorded prices, i.e. currency coincide
+    # index of recorded prices, i.e. currency coincide
     idx.rec <- at.currn == food$Currency[idx.at]
 
     food$Price.currn[idx.at][idx.rec] <-
@@ -144,7 +171,7 @@ food.prices.convert <- function(food,currency) {
     food$Volume[idx.at][idx.rec] <- unit.value[idx.rec]
     food$Volume.Curr[idx.at][idx.rec] <- unit.currn[idx.rec]
 
-    ## for others the following rule applies
+    # for others the following rule applies
     food$Price[idx.at][!idx.rec] <-
         food$Amount[idx.at][!idx.rec] / (at.value[!idx.rec]*unit.value[!idx.rec])
     food$Price.currn[idx.at][!idx.rec] <-
@@ -153,10 +180,10 @@ food.prices.convert <- function(food,currency) {
     food$Volume[idx.at][!idx.rec] <- unit.value[!idx.rec]
     food$Volume.Curr[idx.at][!idx.rec] <- unit.currn[!idx.rec]
 
-    ## remove captured items
+    # remove captured items
     food$Notes <- gsub(regstr,"",food$Notes)
 
-### deal with prices like " @ 0.99 EUR/kg"
+## deal with prices like " @ 0.99 EUR/kg"
     regstr <- "@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+/[[:alpha:]]+)"
     m.at <- regexpr(regstr,food$Notes)
     idx.at <- m.at != -1
@@ -165,14 +192,14 @@ food.prices.convert <- function(food,currency) {
     food$Price[idx.at] <- as.numeric(gsub(regstr,"\\1",str))
     food$Price.currn[idx.at] <- paste("\"",gsub(regstr,"\\2",str),"\"",sep="")
 
-    ## remove captured items
+    # remove captured items
     food$Notes <- gsub(regstr,"",food$Notes)
 
-### deal with other amounts
+## deal with other amounts
     regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
     str <- regmatches(food$Notes,gregexpr(regstr,food$Notes))
 
-    ## add extra lines in food
+    # add extra lines in food
     l <- sapply(str,length)
     idx <- rep(1,nrow(food))
     idx[which(l>1)] <- l[l>1]
@@ -180,7 +207,7 @@ food.prices.convert <- function(food,currency) {
     food <- food[rep(1:nrow(food),idx),]
     str <- unlist(str)
 
-    ## get value and currency
+    # get value and currency
     unit.value <- as.numeric(gsub(regstr,"\\1",str))
     unit.currn <- gsub(regstr,"\\2",str)
 
@@ -191,22 +218,22 @@ food.prices.convert <- function(food,currency) {
     food$Volume[idx.at] <- unit.value
     food$Volume.Curr[idx.at] <- unit.currn
 
-    ## remove capture items. So far I have covered all cases above
+    # remove capture items. So far I have covered all cases above
     food$Notes <- gsub(regstr,"",food$Notes)
 
-    ## write data
+    # write data
     food$Currency <- food$Price.currn
     food$Amount <- food$Price
 
     food <- food[!is.na(food$Amount),]
 
-    ## convert g to kg
+    # convert g to kg
     food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Amount"] <-
         food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Amount"]*1000
     food[food$Currency == paste("\"",currency,"/g\"",sep=""),"Currency"] <-
         paste("\"",currency,"/kg\"",sep="")
 
-    ## remove extra columns
+    # remove extra columns
     food <- food[, !(colnames(food) %in% c("Price","Price.currn"))]
 
     return(food)
