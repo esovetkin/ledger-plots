@@ -60,6 +60,40 @@ plot.ledger <- function(X,title,FUN=cumsum,...) {
            bty="n")   
 }
 
+#! Get list of categories and subcatogories
+#!
+#! \param names character vector containing different account names
+#!
+#! The purpose of the function is to return all possible names on each
+#! level. Function returns list of categories names ordered by the
+#! depth
+subcategories <- function(names) {
+  names <- as.character(names)
+
+  l <- strsplit(names,split=":")
+
+  res <- character(0)
+
+  # do the loop by the depth of account
+  for (depth in 1:max(sapply(l,length))) {
+    res <- c(res,
+             unique(sapply(l,
+                           function(x) {
+                             paste(x[1:min(depth,length(x))],collapse = ":")
+                           })))
+  }
+
+  # get unique names
+  res <- unique(res)
+
+  res <- data.frame("Account"=res,
+                    "Depth" = sapply(res,function(x) length(strsplit(x,":")[[1]])))
+
+  rownames(res) <- 1:nrow(res)
+
+  res
+}
+
 ##! Convert comments in food ledger to the corresponding prices
 ##! \param food dataset with food, returns by read.ledger
 ##! \param currency sometimes currency in transaction note is given
