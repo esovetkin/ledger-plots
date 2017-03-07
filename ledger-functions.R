@@ -7,12 +7,12 @@
 read.ledger <- function(string) {
     lines <- system(paste("ledger csv",string,sep=" "),
                     intern=TRUE)
-    
+
     con <- textConnection(lines)
     res <- read.csv(con, header=FALSE)
     close(con)
     res[,1] <- as.Date(res[,1])
-    
+
     colnames(res) = c("Date",NA,"Description","Category","Currency","Amount",NA,"Notes")
 
     res
@@ -33,7 +33,7 @@ read.ledger <- function(string) {
 ##! \return nothing
 plot.ledger <- function(X,title,FUN=cumsum,...) {
     dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
-    
+
     data <- data.frame("Date"=dates.series,"Amount"=0)
     data <- rbind(data,X)
     data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
@@ -57,7 +57,7 @@ plot.ledger <- function(X,title,FUN=cumsum,...) {
            paste("ny cell=",
                  round((max(data[,2],na.rm=TRUE)-min(data[,2],na.rm=TRUE))/25),
                  sep=""),
-           bty="n")   
+           bty="n")
 }
 
 #! Get list of categories and subcatogories
@@ -100,23 +100,26 @@ subcategories <- function(names) {
 food.prices.convert <- function(food,currency) {
     ## convert names of the shops to a lower case
     food$Description <- tolower(food$Description)
-    
+
     ## paying currency and amount
     food$Currency <- as.character(food$Currency)
     food$Amount <- as.numeric(food$Amount)
-    
+
     ## add price vectors
     food$Price <- rep(NA,nrow(food))
     food$Price.currn <- rep(NA,nrow(food))
-    
+
     ## Convert comments to character
     food$Notes <- as.character(food$Notes)
 
-### deal with comments like "0.5kg @ 1.99 EUR" or "10x @ 100g" 
+    food$Volume <- rep(NA,nrow(food))
+    food$Volume.Curr <- rep("",nrow(food))
+
+### deal with comments like "0.5kg @ 1.99 EUR" or "10x @ 100g"
     regstr <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)[ ]?@[ ]?([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
     str <- regmatches(food$Notes,gregexpr(regstr,food$Notes))
 
-    ## add extra lines in food \todo remove repitition
+    ## add extra lines in food \todo remove repetition
     l <- sapply(str,length)
     idx <- rep(1,nrow(food))
     idx[which(l>1)] <- l[l>1]
@@ -138,11 +141,17 @@ food.prices.convert <- function(food,currency) {
         paste("\"",at.currn[idx.rec],"/",unit.currn[idx.rec],"\"",sep="")
     food$Price[idx.at][idx.rec] <- at.value[idx.rec]
 
+    food$Volume[idx.at][idx.rec] <- unit.value[idx.rec]
+    food$Volume.Curr[idx.at][idx.rec] <- unit.currn[idx.rec]
+
     ## for others the following rule applies
     food$Price[idx.at][!idx.rec] <-
         food$Amount[idx.at][!idx.rec] / (at.value[!idx.rec]*unit.value[!idx.rec])
-    food$Price.currn[idx.at][!idx.rec] <- 
+    food$Price.currn[idx.at][!idx.rec] <-
         paste("\"",food$Currency[idx.at][!idx.rec],"/",at.currn[!idx.rec],"\"",sep="")
+
+    food$Volume[idx.at][!idx.rec] <- unit.value[!idx.rec]
+    food$Volume.Curr[idx.at][!idx.rec] <- unit.currn[!idx.rec]
 
     ## remove captured items
     food$Notes <- gsub(regstr,"",food$Notes)
@@ -179,6 +188,9 @@ food.prices.convert <- function(food,currency) {
     food$Price.currn[idx.at] <-
         paste("\"",food$Currency[idx.at],"/",unit.currn,"\"",sep="")
 
+    food$Volume[idx.at] <- unit.value
+    food$Volume.Curr[idx.at] <- unit.currn
+
     ## remove capture items. So far I have covered all cases above
     food$Notes <- gsub(regstr,"",food$Notes)
 
@@ -196,6 +208,6 @@ food.prices.convert <- function(food,currency) {
 
     ## remove extra columns
     food <- food[, !(colnames(food) %in% c("Price","Price.currn"))]
-    
+
     return(food)
 }
