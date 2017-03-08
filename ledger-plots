@@ -1,0 +1,56 @@
+#!/usr/bin/env Rscript
+
+source("ledger-functions.R")
+
+# parse arguments
+if (!require("optparse")) {
+  install.packages("optparse")
+  require("optparse")
+}
+
+# available options
+option_list <- list(
+  make_option(c("-q","--queries"), type="character", default=NULL,
+              help = "queries separated by ';;' for transcations to plot",
+              metavar="character"),
+  make_option(c("-f","--functions"), type="character", default="cumsum",
+              help = "functions separated by ';;'  applied to queries",
+              metavar="character"),
+  make_option(c("-o","--output"), type="character", default="assets-expenses.pdf",
+              help = "output pdf file", metavar="character")
+)
+
+opt_parser = OptionParser(option_list = option_list)
+opt = parse_args(opt_parser)
+
+# split on vectors
+q <- unlist(strsplit(opt$queries,split=";;"))
+f <- unlist(strsplit(opt$functions,split=";;"))
+
+# make functions the same length
+if (length(f) < length(q)) {
+  # make number of functions the same as queries
+  f <- f[(1:length(q) - 1) %% length(f) + 1]
+}
+
+pdf(opt$output, width = 13, height = 7, onefile = TRUE)
+
+## graphical parameters
+par(mex=1.2,mar=c(6,4,1,1), mfcol=c(2,2))
+
+for (i in 1:length(q)) {
+  plot.query(q[i],
+             FUN=function(x)
+               do.call(eval(parse(text=f[i])),args=list(x)))
+}
+
+dev.off()
+
+
+
+
+
+
+
+
+
