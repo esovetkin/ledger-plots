@@ -2,6 +2,9 @@
 
 Make plots for your ledger entries and save them to a pdf file.
 
+Obligatory screenshot:
+![plot of some expenses account](screenshot.jpg?raw=true)
+
 ## Dependencies
 
  * [ledger](http://ledger-cli.org/)
@@ -16,6 +19,9 @@ ledger-plots file. Run
 ledger-plots --install-dependencies
 ```
 to install the missing R-packages.
+
+Alternatively, there is an AUR package for archlinux:
+ledger-plots-git.
 
 See full options list by saying
 ```
