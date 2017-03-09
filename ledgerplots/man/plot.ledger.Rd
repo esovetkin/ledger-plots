@@ -33,5 +33,6 @@ expenses <- read.ledger("^expenses: -X EUR")
 plot.ledger(X=expenses[,c(1,6)],
             title="30 days average expenses",
             FUN=filter, rep(1,30),sides=1)
+
 }
 

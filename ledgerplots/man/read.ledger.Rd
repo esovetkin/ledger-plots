@@ -27,5 +27,6 @@ One may pass extra argument to ledger this way.
 expenses <- read.ledger("^expenses: -X EUR")
 
 assets <- read.ledger("^assets: -X EUR")
+
 }
 

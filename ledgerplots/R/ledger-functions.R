@@ -17,19 +17,26 @@
 #' expenses <- read.ledger("^expenses: -X EUR")
 #'
 #' assets <- read.ledger("^assets: -X EUR")
+#'
+#' @export
 read.ledger <- function(query) {
   # check presence of ledger
   if (0 != system2("command"," -v ledger",stdout=FALSE,stderr=FALSE)) {
     stop("Ledger command is not found!")
   }
 
+  # make query to ledger and read to string
   lines <- system(paste("ledger csv",query), intern=TRUE)
 
+  # convert string to a data.frame
   con <- textConnection(lines)
   res <- read.csv(con, header=FALSE)
   close(con)
+
+  # convert Date to a real Dates
   res[,1] <- as.Date(res[,1])
 
+  # rename columns
   colnames(res) = c("Date",NA,"Description","Category","Currency","Amount",NA,"Notes")
 
   res
@@ -41,7 +48,8 @@ read.ledger <- function(query) {
 #'   function (see plot.ledger). All plots are done in the current
 #'   device.
 #'
-#' @param query query string that is used in read.ledger function
+#' @param query query string that is used in read.ledger function to
+#'   query the ledger for transactions
 #'
 #' @param order.function function that is calculated in order to sort
 #'   the plots for different accounts. The function must take a vector
@@ -49,8 +57,17 @@ read.ledger <- function(query) {
 #'
 #' @param ... extra arguments given to plot.ledger function
 #'
+#' @details the plots are ordered by the depth of the ledger account
+#'   name and by a value of the order.function (by default it
+#'   calculates the sum of absolute values of transactions). This
+#'   allows to order many plots in such a fashion that firstly a
+#'   presented a high level plots with the most impact (wrt
+#'   order.function).
+#'
 #' @return nothing
 #'
+#'
+#' @export
 plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
   # read transactions
   transactions <- read.ledger(query)
@@ -75,14 +92,17 @@ plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
 
 #' @title Plot ledger data in a current device
 #'
-#' @description Transforms and plots data in some format, providing
-#'   some extra information
+#' @description A low lever function that do the actual
+#'   plot. Transforms and plots data in some format, providing some
+#'   extra information
 #'
 #' @param X data. First column date, Second column amount
 #'
-#' @param title title for plot
+#' @param title title for the plot
 #'
-#' @param FUN what to do with data before plotting
+#' @param FUN what to do with data before plotting. This must be a
+#'   function that accept a vector as an argument and outputs a
+#'   vector.
 #'
 #' @param ... arguments passed to FUN
 #'
@@ -96,6 +116,8 @@ plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
 #' plot.ledger(X=expenses[,c(1,6)],
 #'             title="30 days average expenses",
 #'             FUN=filter, rep(1,30),sides=1)
+#'
+#' @export
 plot.ledger <- function(X,title,FUN=cumsum,...) {
   dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
 
@@ -136,6 +158,8 @@ plot.ledger <- function(X,title,FUN=cumsum,...) {
 #' @param names character vector containing different account names
 #'
 #' @return data.frame containing column account and depth
+#'
+#' @export
 subcategories <- function(names) {
   names <- as.character(names)
 
