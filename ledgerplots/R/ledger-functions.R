@@ -200,6 +200,18 @@ account.tree.depth <- function(names) {
   res
 }
 
+#' @title Calculate 30 days average of the given vector
+#'
+#' @description example of a functions can be used to be appled for
+#'   the transaction vectors
+#'
+#' @param x a numeric vector
+#'
+#' @export
+monthly <- function(x) {
+  filter(x,rep(1,30),sides=1)
+}
+
 #' Convert comments in food ledger to the corresponding prices
 #' @param food dataset with food, returns by read.ledger
 #' @param currency sometimes currency in transaction note is given
