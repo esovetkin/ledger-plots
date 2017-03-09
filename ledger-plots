@@ -2,9 +2,6 @@
 
 #' Install missing packages
 install.missing.packages <- function() {
-  # for command line argument parsing
-  if (!require("optparse")) install.packages("optparse")
-
   # devtools for installing ledgerplots package
   if (!require("devtools")) install.packages("devtools")
 
@@ -15,7 +12,8 @@ install.missing.packages <- function() {
 
 # parse arguments
 if (!require("optparse", quietly = TRUE)) {
-  stop("optparse R-package is missing! Use --install-dependencies")
+  install.packages("optparse")
+  # stop("optparse R-package is missing! Use --install-dependencies")
 }
 require("optparse", quietly = TRUE)
 
