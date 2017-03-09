@@ -75,7 +75,7 @@ read.ledger <- function(query, options = "") {
 queryplot <- function(query, order.function = function(x) sum(abs(x)),
                       ledger.options, ...) {
   # read transactions
-  cat("Reading transactions...\n")
+  cat(paste("Reading transactions for the query:",query,"\n"))
   transactions <- read.ledger(query, ledger.options)
 
   # get account tree

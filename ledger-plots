@@ -21,7 +21,7 @@ require("optparse", quietly = TRUE)
 
 # available options
 option_list <- list(
-  make_option(c("-o","--output"), type="character", default="assets-expenses.pdf",
+  make_option(c("-o","--output"), type="character", default="ledger.pdf",
               help = "output pdf file name", metavar="character"),
   make_option(c("-q","--queries"), type="character", default=NULL,
               help =
