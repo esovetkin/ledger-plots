@@ -14,11 +14,10 @@ install.missing.packages <- function() {
 }
 
 # parse arguments
-if (!require("optparse")) {
-  stop("optparse R-package is not installed! Use --install-dependencies")
+if (!require("optparse", quietly = TRUE)) {
+  stop("optparse R-package is missing! Use --install-dependencies")
 }
-
-require("optparse")
+require("optparse", quietly = TRUE)
 
 # available options
 option_list <- list(
@@ -45,6 +44,11 @@ if (opt$"install-dependencies") {
 # in case there are some queries, plot them
 if (! is.null(opt$queries)) {
 
+  if (!require("ledgerplots", quietly = TRUE)) {
+    stop("ledgerplots R-package is missing! Use -u,--install-dependencies")
+  }
+  require("ledgerplots", quietly = TRUE)
+
   # split on vectors
   q <- unlist(strsplit(opt$queries,split=";;"))
   f <- unlist(strsplit(opt$functions,split=";;"))
@@ -62,7 +66,6 @@ if (! is.null(opt$queries)) {
 
   # make plot for each query
   for (i in 1:length(q)) {
-    require("ledgerplots")
     queryplot(q[i],
               FUN=function(x)
                 do.call(eval(parse(text=f[i])),args=list(x)))
