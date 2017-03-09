@@ -75,9 +75,11 @@ read.ledger <- function(query, options = "") {
 queryplot <- function(query, order.function = function(x) sum(abs(x)),
                       ledger.options, ...) {
   # read transactions
+  cat("Reading transactions...\n")
   transactions <- read.ledger(query, ledger.options)
 
   # get account tree
+  cat("Generating accounts tree...\n")
   tree <- account.tree.depth(transactions$Category)
 
   # get ordering of the accounts
@@ -90,6 +92,7 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)),
 
   # make a plots in the selected order
   for (i in ord) {
+    cat(paste("Plotting:",tree[i,1],"\n"))
     idx <- grep(tree[i,1],transactions$Category)
     transactionplots(X=transactions[idx,c(1,6)],
                      title=tree[i,1],

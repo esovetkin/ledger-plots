@@ -4,7 +4,8 @@
 \alias{queryplot}
 \title{Plot accounts for a given query}
 \usage{
-queryplot(query, order.function = function(x) sum(abs(x)), ...)
+queryplot(query, order.function = function(x) sum(abs(x)), ledger.options,
+  ...)
 }
 \arguments{
 \item{query}{query string that is used in read.ledger function to
@@ -13,6 +14,9 @@ query the ledger for transactions}
 \item{order.function}{function that is calculated in order to sort
 the plots for different accounts. The function must take a vector
 and return a single value}
+
+\item{ledger.options}{extra options specified during the call to
+ledger}
 
 \item{...}{extra arguments given to plot.ledger function}
 }

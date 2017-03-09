@@ -4,10 +4,12 @@
 \alias{read.ledger}
 \title{Make quries to ledger}
 \usage{
-read.ledger(query)
+read.ledger(query, options = "")
 }
 \arguments{
 \item{query}{string query that is used in the ledger call.}
+
+\item{options}{string of options given to ledger}
 }
 \value{
 data.frame containing the following columns

@@ -21,8 +21,11 @@ require("optparse", quietly = TRUE)
 
 # available options
 option_list <- list(
+  make_option(c("-o","--output"), type="character", default="assets-expenses.pdf",
+              help = "output pdf file name", metavar="character"),
   make_option(c("-q","--queries"), type="character", default=NULL,
-              help = "queries separated by ';;' for transcations to plot",
+              help =
+                "multiple queries separated by ';;' for transactions to plot",
               metavar="character"),
   make_option(c("-f","--functions"), type="character",
               default="cumsum",
@@ -33,16 +36,34 @@ option_list <- list(
               default="function(x) sum(abs(x))",
               help = "function that specifies how to order the plots",
               metavar="character"),
-  make_option(c("-o","--output"), type="character", default="assets-expenses.pdf",
-              help = "output pdf file", metavar="character"),
-  make_option(c("--install-dependencies"), action = "store_true", default = FALSE,
   make_option(c("-l","--ledger-options"), type="character", default=NULL,
               help = "string with options given to ledger",
               metavar="character"),
+  make_option(c("-u","--install-dependencies"), action = "store_true", default = FALSE,
               help = "install missing dependencies. It also updates ledgerplots package")
 )
 
-opt_parser <- OptionParser(option_list = option_list)
+opt_parser <- OptionParser(option_list = option_list,
+                           prog = "ledger-plots",
+                           description =
+                             paste0("Using ledger get and plot transactions to a pdf file. ",
+                                    "You may specify the query in -q options. The program plots ",
+                                    "the daily value of the function evaluated on the transactions. ",
+                                    "The function can be specified in -f option.\n\n",
+                                    "Multiple plots are ordered with respect to the depth of the ",
+                                    "account names (e.g. Assets:Cash has depth 2) and function ",
+                                    "evaluated on transactions vector (--order-function argument).\n\n",
+                                    "Extra option to be passed to ledger may be specified using the ",
+                                    "--ledger-options argument.\n\n",
+                                    "You can install missing R-package dependencies using the ",
+                                    "--install-dependencies argument. This also updates the ",
+                                    "ledgerplots R-package."),
+                           epilogue =
+                             paste0("Examples:\n\n",
+                                    "Install dependencies and update ledgerplots R-package:\n",
+                                    "ledger-plots -u\n\n",
+                                    "Generate plot for assets:\n",
+                                    "ledger-plots -q \"^assets: -X EUR\" -f \"cumsum\"\n\n"))
 opt <- parse_args(opt_parser)
 
 # to install missing dependencies

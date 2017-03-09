@@ -2,6 +2,7 @@
 
 export(account.tree.depth)
 export(food.prices.convert)
+export(monthly)
 export(queryplot)
 export(read.ledger)
 export(transactionplots)
