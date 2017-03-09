@@ -1,0 +1,70 @@
+#!/usr/bin/env Rscript
+
+#' Install missing packages
+install.missing.packages <- function() {
+  # for command line argument parsing
+  if (!require("optparse")) install.packages("optparse")
+
+  # devtools for installing ledgerplots package
+  if (!require("devtools")) install.packages("devtools")
+
+  # install ledger-plots
+  require("devtools")
+  install_github("esovetkin/ledger-plots/ledgerplots")
+}
+
+# parse arguments
+if (!require("optparse")) {
+  stop("optparse R-package is not installed! Use --install-dependencies")
+}
+
+require("optparse")
+
+# available options
+option_list <- list(
+  make_option(c("-q","--queries"), type="character", default=NULL,
+              help = "queries separated by ';;' for transcations to plot",
+              metavar="character"),
+  make_option(c("-f","--functions"), type="character", default="cumsum",
+              help = "functions separated by ';;'  applied to queries",
+              metavar="character"),
+  make_option(c("-o","--output"), type="character", default="assets-expenses.pdf",
+              help = "output pdf file", metavar="character"),
+  make_option(c("--install-dependencies"), action = "store_true", default = FALSE,
+              help = "install missing dependencies. It also updates ledgerplots package")
+)
+
+opt_parser <- OptionParser(option_list = option_list)
+opt <- parse_args(opt_parser)
+
+# to install missing dependencies
+if (opt$"install-dependencies") {
+  install.missing.packages()
+}
+
+# split on vectors
+q <- unlist(strsplit(opt$queries,split=";;"))
+f <- unlist(strsplit(opt$functions,split=";;"))
+
+# make functions the same length
+if (length(f) < length(q)) {
+  f <- f[(1:length(q) - 1) %% length(f) + 1]
+}
+
+# create a pdf device
+pdf(opt$output, width = 13, height = 7, onefile = TRUE)
+
+# graphical parameters (4 plots per page, see more ?par)
+par(mex=1.2,mar=c(6,4,1,1), mfcol=c(2,2))
+
+# make plot for each query
+for (i in 1:length(q)) {
+  require("ledgerplots")
+  queryplot(q[i],
+            FUN=function(x)
+              do.call(eval(parse(text=f[i])),args=list(x)))
+}
+
+# close pdf device
+dev.off()
+

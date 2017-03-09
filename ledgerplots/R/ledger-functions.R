@@ -66,14 +66,13 @@ read.ledger <- function(query) {
 #'
 #' @return nothing
 #'
-#'
 #' @export
-plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
+queryplot <- function(query, order.function = function(x) sum(abs(x)), ...) {
   # read transactions
   transactions <- read.ledger(query)
 
   # get account tree
-  tree <- subcategories(transactions$Category)
+  tree <- account.tree.depth(transactions$Category)
 
   # get ordering of the accounts
   ord <- order(-tree[,2],
@@ -86,7 +85,7 @@ plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
   # make a plots in the selected order
   for (i in ord) {
     idx <- grep(tree[i,1],transactions$Category)
-    plot.ledger(X=transactions[idx,c(1,6)],title=tree[i,1],...)
+    transactionplots(X=transactions[idx,c(1,6)],title=tree[i,1],...)
   }
 }
 
@@ -118,7 +117,7 @@ plot.query <- function(query,order.function = function(x) sum(abs(x)),...) {
 #'             FUN=filter, rep(1,30),sides=1)
 #'
 #' @export
-plot.ledger <- function(X,title,FUN=cumsum,...) {
+transactionplots <- function(X,title,FUN=cumsum,...) {
   dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
 
   data <- data.frame("Date"=dates.series,"Amount"=0)
@@ -160,7 +159,7 @@ plot.ledger <- function(X,title,FUN=cumsum,...) {
 #' @return data.frame containing column account and depth
 #'
 #' @export
-subcategories <- function(names) {
+account.tree.depth <- function(names) {
   names <- as.character(names)
 
   l <- strsplit(names,split=":")
@@ -190,6 +189,8 @@ subcategories <- function(names) {
 #' Convert comments in food ledger to the corresponding prices
 #' @param food dataset with food, returns by read.ledger
 #' @param currency sometimes currency in transaction note is given
+#'
+#' @export
 food.prices.convert <- function(food,currency) {
   # convert names of the shops to a lower case
   food$Description <- tolower(food$Description)

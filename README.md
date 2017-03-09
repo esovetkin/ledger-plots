@@ -1,11 +1,6 @@
 # ledger-plots - generate plots for your ledger
 
-Make plots and save them to a pdf file.
-
-See full options by saying
-```
-ledger-plots --help
-```
+Make plots for your ledger entries and save them to a pdf file.
 
 ## Dependencies
 
@@ -13,6 +8,19 @@ ledger-plots --help
 
  * [R](https://www.r-project.org/) does all plots
 
+## Installation
+
+In order to use the ledger-plots it is sufficient to copy the
+ledger-plots file. Run
+```
+ledger-plots --install-dependencies
+```
+to install the missing R-packages.
+
+See full options list by saying
+```
+ledger-plots --help
+```
 
 ## Queries and functions
 
@@ -24,6 +32,10 @@ call
 ```
 ledger-plots -q "^assets: -X EUR"
 ```
+
+Note that it is important to convert all transactions to a common
+currency. This can be done by means of ledger itself with "-X"
+argument (all examples given here convert to euro).
 
 One may specify several queries, separated by two semi-colons (";;")
 ```
