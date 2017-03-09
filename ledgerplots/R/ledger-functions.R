@@ -5,6 +5,8 @@
 #'
 #' @param query string query that is used in the ledger call.
 #'
+#' @param options string of options given to ledger
+#'
 #' @return data.frame containing the following columns
 #' \code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
 #'
@@ -19,14 +21,14 @@
 #' assets <- read.ledger("^assets: -X EUR")
 #'
 #' @export
-read.ledger <- function(query) {
+read.ledger <- function(query, options = "") {
   # check presence of ledger
   if (0 != system2("command"," -v ledger",stdout=FALSE,stderr=FALSE)) {
     stop("Ledger command is not found!")
   }
 
   # make query to ledger and read to string
-  lines <- system(paste("ledger csv",query), intern=TRUE)
+  lines <- system(paste("ledger csv", query, options), intern=TRUE)
 
   # convert string to a data.frame
   con <- textConnection(lines)
@@ -55,6 +57,9 @@ read.ledger <- function(query) {
 #'   the plots for different accounts. The function must take a vector
 #'   and return a single value
 #'
+#' @param ledger.options extra options specified during the call to
+#'   ledger
+#'
 #' @param ... extra arguments given to plot.ledger function
 #'
 #' @details the plots are ordered by the depth of the ledger account
@@ -67,9 +72,10 @@ read.ledger <- function(query) {
 #' @return nothing
 #'
 #' @export
-queryplot <- function(query, order.function = function(x) sum(abs(x)), ...) {
+queryplot <- function(query, order.function = function(x) sum(abs(x)),
+                      ledger.options, ...) {
   # read transactions
-  transactions <- read.ledger(query)
+  transactions <- read.ledger(query, ledger.options)
 
   # get account tree
   tree <- account.tree.depth(transactions$Category)

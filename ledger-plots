@@ -30,6 +30,9 @@ option_list <- list(
   make_option(c("-o","--output"), type="character", default="assets-expenses.pdf",
               help = "output pdf file", metavar="character"),
   make_option(c("--install-dependencies"), action = "store_true", default = FALSE,
+  make_option(c("-l","--ledger-options"), type="character", default=NULL,
+              help = "string with options given to ledger",
+              metavar="character"),
               help = "install missing dependencies. It also updates ledgerplots package")
 )
 
@@ -67,6 +70,7 @@ if (! is.null(opt$queries)) {
   # make plot for each query
   for (i in 1:length(q)) {
     queryplot(q[i],
+              ledger.options = opt$"ledger-options",
               FUN=function(x)
                 do.call(eval(parse(text=f[i])),args=list(x)))
   }
