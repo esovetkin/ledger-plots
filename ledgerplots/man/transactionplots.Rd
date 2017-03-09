@@ -4,12 +4,16 @@
 \alias{transactionplots}
 \title{Plot ledger data in a current device}
 \usage{
-transactionplots(X, title, FUN = cumsum, ...)
+transactionplots(X, title, date.interval = c(Sys.Date() - 365, Sys.Date()),
+  FUN = cumsum, ...)
 }
 \arguments{
 \item{X}{data. First column date, Second column amount}
 
 \item{title}{title for the plot}
+
+\item{date.interval}{dates period between which the plots should be
+done}
 
 \item{FUN}{what to do with data before plotting. This must be a
 function that accept a vector as an argument and outputs a

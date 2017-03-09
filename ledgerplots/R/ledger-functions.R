@@ -85,7 +85,10 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)), ...) {
   # make a plots in the selected order
   for (i in ord) {
     idx <- grep(tree[i,1],transactions$Category)
-    transactionplots(X=transactions[idx,c(1,6)],title=tree[i,1],...)
+    transactionplots(X=transactions[idx,c(1,6)],
+                     title=tree[i,1],
+                     date.interval = c(min(transactions$Date),max(transactions$Date)),
+                     ...)
   }
 }
 
@@ -98,6 +101,9 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)), ...) {
 #' @param X data. First column date, Second column amount
 #'
 #' @param title title for the plot
+#'
+#' @param date.interval dates period between which the plots should be
+#'   done
 #'
 #' @param FUN what to do with data before plotting. This must be a
 #'   function that accept a vector as an argument and outputs a
@@ -117,8 +123,10 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)), ...) {
 #'             FUN=filter, rep(1,30),sides=1)
 #'
 #' @export
-transactionplots <- function(X,title,FUN=cumsum,...) {
-  dates.series <- seq(as.Date("2013-09-01"),Sys.Date(),1)
+transactionplots <- function(X,title,
+                             date.interval = c(Sys.Date()-365,Sys.Date()),
+                             FUN=cumsum,...) {
+  dates.series <- seq(date.interval[1],date.interval[2],1)
 
   data <- data.frame("Date"=dates.series,"Amount"=0)
   data <- rbind(data,X)
