@@ -19,4 +19,3 @@ For a given character vector of the account names
 
 For example, "Assets:Bank:Current" account has depth 3
 }
-

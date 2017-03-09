@@ -29,4 +29,3 @@ expenses <- read.ledger("^expenses: -X EUR")
 assets <- read.ledger("^assets: -X EUR")
 
 }
-

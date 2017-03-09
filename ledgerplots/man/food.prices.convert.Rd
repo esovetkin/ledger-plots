@@ -14,4 +14,3 @@ food.prices.convert(food, currency)
 \description{
 Convert comments in food ledger to the corresponding prices
 }
-

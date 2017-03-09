@@ -39,4 +39,3 @@ plot.ledger(X=expenses[,c(1,6)],
             FUN=filter, rep(1,30),sides=1)
 
 }
-

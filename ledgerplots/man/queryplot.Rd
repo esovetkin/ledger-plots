@@ -32,4 +32,3 @@ the plots are ordered by the depth of the ledger account
   presented a high level plots with the most impact (wrt
   order.function).
 }
-
