@@ -2,6 +2,10 @@
 
 #' Install missing packages
 install.missing.packages <- function() {
+  # argument parsing
+  if (!require("optparse")) install.packages("optparse")
+
+
   # devtools for installing ledgerplots package
   if (!require("devtools")) install.packages("devtools")
 
@@ -10,10 +14,14 @@ install.missing.packages <- function() {
   install_github("esovetkin/ledger-plots/ledgerplots")
 }
 
+# to install missing dependencies
+if (any(c("--install-dependencies","-u") %in% commandArgs(trailingOnly = TRUE))) {
+  install.missing.packages()
+}
+
 # parse arguments
 if (!require("optparse", quietly = TRUE)) {
-  install.packages("optparse")
-  # stop("optparse R-package is missing! Use --install-dependencies")
+  stop("optparse R-package is missing! Use -u,--install-dependencies")
 }
 require("optparse", quietly = TRUE)
 
@@ -63,11 +71,6 @@ opt_parser <- OptionParser(option_list = option_list,
                                     "Generate plot for assets:\n",
                                     "ledger-plots -q \"^assets: -X EUR\" -f \"cumsum\"\n\n"))
 opt <- parse_args(opt_parser)
-
-# to install missing dependencies
-if (opt$"install-dependencies") {
-  install.missing.packages()
-}
 
 # in case there are some queries, plot them
 if (! is.null(opt$queries)) {
