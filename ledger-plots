@@ -1,7 +1,24 @@
 #!/usr/bin/env Rscript
 
-#' Install missing packages
+#' check if R_LIBS_USER writable
+#' @param path directory path
+check.writable <- function(path) {
+  # check if writable
+  tryCatch(dir.create(paste0(path,"/ledger-plots.dummy")),
+           warning = function(w) {return(FALSE)},
+           finally = {unlink(paste0(path,"/ledger-plots.dummy"),
+                             recursive = TRUE)})
+}
+
+#' Install missing packages for this script
 install.missing.packages <- function() {
+
+  # check that R_LIBS_USER directory is writable
+  if (!check.writable(Sys.getenv("R_LIBS_USER"))) {
+    stop(paste("Directory",Sys.getenv("R_LIBS_USER"),
+               "is not writable (configure Renviron (/etc/Renviron))."))
+  }
+
   # argument parsing
   if (!require("optparse")) install.packages("optparse")
 
