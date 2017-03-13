@@ -10,7 +10,7 @@
 #' @param ledger.path path to the ledger executable
 #'
 #' @return data.frame containing the following columns
-#' \code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
+#'   \code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
 #'
 #' @details The function make the following call in shell:
 #'   \code{ledger csv <query>}

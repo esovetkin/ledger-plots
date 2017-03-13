@@ -102,7 +102,7 @@ if (! is.null(opt$queries)) {
   }
   require("ledgerplots", quietly = TRUE)
 
-  # split on vectors
+  # split on queries and functions
   q <- unlist(strsplit(opt$queries,split=";;"))
   f <- unlist(strsplit(opt$functions,split=";;"))
 
