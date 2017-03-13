@@ -4,16 +4,18 @@
 \alias{read.ledger}
 \title{Make quries to ledger}
 \usage{
-read.ledger(query, options = "")
+read.ledger(query, options = "", ledger.path = NULL)
 }
 \arguments{
 \item{query}{string query that is used in the ledger call.}
 
 \item{options}{string of options given to ledger}
+
+\item{ledger.path}{path to the ledger executable}
 }
 \value{
 data.frame containing the following columns
-\code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
+  \code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
 }
 \description{
 Call a shell and execute ledger command with a given

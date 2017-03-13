@@ -62,6 +62,9 @@ option_list <- list(
   make_option(c("-l","--ledger-options"), type="character", default=NULL,
               help = "string with options given to ledger",
               metavar="character"),
+  make_option(c("--ledger-bin-path"), type="character", default=NULL,
+              help = "path to the ledger executable",
+              metavar="character"),
   make_option(c("-u","--install-dependencies"), action = "store_true", default = FALSE,
               help = "install missing dependencies. It also updates ledgerplots package")
 )
@@ -78,6 +81,8 @@ opt_parser <- OptionParser(option_list = option_list,
                                     "evaluated on transactions vector (--order-function argument).\n\n",
                                     "Extra option to be passed to ledger may be specified using the ",
                                     "--ledger-options argument.\n\n",
+                                    "In case you ledger executable is located in a non-$PATH director ",
+                                    "then you can specify to correct path with --ledger-bin-path argument.\n\n",
                                     "You can install missing R-package dependencies using the ",
                                     "--install-dependencies argument. This also updates the ",
                                     "ledgerplots R-package."),
@@ -118,6 +123,7 @@ if (! is.null(opt$queries)) {
               order.function = function(x)
                 do.call(eval(parse(text=opt$"order-function")),args=list(x)),
               ledger.options = opt$"ledger-options",
+              ledger.path = opt$"ledger-bin-path",
               FUN=function(x)
                 do.call(eval(parse(text=f[i])),args=list(x))
               )

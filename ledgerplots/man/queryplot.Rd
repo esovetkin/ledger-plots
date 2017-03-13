@@ -5,7 +5,7 @@
 \title{Plot accounts for a given query}
 \usage{
 queryplot(query, order.function = function(x) sum(abs(x)), ledger.options,
-  ...)
+  ledger.path = NULL, ...)
 }
 \arguments{
 \item{query}{query string that is used in read.ledger function to
@@ -17,6 +17,8 @@ and return a single value}
 
 \item{ledger.options}{extra options specified during the call to
 ledger}
+
+\item{ledger.path}{path to the ledger executable}
 
 \item{...}{extra arguments given to plot.ledger function}
 }

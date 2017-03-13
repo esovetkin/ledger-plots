@@ -7,6 +7,8 @@
 #'
 #' @param options string of options given to ledger
 #'
+#' @param ledger.path path to the ledger executable
+#'
 #' @return data.frame containing the following columns
 #' \code{"Date",NA,"Description","Category","Currency","Amount",NA,"Notes"}
 #'
@@ -21,14 +23,22 @@
 #' assets <- read.ledger("^assets: -X EUR")
 #'
 #' @export
-read.ledger <- function(query, options = "") {
+read.ledger <- function(query, options = "", ledger.path = NULL) {
+  ledger.bin <- "ledger"
+
   # check presence of ledger
-  if (0 != system2("command"," -v ledger",stdout=FALSE,stderr=FALSE)) {
-    stop("Ledger command is not found!")
+  if (!is.null(ledger.path)) {
+    ledger.bin <- ledger.path
+
+    if (!file.exists(ledger.bin))
+      stop(paste("File",ledger.bin,"is not found!"))
+  } else {
+    if (0 != system2("command",paste(" -v",ledger.bin), stdout=FALSE,stderr=FALSE))
+      stop("Ledger command is not found!")
   }
 
   # make query to ledger and read to string
-  lines <- system(paste("ledger csv", query, options), intern=TRUE)
+  lines <- system(paste(ledger.bin, "csv", query, options), intern=TRUE)
 
   # convert string to a data.frame
   con <- textConnection(lines)
@@ -60,6 +70,8 @@ read.ledger <- function(query, options = "") {
 #' @param ledger.options extra options specified during the call to
 #'   ledger
 #'
+#' @param ledger.path path to the ledger executable
+#'
 #' @param ... extra arguments given to plot.ledger function
 #'
 #' @details the plots are ordered by the depth of the ledger account
@@ -73,10 +85,11 @@ read.ledger <- function(query, options = "") {
 #'
 #' @export
 queryplot <- function(query, order.function = function(x) sum(abs(x)),
-                      ledger.options, ...) {
+                      ledger.options, ledger.path = NULL, ...) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,"\n"))
-  transactions <- read.ledger(query, ledger.options)
+  transactions <- read.ledger(query = query, options = ledger.options,
+                              ledger.path = ledger.path)
 
   # get account tree
   cat("Generating accounts tree...\n")
