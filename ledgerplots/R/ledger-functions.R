@@ -69,6 +69,8 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #'   the plots for different accounts. The function must take a vector
 #'   and return a single value
 #'
+#' @param max.num.plots maximum number of plots
+#'
 #' @param ledger.options extra options specified during the call to
 #'   ledger
 #'
@@ -88,6 +90,7 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @export
 query.plot <- function(query, order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
+                       max.num.plots,
                        ledger.options, ledger.path = NULL, ...) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,"\n"))
@@ -105,6 +108,8 @@ query.plot <- function(query, order.depth = TRUE,
                  order.function(transactions$Amount[idx])
                }),
                decreasing = TRUE)
+
+  ord <- head(ord, n = max.num.plots)
 
   # make a plots in the selected order
   plots <- lapply(ord, function(i) {

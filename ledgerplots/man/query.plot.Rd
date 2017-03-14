@@ -5,7 +5,7 @@
 \title{Plot accounts for a given query}
 \usage{
 query.plot(query, order.depth = TRUE, order.function = function(x)
-  sum(abs(x)), ledger.options, ledger.path = NULL, ...)
+  sum(abs(x)), max.num.plots, ledger.options, ledger.path = NULL, ...)
 }
 \arguments{
 \item{query}{query string that is used in read.ledger function to
@@ -16,6 +16,8 @@ query the ledger for transactions}
 \item{order.function}{function that is calculated in order to sort
 the plots for different accounts. The function must take a vector
 and return a single value}
+
+\item{max.num.plots}{maximum number of plots}
 
 \item{ledger.options}{extra options specified during the call to
 ledger}

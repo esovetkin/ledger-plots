@@ -69,6 +69,9 @@ option_list <- list(
               default = TRUE,
               help = paste0("Do not sort plots by depth. Plots are ordered only ",
                             "wrt --order-function. Default: %default")),
+  make_option(c("-n","--number-of-plots"),
+              type="numeric", default = Inf,
+              help = paste0("Maximum number of plots per query. Default: %default ")),
   make_option(c("-l","--ledger-options"), type="character",
               default=NULL,
               help = "String with extra options passed to ledger",
@@ -132,6 +135,7 @@ if (! is.null(opt$queries)) {
                order.depth = opt$"no-depth-order",
                order.function = function(x)
                  do.call(eval(parse(text=opt$"order-function")),args=list(x)),
+               max.num.plots = opt$"number-of-plots",
                ledger.options = opt$"ledger-options",
                ledger.path = opt$"ledger-bin-path",
                FUN=function(x)
