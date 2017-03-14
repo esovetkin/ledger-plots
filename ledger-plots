@@ -136,19 +136,16 @@ if (! is.null(opt$queries)) {
                ledger.path = opt$"ledger-bin-path",
                FUN=function(x)
                  do.call(eval(parse(text=f[i])),args=list(x)))
-    })
+  })
 
-  # remove recursive level
+  # remove recursive lists
   plots <- unlist(plots, recursive = FALSE)
 
+  cat(paste("Saving plots to",opt$output,"\n"))
   # workaround due to the blank page
   plots <- lapply(plots, ggplotGrob)
 
   require("gridExtra", quietly = TRUE)
-
-  cat(paste("Saving plots to",opt$output,"\n"))
-  ggsave(opt$output,
-         marrangeGrob(plots, nrow=2, ncol=2, top=NULL),
-         width = 13, height = 7)
-
+  plots <- marrangeGrob(plots, nrow=2, ncol=2, top=NULL)
+  ggsave(opt$output, plots, width = 13, height = 7)
 }

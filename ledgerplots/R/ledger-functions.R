@@ -148,7 +148,7 @@ account.plot <- function(X,title,
   dates.series <- seq(date.interval[1],date.interval[2],1)
 
   # plot for each currency separately
-  plots <- lapply(sort(unique(X$Currency)), function(currency) {
+  lapply(sort(unique(X$Currency)), function(currency) {
     data <- data.frame("Date"=dates.series,"Amount"=0)
     data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
     data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
@@ -157,8 +157,6 @@ account.plot <- function(X,title,
 
     series.plot(data,currency=currency,title=title)
   })
-
-  plots
 }
 
 #' @title Low level function that plots the series
@@ -187,7 +185,7 @@ series.plot <- function(data,currency,title) {
   g <- g + labs(title=title,x="Date",y=currency) +
     theme(plot.title = element_text(hjust = 0.5, face="bold"))
   # xlab
-  g <- g + theme(axis.text.x = element_text(angle=50, vjust=0.5, size=5))
+  g <- g + theme(axis.text.x = element_text(angle=90, size=5))
 
   g
 }
