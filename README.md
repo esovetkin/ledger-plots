@@ -124,7 +124,7 @@ for the query "^assets:" accumulated sum is calculated, for the query
 "^expenses" a 30-days average and for the query "^income:" the
 inverted accumulated sum.
 
-## Plots ordering
+## Plots ordering and description
 
 By default plots of several accounts are ordered by the account depth
 and a value of function specified in `--order-function`.
@@ -138,6 +138,10 @@ sum of the absolute value of the transactions.
 
 With option `--no-depth-order` plots are ordered only with respect to
 the `--order-function`.
+
+The thick vertical lines on the plots correspond to the first day of
+the month. Thin vertical lines correspond to the first day of the week
+(Monday).
 
 # Food prices
 
