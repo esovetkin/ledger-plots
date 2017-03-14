@@ -56,10 +56,9 @@ convert transaction to different currencies using the price derived
 from transactions or using a separate price database. The conversion
 maybe done using the `-X` option in the ledger query syntax.
 
-Therefore, don't specify a query to convert all your transactions to a
-common currency when you call ledger-plots. In case multiple
-transactions are present ledger-plots selects only transactions with
-the most frequent currency.
+In case multiple transactions are present ledger-plot will generate
+several plots together for each of the currency, ordered by the
+currency name.
 
 You can specify extra options which are passed to ledger with the
 `--ledger-options` argument. For instance, this argument is useful to

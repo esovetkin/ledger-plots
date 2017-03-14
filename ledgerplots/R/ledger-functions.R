@@ -84,8 +84,8 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @return nothing
 #'
 #' @export
-queryplot <- function(query, order.function = function(x) sum(abs(x)),
-                      ledger.options, ledger.path = NULL, ...) {
+query.plot <- function(query, order.function = function(x) sum(abs(x)),
+                       ledger.options, ledger.path = NULL, ...) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,"\n"))
   transactions <- read.ledger(query = query, options = ledger.options,
@@ -107,10 +107,10 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)),
   for (i in ord) {
     cat(paste("Plotting:",tree[i,1],"\n"))
     idx <- grep(tree[i,1],transactions$Category)
-    transactionplots(X=transactions[idx,c(1,6)],
-                     title=tree[i,1],
-                     date.interval = c(min(transactions$Date),max(transactions$Date)),
-                     ...)
+    account.plot(X=transactions[idx,],
+                 title=tree[i,1],
+                 date.interval = c(min(transactions$Date),max(transactions$Date)),
+                 ...)
   }
 }
 
@@ -122,10 +122,10 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)),
 #'
 #' @param X data. First column date, Second column amount
 #'
-#' @param title title for the plot
+#' @param title title for the plot (account name)
 #'
 #' @param date.interval dates period between which the plots should be
-#'   done
+#'   done (default for one year)
 #'
 #' @param FUN what to do with data before plotting. This must be a
 #'   function that accept a vector as an argument and outputs a
@@ -135,45 +135,57 @@ queryplot <- function(query, order.function = function(x) sum(abs(x)),
 #'
 #' @return nothing
 #'
-#' @examples
-#' # read expenses data
-#' expenses <- read.ledger("^expenses: -X EUR")
-#'
-#' # plot cumsum over 30 days expenses
-#' plot.ledger(X=expenses[,c(1,6)],
-#'             title="30 days average expenses",
-#'             FUN=filter, rep(1,30),sides=1)
-#'
 #' @export
-transactionplots <- function(X,title,
-                             date.interval = c(Sys.Date()-365,Sys.Date()),
-                             FUN=cumsum,...) {
+account.plot <- function(X,title,
+                         date.interval = c(Sys.Date()-365,Sys.Date()),
+                         FUN=cumsum,...) {
   dates.series <- seq(date.interval[1],date.interval[2],1)
 
-  data <- data.frame("Date"=dates.series,"Amount"=0)
-  data <- rbind(data,X)
-  data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
-  data[,2] <- FUN(data[,2],...)
+  # plot for each currency separately
+  for ( currency in sort(unique(X$Currency)) ) {
+      data <- data.frame("Date"=dates.series,"Amount"=0)
+      data <- rbind(data,X[X$Currency %in% currency,c(1,6)])
+      data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
+      data[,2] <- FUN(data[,2],...)
 
-  plot(data[,1],data[,2],
+      series.plot(date=data[,1],series=data[,2],
+                  currency=currency,title=title)
+  }
+}
+
+#' @title Low level function that plots the series
+#'
+#' @param date vector of dates
+#' @param series vector of the same length as date containing values
+#'   of the series
+#' @param currency type of series values (used as ylab)
+#' @param title account name (used as a plot name)
+#'
+#' @return nothing
+#'
+#' @export
+series.plot <- function(date,series,currency,title) {
+
+  plot(date,series,
        type = "l", main = title,
-       ylab = "",xlab = "",
+       ylab = currency, xlab = "Date",
        xaxt = 'n',yaxt = 'n')
   axis(side=2,
-       at=seq(min(data[,2],na.rm=TRUE),max(data[,2],na.rm=TRUE),length.out = 15),
-       labels=round(seq(min(data[,2],na.rm=TRUE),max(data[,2],na.rm=TRUE),length.out = 15)),
+       at=seq(min(series,na.rm=TRUE),max(series,na.rm=TRUE),length.out = 15),
+       labels=round(seq(min(series,na.rm=TRUE),max(series,na.rm=TRUE),length.out = 15)),
        las=2)
   axis(side=1,
-       at=data[seq(1,nrow(data),length.out = 15),1],
-       labels=data[seq(1,nrow(data),length.out = 15),1],
+       at=date[seq(1,length(date),length.out = 15)],
+       labels=date[seq(1,length(date),length.out = 15)],
        las=3)
-  grid(nx=ceiling(as.numeric(max(data[,1])-min(data[,1]))/30), ny=25, col="black")
+  grid(nx=ceiling(as.numeric(max(date)-min(date))/30), ny=25, col="black")
   abline(h=0, col=2)
   legend("topleft",
          paste("ny cell=",
-               round((max(data[,2],na.rm=TRUE)-min(data[,2],na.rm=TRUE))/25),
+               round((max(series,na.rm=TRUE)-min(series,na.rm=TRUE))/25),
                sep=""),
          bty="n")
+
 }
 
 #' @title Get list of account tree

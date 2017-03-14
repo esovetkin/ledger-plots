@@ -119,14 +119,14 @@ if (! is.null(opt$queries)) {
 
   # make plot for each query
   for (i in 1:length(q)) {
-    queryplot(q[i],
-              order.function = function(x)
-                do.call(eval(parse(text=opt$"order-function")),args=list(x)),
-              ledger.options = opt$"ledger-options",
-              ledger.path = opt$"ledger-bin-path",
-              FUN=function(x)
-                do.call(eval(parse(text=f[i])),args=list(x))
-              )
+    query.plot(q[i],
+               order.function = function(x)
+                 do.call(eval(parse(text=opt$"order-function")),args=list(x)),
+               ledger.options = opt$"ledger-options",
+               ledger.path = opt$"ledger-bin-path",
+               FUN=function(x)
+                 do.call(eval(parse(text=f[i])),args=list(x))
+               )
   }
 
   # close pdf device
