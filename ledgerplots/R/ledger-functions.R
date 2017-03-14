@@ -83,7 +83,7 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #'   presented a high level plots with the most impact (wrt
 #'   order.function).
 #'
-#' @return nothing
+#' @return list of ggplots
 #'
 #' @export
 query.plot <- function(query, order.depth = TRUE,
@@ -107,14 +107,17 @@ query.plot <- function(query, order.depth = TRUE,
                decreasing = TRUE)
 
   # make a plots in the selected order
-  for (i in ord) {
+  plots <- lapply(ord, function(i) {
     cat(paste("Plotting:",tree[i,1],"\n"))
     idx <- grep(tree[i,1],transactions$Category)
     account.plot(X=transactions[idx,],
                  title=tree[i,1],
                  date.interval = c(min(transactions$Date),max(transactions$Date)),
                  ...)
-  }
+  })
+
+  # remove recursive lists
+  unlist(plots, recursive = FALSE)
 }
 
 #' @title Plot ledger data in a current device
@@ -136,7 +139,7 @@ query.plot <- function(query, order.depth = TRUE,
 #'
 #' @param ... arguments passed to FUN
 #'
-#' @return nothing
+#' @return list of ggplot
 #'
 #' @export
 account.plot <- function(X,title,
@@ -145,50 +148,48 @@ account.plot <- function(X,title,
   dates.series <- seq(date.interval[1],date.interval[2],1)
 
   # plot for each currency separately
-  for ( currency in sort(unique(X$Currency)) ) {
-      data <- data.frame("Date"=dates.series,"Amount"=0)
-      data <- rbind(data,X[X$Currency %in% currency,c(1,6)])
-      data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
-      data[,2] <- FUN(data[,2],...)
+  plots <- lapply(sort(unique(X$Currency)), function(currency) {
+    data <- data.frame("Date"=dates.series,"Amount"=0)
+    data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
+    data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
+    data[,2] <- FUN(data[,2],...)
+    colnames(data) <- c("Date","Amount")
 
-      series.plot(date=data[,1],series=data[,2],
-                  currency=currency,title=title)
-  }
+    series.plot(data,currency=currency,title=title)
+  })
+
+  plots
 }
 
 #' @title Low level function that plots the series
 #'
-#' @param date vector of dates
-#' @param series vector of the same length as date containing values
-#'   of the series
+#' @param data data.frame to be plotted
 #' @param currency type of series values (used as ylab)
 #' @param title account name (used as a plot name)
 #'
-#' @return nothing
+#' @return ggplot object
 #'
 #' @export
-series.plot <- function(date,series,currency,title) {
+series.plot <- function(data,currency,title) {
+  require("ggplot2", quietly = TRUE)
 
-  plot(date,series,
-       type = "l", main = title,
-       ylab = currency, xlab = "Date",
-       xaxt = 'n',yaxt = 'n')
-  axis(side=2,
-       at=seq(min(series,na.rm=TRUE),max(series,na.rm=TRUE),length.out = 15),
-       labels=round(seq(min(series,na.rm=TRUE),max(series,na.rm=TRUE),length.out = 15)),
-       las=2)
-  axis(side=1,
-       at=date[seq(1,length(date),length.out = 15)],
-       labels=date[seq(1,length(date),length.out = 15)],
-       las=3)
-  grid(nx=ceiling(as.numeric(max(date)-min(date))/30), ny=25, col="black")
-  abline(h=0, col=2)
-  legend("topleft",
-         paste("ny cell=",
-               round((max(series,na.rm=TRUE)-min(series,na.rm=TRUE))/25),
-               sep=""),
-         bty="n")
+  # main plot
+  g <- ggplot(data, aes(Date,Amount))
+  # line type
+  g <- g + geom_line(color="firebrick")
+  # minor grid: weeks, major grid: months
+  g <- g + theme(panel.grid.minor = element_line(size=0.1),
+                 panel.grid.major = element_line(size=0.5)) +
+    scale_x_date(minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
+                 breaks = data$Date[format(data$Date,"%d") == "01"],
+                 date_labels = "%b %Y")
+  # labs and title
+  g <- g + labs(title=title,x="Date",y=currency) +
+    theme(plot.title = element_text(hjust = 0.5, face="bold"))
+  # xlab
+  g <- g + theme(axis.text.x = element_text(angle=50, vjust=0.5, size=5))
 
+  g
 }
 
 #' @title Get list of account tree

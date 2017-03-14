@@ -25,7 +25,7 @@ ledger}
 \item{...}{extra arguments given to plot.ledger function}
 }
 \value{
-nothing
+list of ggplots
 }
 \description{
 For a given query plot accounts given transaction

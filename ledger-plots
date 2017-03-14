@@ -29,6 +29,10 @@ install.missing.packages <- function() {
   # install ledger-plots
   require("devtools")
   install_github("esovetkin/ledger-plots/ledgerplots")
+
+  # install ggplot2
+  if (!require("ggplot2")) install.packages("ggplot2")
+  if (!require("gridExtra")) install.packages("gridExtra")
 }
 
 # to install missing dependencies
@@ -120,14 +124,10 @@ if (! is.null(opt$queries)) {
     f <- f[(1:length(q) - 1) %% length(f) + 1]
   }
 
-  # create a pdf device
-  pdf(opt$output, width = 13, height = 7, onefile = TRUE)
-
-  # graphical parameters (4 plots per page, see more ?par)
-  par(mex=1.2,mar=c(6,4,1,1), mfcol=c(2,2))
+  require("ggplot2", quietly = TRUE)
 
   # make plot for each query
-  for (i in 1:length(q)) {
+  plots <- lapply(1:length(q), function(i) {
     query.plot(q[i],
                order.depth = opt$"no-depth-order",
                order.function = function(x)
@@ -135,10 +135,20 @@ if (! is.null(opt$queries)) {
                ledger.options = opt$"ledger-options",
                ledger.path = opt$"ledger-bin-path",
                FUN=function(x)
-                 do.call(eval(parse(text=f[i])),args=list(x))
-               )
-  }
+                 do.call(eval(parse(text=f[i])),args=list(x)))
+    })
 
-  # close pdf device
-  dev.off()
+  # remove recursive level
+  plots <- unlist(plots, recursive = FALSE)
+
+  # workaround due to the blank page
+  plots <- lapply(plots, ggplotGrob)
+
+  require("gridExtra", quietly = TRUE)
+
+  cat(paste("Saving plots to",opt$output,"\n"))
+  ggsave(opt$output,
+         marrangeGrob(plots, nrow=2, ncol=2, top=NULL),
+         width = 13, height = 7)
+
 }

@@ -4,18 +4,15 @@
 \alias{series.plot}
 \title{Low level function that plots the series}
 \usage{
-series.plot(date, series, currency, title)
+series.plot(data, currency, title)
 }
 \arguments{
-\item{date}{vector of dates}
-
-\item{series}{vector of the same length as date containing values
-of the series}
+\item{data}{data.frame to be plotted}
 
 \item{currency}{type of series values (used as ylab)}
 
 \item{title}{account name (used as a plot name)}
 }
 \value{
-nothing
+ggplot object
 }

@@ -22,7 +22,7 @@ vector.}
 \item{...}{arguments passed to FUN}
 }
 \value{
-nothing
+list of ggplot
 }
 \description{
 A low lever function that do the actual
