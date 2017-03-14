@@ -63,6 +63,8 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @param query query string that is used in read.ledger function to
 #'   query the ledger for transactions
 #'
+#' @param order.depth if do ordering by account depths first
+#'
 #' @param order.function function that is calculated in order to sort
 #'   the plots for different accounts. The function must take a vector
 #'   and return a single value
@@ -84,7 +86,8 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @return nothing
 #'
 #' @export
-query.plot <- function(query, order.function = function(x) sum(abs(x)),
+query.plot <- function(query, order.depth = TRUE,
+                       order.function = function(x) sum(abs(x)),
                        ledger.options, ledger.path = NULL, ...) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,"\n"))
@@ -96,7 +99,7 @@ query.plot <- function(query, order.function = function(x) sum(abs(x)),
   tree <- account.tree.depth(transactions$Category)
 
   # get ordering of the accounts
-  ord <- order(-tree[,2],
+  ord <- order(if (order.depth) -tree[,2] else rep(0,nrow(tree)),
                sapply(tree[,1], function(x) {
                  idx <- grep(x,transactions$Category)
                  order.function(transactions$Amount[idx])

@@ -136,6 +136,9 @@ with a given depth are ordered according to the value of the
 sum(abs(x))`, which means that firstly appear plots with the biggest
 sum of the absolute value of the transactions.
 
+With option `--no-depth-order` plots are ordered only with respect to
+the `--order-function`.
+
 # Food prices
 
 ledger-plots is also able to make plots and generate table for the
