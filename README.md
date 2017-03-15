@@ -66,8 +66,11 @@ avoid repetition in multiple queries and/or to specify the location of
 the ledger files.
 
 You can specify an output pdf filename with `-o` (`--output`)
-option. All plots are placed on a landscape page layout with 4 plots
-per page.
+option. By default, all plots are placed on a landscape page layout
+(13x7 inches) with 2x2 plots per page. The plots per page matrix can
+be changed via `--output-pdf-ncol` and `--output-pdf-nrow`
+options. The size of the pdf page can be changed via
+`--output-pdf-width` and `--output-pdf-height` options.
 
 In case your ledger executable is located in a non-$PATH directory,
 then you can specify its location by means `--ledger-bin-path`

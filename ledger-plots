@@ -81,7 +81,19 @@ option_list <- list(
               metavar="character"),
   make_option(c("-u","--install-dependencies"), action = "store_true", default = FALSE,
               help = paste0("Install missing dependencies. It also updates ",
-                            "ledgerplots package. Default: %default"))
+                            "ledgerplots package. Default: %default")),
+  make_option(c("--output-pdf-ncol"),
+              type="numeric", default = 2,
+              help = paste0("Number of plots columns on one page. Default: %default ")),
+  make_option(c("--output-pdf-nrow"),
+              type="numeric", default = 2,
+              help = paste0("Number of plots rows on one page. Default: %default ")),
+  make_option(c("--output-pdf-width"),
+              type="numeric", default = 13,
+              help = paste0("Page width (in inches). Default: %default ")),
+  make_option(c("--output-pdf-height"),
+              type="numeric", default = 7,
+              help = paste0("Page height (in inches). Default: %default "))
 )
 
 opt_parser <- OptionParser(option_list = option_list,
@@ -150,6 +162,11 @@ if (! is.null(opt$queries)) {
   plots <- lapply(plots, ggplotGrob)
 
   require("gridExtra", quietly = TRUE)
-  plots <- marrangeGrob(plots, nrow=2, ncol=2, top=NULL)
-  ggsave(opt$output, plots, width = 13, height = 7)
+  plots <- marrangeGrob(plots,
+                        nrow=opt$"output-pdf-nrow",
+                        ncol=opt$"output-pdf-ncol",
+                        top=NULL)
+  ggsave(opt$output, plots,
+         width = opt$"output-pdf-width",
+         height = opt$"output-pdf-height")
 }
