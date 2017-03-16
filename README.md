@@ -111,7 +111,7 @@ More generally, you can specify any R function. For instance, a 7-days
 average can be specified as
 
 ```
-ledger-plots -f "function(x) {filter(x,rep(1,30),sides=1)}" -q "^expenses: -X EUR"
+ledger-plots -f "function(x) {filter(x,rep(1,7),sides=1)}" -q "^expenses: -X EUR"
 ```
 
 Multiple function can be combined together for multiple queries by
