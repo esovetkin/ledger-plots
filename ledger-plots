@@ -22,19 +22,19 @@ install.missing.packages <- function() {
   }
 
   # argument parsing
-  if (!require("optparse")) install.packages("optparse", repo = mirror)
+  if (!require("optparse", quietly = TRUE)) install.packages("optparse", repo = mirror)
 
 
   # devtools for installing ledgerplots package
-  if (!require("devtools")) install.packages("devtools", repo = mirror)
+  if (!require("devtools", quietly = TRUE)) install.packages("devtools", repo = mirror)
 
   # install ledger-plots
   require("devtools")
   install_github("esovetkin/ledger-plots/ledgerplots")
 
   # install ggplot2
-  if (!require("ggplot2")) install.packages("ggplot2", repo = mirror)
-  if (!require("gridExtra")) install.packages("gridExtra", repo = mirror)
+  if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2", repo = mirror)
+  if (!require("gridExtra", quietly = TRUE)) install.packages("gridExtra", repo = mirror)
 }
 
 # to install missing dependencies
