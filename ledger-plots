@@ -12,6 +12,8 @@ check.writable <- function(path) {
 
 #' Install missing packages for this script
 install.missing.packages <- function() {
+  # default mirror
+  mirror <- "https://cloud.r-project.org/"
 
   # check that R_LIBS_USER directory is writable
   if (!check.writable(Sys.getenv("R_LIBS_USER"))) {
@@ -20,19 +22,19 @@ install.missing.packages <- function() {
   }
 
   # argument parsing
-  if (!require("optparse")) install.packages("optparse")
+  if (!require("optparse")) install.packages("optparse", repo = mirror)
 
 
   # devtools for installing ledgerplots package
-  if (!require("devtools")) install.packages("devtools")
+  if (!require("devtools")) install.packages("devtools", repo = mirror)
 
   # install ledger-plots
   require("devtools")
   install_github("esovetkin/ledger-plots/ledgerplots")
 
   # install ggplot2
-  if (!require("ggplot2")) install.packages("ggplot2")
-  if (!require("gridExtra")) install.packages("gridExtra")
+  if (!require("ggplot2")) install.packages("ggplot2", repo = mirror)
+  if (!require("gridExtra")) install.packages("gridExtra", repo = mirror)
 }
 
 # to install missing dependencies
