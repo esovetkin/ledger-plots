@@ -50,7 +50,7 @@ require("optparse", quietly = TRUE)
 option_list <- list(
   make_option(c("-o","--output"), type="character", default="ledger.pdf",
               help = "output pdf file name", metavar="character"),
-  make_option(c("-q","--queries"), type="character", default=NULL,
+  make_option(c("-q","--queries"), type="character", default="",
               help = paste0("Query in a ledger query syntax. Multiple queries are ",
                             "separated by ';;'. All plots for each query are ",
                             "generated separately one after another."),
