@@ -93,7 +93,7 @@ query.plot <- function(query, order.depth = TRUE,
                        max.num.plots,
                        ledger.options, ledger.path = NULL, ...) {
   # read transactions
-  cat(paste("Reading transactions for the query:",query,"\n"))
+  cat(paste("Reading transactions for the query:",query,ledger.options,"\n"))
   transactions <- read.ledger(query = query, options = ledger.options,
                               ledger.path = ledger.path)
 
