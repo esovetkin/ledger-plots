@@ -104,7 +104,7 @@ If you plot expenses it is more reasonable to calculate a moving
 average over some period of time. For example, you can calculate a
 monthly average (over 30 days)
 ```
-ledger-plots -f "monthly" -q "^expenses: -X EUR"
+ledger-plots -f "monthly" -q "^expenses: -H -X EUR"
 ```
 
 More generally, you can specify any R function. For instance, a 7-days
@@ -120,7 +120,7 @@ the list of functions corresponds to the first query, second function
 corresponds to the second query, etc. For example,
 ```
 ledger-plots -f "cumsum  ;; monthly  ;; function(x) {-cumsum(x)}" \
-             -q "^assets:;;^expenses:;;^income:" \
+             -q "^assets:;;^expenses: -H;;^income:" \
              --ledger-options="-X EUR"
 ```
 for the query "^assets:" accumulated sum is calculated, for the query
