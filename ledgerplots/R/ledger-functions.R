@@ -117,7 +117,7 @@ query.plot <- function(query, order.depth = TRUE,
     idx <- grep(tree[i,1],transactions$Category)
     account.plot(X=transactions[idx,],
                  title=tree[i,1],
-                 date.interval = c(min(transactions$Date),max(transactions$Date)),
+                 date.interval = c(min(transactions$Date),min(Sys.Date(),max(transactions$Date))),
                  ...)
   })
 
