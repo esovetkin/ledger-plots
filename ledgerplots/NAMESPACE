@@ -2,8 +2,10 @@
 
 export(account.plot)
 export(account.tree.depth)
-export(food.prices.convert)
 export(monthly)
+export(parse.comments.price)
+export(parse_at_entries)
+export(parse_duplicate_entries)
 export(query.plot)
 export(read.ledger)
 export(series.plot)
