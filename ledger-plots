@@ -61,6 +61,13 @@ option_list <- list(
                             "Multiple functions are separated by ';;' correspondingly to the queries. ",
                             "This argument can be any R-function (e.g. cumsum, monthly). Default: %default"),
               metavar="character"),
+  make_option(c("-t","--type"), type="character",
+              default = "amount",
+              help = paste0("Type of values to plots. Possible values: amount, price, volume. ",
+                            "Price and volumes are parsed from comments to transactions. ",
+                            "Multiple functions are separated by ';;' correspondingly to the queries. ",
+                            "Default: %default."),
+              metavar="character"),
   make_option(c("--order-function"), type="character",
               default="function(x) sum(abs(x))",
               help = "Function that specifies how to order the plots. Default: %default",
@@ -133,10 +140,16 @@ if (! is.null(opt$queries)) {
   # split on queries and functions
   q <- unlist(strsplit(opt$queries,split=";;"))
   f <- unlist(strsplit(opt$functions,split=";;"))
+  t <- unlist(strsplit(opt$type,split=";;"))
 
   # make functions the same length
   if (length(f) < length(q)) {
     f <- f[(1:length(q) - 1) %% length(f) + 1]
+  }
+
+  # make type the same length
+  if (length(t) < length(q)) {
+    t <- t[(1:length(q) - 1) %% length(t) + 1]
   }
 
   require("ggplot2", quietly = TRUE)
@@ -144,6 +157,7 @@ if (! is.null(opt$queries)) {
   # make plot for each query
   plots <- lapply(1:length(q), function(i) {
     query.plot(q[i],
+               type = t[i],
                order.depth = opt$"no-depth-order",
                order.function = function(x)
                  do.call(eval(parse(text=opt$"order-function")),args=list(x)),

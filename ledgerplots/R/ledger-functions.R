@@ -88,14 +88,23 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @return list of ggplots
 #'
 #' @export
-query.plot <- function(query, order.depth = TRUE,
+query.plot <- function(query,
+                       type = c("amount","price","volume"),
+                       order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
                        ledger.options, ledger.path = NULL, ...) {
+  type <- match.arg(type)
+
   # read transactions
   cat(paste("Reading transactions for the query:",query,"\n"))
   transactions <- read.ledger(query = query, options = ledger.options,
                               ledger.path = ledger.path)
+
+  # parse notes
+  if ("amount" != type) {
+    transactions <- parse.notes(transactions)
+  }
 
   # get account tree
   cat("Generating accounts tree...\n")
@@ -117,6 +126,7 @@ query.plot <- function(query, order.depth = TRUE,
     idx <- grep(tree[i,1],transactions$Category)
     account.plot(X=transactions[idx,],
                  title=tree[i,1],
+                 type = type,
                  date.interval = c(min(transactions$Date),max(transactions$Date)),
                  ...)
   })
@@ -135,6 +145,8 @@ query.plot <- function(query, order.depth = TRUE,
 #'
 #' @param title title for the plot (account name)
 #'
+#' @param type type of the plot to make
+#'
 #' @param date.interval dates period between which the plots should be
 #'   done (default for one year)
 #'
@@ -148,15 +160,32 @@ query.plot <- function(query, order.depth = TRUE,
 #'
 #' @export
 account.plot <- function(X,title,
+                         type = c("amount","price","volume"),
                          date.interval = c(Sys.Date()-365,Sys.Date()),
-                         FUN=cumsum,...) {
+                         FUN=cumsum, ...) {
+  type <- match.arg(type)
+
   dates.series <- seq(date.interval[1],date.interval[2],1)
+
+  duplicated_transactions <- sum
+
+  if ("price" == type) {
+    X$Currency <- X$Price.curr
+    X$Amount <- X$Price
+    duplicated_transactions <- mean
+  }
+
+  if ("volume" == type) {
+    X$Currency <- X$Volume.curr
+    X$Amount <- X$Volume
+  }
 
   # plot for each currency separately
   lapply(sort(unique(X$Currency)), function(currency) {
     data <- data.frame("Date"=dates.series,"Amount"=0)
     data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
-    data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
+    data <- aggregate(data[,2],FUN=duplicated_transactions,
+                      by=list(data[,1]))
     data[,2] <- FUN(data[,2],...)
     colnames(data) <- c("Date","Amount")
 
