@@ -148,8 +148,11 @@ the month. Thin vertical lines correspond to the first day of the week
 
 # Food prices
 
-ledger-plots is also able to make plots and generate table for the
-food prices. It assumes the following syntax:
+ledger-plots is also able to parse a special syntax of transaction
+notes. For example, this can be used to keep a track on the consumed
+amounts of food and food prices.
+
+Below is given an example of ledger entry with volume given in transaction comments.
 ```
 2016/05/21 edeka
     Food:Spirits:Campari                       10.99 EUR ; 0.75l
@@ -158,7 +161,11 @@ food prices. It assumes the following syntax:
     Food:Mushrooms:Champignons                  2.14 EUR ; 0.428kg
     Food:Mango                                  5.96 EUR ; 4x
     Bath:Toothpaste                             4.98 EUR ; 2x @ 75ml elmex
+    Food:Onion:Green                            1.00 EUR ; 75g 1x
     Expenses
 ```
 
-The support for this feature is coming...
+For each transaction several entries may be specified.
+
+Use `--type` argument to parse and plot the price/volume of the
+transactions.
