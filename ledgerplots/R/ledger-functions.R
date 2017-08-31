@@ -88,14 +88,23 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @return list of ggplots
 #'
 #' @export
-query.plot <- function(query, order.depth = TRUE,
+query.plot <- function(query,
+                       type = c("amount","price","volume"),
+                       order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
                        ledger.options, ledger.path = NULL, ...) {
+  type <- match.arg(type)
+
   # read transactions
   cat(paste("Reading transactions for the query:",query,ledger.options,"\n"))
   transactions <- read.ledger(query = query, options = ledger.options,
                               ledger.path = ledger.path)
+
+  # parse notes
+  if ("amount" != type) {
+    transactions <- parse.notes(transactions)
+  }
 
   # get account tree
   cat("Generating accounts tree...\n")
@@ -117,6 +126,7 @@ query.plot <- function(query, order.depth = TRUE,
     idx <- grep(tree[i,1],transactions$Category)
     account.plot(X=transactions[idx,],
                  title=tree[i,1],
+                 type = type,
                  date.interval = c(min(transactions$Date),min(Sys.Date(),max(transactions$Date))),
                  ...)
   })
@@ -135,6 +145,8 @@ query.plot <- function(query, order.depth = TRUE,
 #'
 #' @param title title for the plot (account name)
 #'
+#' @param type type of the plot to make
+#'
 #' @param date.interval dates period between which the plots should be
 #'   done (default for one year)
 #'
@@ -148,15 +160,32 @@ query.plot <- function(query, order.depth = TRUE,
 #'
 #' @export
 account.plot <- function(X,title,
+                         type = c("amount","price","volume"),
                          date.interval = c(Sys.Date()-365,Sys.Date()),
-                         FUN=cumsum,...) {
+                         FUN=cumsum, ...) {
+  type <- match.arg(type)
+
   dates.series <- seq(date.interval[1],date.interval[2],1)
+
+  duplicated_transactions <- sum
+
+  if ("price" == type) {
+    X$Currency <- X$Price.curr
+    X$Amount <- X$Price
+    duplicated_transactions <- mean
+  }
+
+  if ("volume" == type) {
+    X$Currency <- X$Volume.curr
+    X$Amount <- X$Volume
+  }
 
   # plot for each currency separately
   lapply(sort(unique(X$Currency)), function(currency) {
     data <- data.frame("Date"=dates.series,"Amount"=0)
     data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
-    data <- aggregate(data[,2],FUN=sum,by=list(data[,1]))
+    data <- aggregate(data[,2],FUN=duplicated_transactions,
+                      by=list(data[,1]))
     data[,2] <- FUN(data[,2],...)
     colnames(data) <- c("Date","Amount")
 
@@ -245,6 +274,138 @@ account.tree.depth <- function(names) {
 #' @export
 monthly <- function(x) {
   filter(x,rep(1,30),sides=1)
+}
+
+#' @title duplicate entries in case there are multiple matches
+#'
+#' @description a help function. Duplicates entries in a transactions
+#'   data.frame. For instance trasaction with note
+#'   "20 EUR ; 20l 25kg 10x" will be split onto tree transactions
+#'   "20 EUR ; 20l", "20 EUR ; 25kg", "20 EUR ; 10x". In order to
+#'   identify that the transaction is being duplicated an extra column
+#'   to the data.frame is being added.
+#'
+#' @param data data.frame, output of the read.ledger
+#'
+#' @param re regular expression matching "10 kg" like patterns
+#'
+#' @return data.frame in the simular format as read.ledger
+#'
+#' @export
+parse_duplicate_entries <- function(data,
+                                    re = "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)") {
+  re.at <- paste0(re,"[ ]?@[ ]?",re)
+  re.OR <- paste0(re,"|",re.at)
+
+  # find matches
+  matches <- regmatches(data$Notes, gregexpr(re.OR, data$Notes))
+
+  # find length of matches
+  l <- sapply(matches,length)
+
+  # duplicate the multiple matches
+  x <- rep(1:nrow(data),ifelse(l==0,1,l))
+  data <- data[x,]
+
+  # add column for the entries corresponding to re
+  matches[l==0] <- NA
+  data[,"matches"] <- unlist(matches)
+
+  # add column indicating which entries has been duplicated
+  data[,"duplicated_rows"] <- x
+
+  # remove parsed notes
+  data$Notes <- gsub(re.OR,"",data$Notes)
+
+  return(data)
+}
+
+#' @title parse price and volumes
+#'
+#' @description get the prices and volumes columns from the parsed entries
+#'
+#' @param data data.frame
+#'
+#' @param re regular expression to parse
+#'
+#' @export
+parse_at_entries <- function(data,
+                             re = "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)") {
+  re.at <- paste0(re,"[ ]?@[ ]?",re)
+
+
+  x <- as.numeric(gsub(re.at,"\\1",data$matches)) *
+    as.numeric(gsub(re.at,"\\3",data$matches))
+  x <- as.character(x)
+  x[is.na(x)] <- ""
+
+  i.na <- is.na(data$matches)
+
+  data$matches <- paste0(x,gsub(re.at,"\\4",data$matches))
+  data$matches[i.na] <- NA
+
+  return(data)
+}
+
+
+  ## # experiments
+  ## data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger_2016.log -f ~/bank/food-ledger.log")
+
+
+#' @title Parse comments and get prices and volumes
+#'
+#' @description Parse transaction notes and get a data frame containing
+#' columns: price, price.currency, volume, volume.currency, other comments
+#'
+#'
+parse.notes <- function(data) {
+  # regular expressio matching entries
+  re <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
+
+  # parse notes and duplicate rows with several entries
+  data <- parse_duplicate_entries(data, re)
+
+  # parse @ entries
+  data <- parse_at_entries(data, re)
+
+  # calculate volume
+  data$Volume <- as.numeric(gsub(re,"\\1",data$matches))
+  data$Volume.curr <- gsub(re,"\\2",data$matches)
+
+  # convert g to kg
+  i <- grep("^g$",data$Volume.curr)
+  data$Volume.curr[i] <- "kg"
+  data$Volume[i] <- data$Volume[i]/1000;
+
+  # calculate price
+  data$Price <- data$Amount / data$Volume
+  data$Price.curr <- paste0(data$Currency,"/",data$Volume.curr)
+  data$Price.curr[is.na(data$Volume)] <- NA
+
+  # delete matches colume
+  data$matches <- NULL
+
+  return(data)
+}
+
+#' @title estimate average/variance of transaction expense per given
+#'   period using Poisson compound process
+#'
+#' @param data transactions data.frame. Default is one year
+#'
+#' @param period period in days of which the average is calculated
+compound.poisson <- function(data, period = 365) {
+
+  data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger.log -X EUR")
+
+  data <- data[grep("Food:Cookies",data$Category),c("Date","Amount")]
+
+  # remove zero period time jumps
+  data <- aggregate(data$Amount, by = list("Date"=data$Date), FUN = sum)
+
+  lambda.t <- (period/as.numeric(mean(diff(data[,1]))))
+
+  c(lambda.t*mean(data[,2]), sqrt(lambda.t*mean(data[,2]^2)))
 }
 
 #' Convert comments in food ledger to the corresponding prices

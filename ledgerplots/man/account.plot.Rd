@@ -4,13 +4,15 @@
 \alias{account.plot}
 \title{Plot ledger data in a current device}
 \usage{
-account.plot(X, title, date.interval = c(Sys.Date() - 365, Sys.Date()),
-  FUN = cumsum, ...)
+account.plot(X, title, type = c("amount", "price", "volume"),
+  date.interval = c(Sys.Date() - 365, Sys.Date()), FUN = cumsum, ...)
 }
 \arguments{
 \item{X}{data. First column date, Second column amount}
 
 \item{title}{title for the plot (account name)}
+
+\item{type}{type of the plot to make}
 
 \item{date.interval}{dates period between which the plots should be
 done (default for one year)}
