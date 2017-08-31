@@ -372,6 +372,11 @@ parse.notes <- function(data) {
   data$Volume <- as.numeric(gsub(re,"\\1",data$matches))
   data$Volume.curr <- gsub(re,"\\2",data$matches)
 
+  # convert g to kg
+  i <- grep("^g$",data$Volume.curr)
+  data$Volume.curr[i] <- "kg"
+  data$Volume[i] <- data$Volume[i]/1000;
+
   # calculate price
   data$Price <- data$Amount / data$Volume
   data$Price.curr <- paste0(data$Currency,"/",data$Volume.curr)
