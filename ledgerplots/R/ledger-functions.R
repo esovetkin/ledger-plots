@@ -287,7 +287,9 @@ monthly <- function(x) {
 #'
 #' @export
 monthly.price <- function(x) {
-  filter(x,rep(1,30),sides=1)/filter(abs(x) > 0,rep(1,30),sides=1)
+  n <- filter(abs(x) > 0,rep(1,30),sides=1)
+  n[! abs(n) > 0] <- 1
+  filter(x,rep(1,30),sides=1)/n
 }
 
 #' @title duplicate entries in case there are multiple matches
