@@ -167,6 +167,9 @@ account.plot <- function(X,title,
 
   dates.series <- seq(date.interval[1],date.interval[2],1)
 
+  # remove present dates
+  dates.series <- dates.series[ !(dates.series %in% X[,"Date"])]
+
   duplicated_transactions <- sum
 
   if ("price" == type) {
@@ -274,6 +277,17 @@ account.tree.depth <- function(names) {
 #' @export
 monthly <- function(x) {
   filter(x,rep(1,30),sides=1)
+}
+
+#' @title Monthly average price
+#'
+#' @description calculate monthly average price
+#'
+#' @param x a numeric vector
+#'
+#' @export
+monthly.price <- function(x) {
+  filter(x,rep(1,30),sides=1)/filter(abs(x) > 0,rep(1,30),sides=1)
 }
 
 #' @title duplicate entries in case there are multiple matches
