@@ -2,8 +2,7 @@
 
 Make plots for your ledger entries and save them to a pdf file.
 
-Obligatory screenshot:
-![plot of some expenses account](screenshot.jpg?raw=true)
+![plot of some expenses account](examples/assets.png?raw=true)
 
 # Installation
 
@@ -143,29 +142,66 @@ With option `--no-depth-order` plots are ordered only with respect to
 the `--order-function`.
 
 The thick vertical lines on the plots correspond to the first day of
-the month. Thin vertical lines correspond to the first day of the week
-(Monday).
+the month. The thin vertical lines correspond to the first day of the
+week (Monday).
 
-# Food prices
+# Food prices and volumes
 
 ledger-plots is also able to parse a special syntax of transaction
 notes. For example, this can be used to keep a track on the consumed
 amounts of food and food prices.
 
-Below is given an example of ledger entry with volume given in transaction comments.
+![food price plot](examples/food-prices.png?raw=true)
+
+![food volume plot](examples/food-volumes.png?raw=true)
+
+In order to keep track on the food prices/volumes one has to put an
+extra entry to the transaction notes. For example, like in the following transactions:
 ```
-2016/05/21 edeka
-    Food:Spirits:Campari                       10.99 EUR ; 0.75l
-    Food:Beverages:Juice                        1.49 EUR ; 1l
-    Food:Kondenzmilk                            2.58 EUR ; 2x @ 400g
-    Food:Mushrooms:Champignons                  2.14 EUR ; 0.428kg
-    Food:Mango                                  5.96 EUR ; 4x
-    Bath:Toothpaste                             4.98 EUR ; 2x @ 75ml elmex
-    Food:Onion:Green                            1.00 EUR ; 75g 1x
+2017/01/1 Lidl
+    Food:Cookies                                   3 GBP ; 500g
+    Food:Milk                                      2 GBP ; 2x @ 1l
+    Expenses
+
+2017/01/2 Edeka
+    Food:Cookies                                   3 EUR ; 500g
+    Food:Milk                                      2 EUR ; 2x @ 1l
+    Bath:Toothpaste                                1 EUR ; 75ml
+    Bath:Toothbrush                                5 EUR ; 3x
+    Expenses
+
+2017/01/3 Sainsbury's
+    Food:Cookies                                   3 GBP ; 500g
+    Food:Milk                                      2 GBP ; 2x @ 1l
     Expenses
 ```
 
-For each transaction several entries may be specified.
+Note that for each transaction multiple entries in different units can be specified. In
+that case the volume/price is accounted and plotted in different
+units. For example,
+```
+2017/01/1 Lidl
+    Food:Ice Cream                                   3 EUR ; 2kg 2.2l
+    Expenses
+```
 
-Use `--type` argument to parse and plot the price/volume of the
-transactions.
+Generally, the volume of the account is given in the following format
+```
+<value>[]?<unit>
+```
+
+In order to make `ledger-plots` to parse the notes and make
+corresponding plots use `--type` argument.
+```
+ledger-plots -q "-H -X EUR" -f "monthly.price" \
+             --ledger-options='-f examples/food.ledger' \
+             --type "price"
+
+ledger-plots -q "-H -X EUR" -f "monthly" \
+             --ledger-options='-f examples/food.ledger' \
+             --type "volume"
+```
+
+Note that statistic value `monthly` doesn't make much sense for price
+plots, therefore, use `monthly.price` that calculates a moving average
+of 30 days price.

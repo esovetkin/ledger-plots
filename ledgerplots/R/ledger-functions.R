@@ -126,6 +126,7 @@ query.plot <- function(query,
                }),
                decreasing = TRUE)
 
+  # plot only first max.num.plots
   ord <- head(ord, n = max.num.plots)
 
   # make a plots in the selected order
