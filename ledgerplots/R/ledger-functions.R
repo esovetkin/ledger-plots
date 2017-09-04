@@ -464,22 +464,18 @@ compound.poisson <- function(data, period = 365) {
 #' @param ledger.path path to the ledger binary
 #'
 #' @export
-generate.price.table <- function(query, ofile="food-prices.text",
+generate.price.table <- function(query, ofile="food-prices.tex",
                                  ledger.options, ledger.path=NULL) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,ledger.options,"\n"))
   data <- read.ledger(query = query, options = ledger.options,
                       ledger.path = ledger.path)
 
-  # experiments
-  data <- read.ledger(
-    paste("food house bath other -f ~/bank/food-ledger_2013.log ",
-          "-f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log ",
-          "-f ~/bank/food-ledger_2016.log ",
-          "-f ~/bank/food-ledger.log -H -X EUR -b 2016-03-12"))
-
   # parse transaction notes
   data <- parse.notes(data)
+
+  # lowercase payee
+  data$Description <- tolower(data$Description)
 
   # evaluate some statistics on prices
   prices <- aggregate(data$Price,by=list(data$Category,data$Description,data$Price.curr),
@@ -505,7 +501,7 @@ generate.price.table <- function(query, ofile="food-prices.text",
   write(paste("\\documentclass[a4paper]{article} \\pagestyle{empty}",
               " \\usepackage[utf8]{inputenc} \\usepackage{longtable}",
               " \\usepackage[left=1cm, right=1cm, bottom=1cm,top=1cm]{geometry}",
-              "\\begin{document}",file=ofile))
+              "\\begin{document}"),file=ofile)
   print(xtable(data,digits=5),type="latex",file=ofile,
         append=TRUE,tabular.environment = 'longtable',
         include.rownames=FALSE,floating=FALSE,

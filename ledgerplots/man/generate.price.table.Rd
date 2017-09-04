@@ -4,7 +4,7 @@
 \alias{generate.price.table}
 \title{Generate a latex table with food prices}
 \usage{
-generate.price.table(query, ofile = "food-prices.text", ledger.options,
+generate.price.table(query, ofile = "food-prices.tex", ledger.options,
   ledger.path = NULL)
 }
 \arguments{
