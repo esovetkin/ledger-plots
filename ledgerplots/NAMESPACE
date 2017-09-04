@@ -2,7 +2,6 @@
 
 export(account.plot)
 export(account.tree.depth)
-export(food.prices.convert)
 export(generate.price.table)
 export(monthly)
 export(monthly.price)
