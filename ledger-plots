@@ -35,6 +35,9 @@ install.missing.packages <- function() {
   # install ggplot2
   if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2", repo = mirror)
   if (!require("gridExtra", quietly = TRUE)) install.packages("gridExtra", repo = mirror)
+
+  # install xtable for plotting latex tables
+  if (!require("xtable", quietly = TRUE)) install.packages("xtable", repo = mirror)
 }
 
 # to install missing dependencies
