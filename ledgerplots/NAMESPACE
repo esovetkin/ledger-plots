@@ -2,9 +2,12 @@
 
 export(account.plot)
 export(account.tree.depth)
+export(compound.poisson)
+export(convert.units)
 export(generate.price.table)
 export(monthly)
 export(monthly.price)
+export(parse.notes)
 export(parse_at_entries)
 export(parse_duplicate_entries)
 export(query.plot)

@@ -80,6 +80,8 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #'
 #' @param ledger.path path to the ledger executable
 #'
+#' @param conversion volume unit conversion rules
+#'
 #' @param ... extra arguments given to plot.ledger function
 #'
 #' @details the plots are ordered by the depth of the ledger account
@@ -97,7 +99,9 @@ query.plot <- function(query,
                        order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
-                       ledger.options, ledger.path = NULL, ...) {
+                       ledger.options, ledger.path = NULL,
+                       conversion,
+                       ...) {
   type <- match.arg(type)
 
   # read transactions
@@ -107,7 +111,7 @@ query.plot <- function(query,
 
   # parse notes
   if ("amount" != type) {
-    transactions <- parse.notes(transactions)
+    transactions <- parse.notes(transactions, conversion)
 
     # remove first NA values
     transactions <-
@@ -401,14 +405,46 @@ parse_at_entries <- function(data,
   ## # experiments
   ## data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger_2016.log -f ~/bank/food-ledger.log")
 
+#' @title convert units one to another
+#'
+#' @description convert all right units to left units
+#'
+#' @param data data frame containing parsed volumes
+#'
+#' @param conversion vector of containing conversion rules. E.g.:
+#' c("1 kg = 1000g","1l = 1000ml")
+#'
+#' @export
+convert.units <- function(data, conversion = c("1kg = 1000g")) {
+
+  for (conv in conversion) {
+    re <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
+    re <- paste0(re,"[ ]?=[ ]?",re)
+
+    to.val <- gsub(re,"\\1",conv)
+    to.cur <- gsub(re,"\\2",conv)
+    from.val <- gsub(re,"\\3",conv)
+    from.cur <- gsub(re,"\\4",conv)
+
+    i <- grep(paste0("^",from.cur,"$"), data$Volume.curr)
+    data$Volume.curr[i] <- to.cur
+    data$Volume[i] <- data$Volume[i]*as.numeric(to.val)/as.numeric(from.val)
+  }
+
+  data
+}
 
 #' @title Parse comments and get prices and volumes
 #'
 #' @description Parse transaction notes and get a data frame containing
 #' columns: price, price.currency, volume, volume.currency, other comments
 #'
+#' @param data read ledger data
 #'
-parse.notes <- function(data) {
+#' @param conversion unit conversion rules
+#'
+#' @export
+parse.notes <- function(data, conversion = c("1kg = 1000g")) {
   # regular expressio matching entries
   re <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
 
@@ -423,9 +459,7 @@ parse.notes <- function(data) {
   data$Volume.curr <- gsub(re,"\\2",data$matches)
 
   # convert g to kg
-  i <- grep("^g$",data$Volume.curr)
-  data$Volume.curr[i] <- "kg"
-  data$Volume[i] <- data$Volume[i]/1000;
+  data <- convert.units(data, conversion)
 
   # calculate price
   data$Price <- data$Amount / data$Volume
@@ -444,6 +478,8 @@ parse.notes <- function(data) {
 #' @param data transactions data.frame. Default is one year
 #'
 #' @param period period in days of which the average is calculated
+#'
+#' @export
 compound.poisson <- function(data, period = 365) {
 
   data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger.log -X EUR")
@@ -468,16 +504,19 @@ compound.poisson <- function(data, period = 365) {
 #'
 #' @param ledger.path path to the ledger binary
 #'
+#' @param conversion volume unit conversion rules
+#'
 #' @export
 generate.price.table <- function(query, ofile="food-prices.tex",
-                                 ledger.options, ledger.path=NULL) {
+                                 ledger.options, ledger.path=NULL,
+                                 conversion) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,ledger.options,"\n"))
   data <- read.ledger(query = query, options = ledger.options,
                       ledger.path = ledger.path)
 
   # parse transaction notes
-  data <- parse.notes(data)
+  data <- parse.notes(data, conversion)
 
   # lowercase payee
   data$Description <- tolower(data$Description)

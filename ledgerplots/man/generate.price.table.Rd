@@ -5,7 +5,7 @@
 \title{Generate a latex table with food prices}
 \usage{
 generate.price.table(query, ofile = "food-prices.tex", ledger.options,
-  ledger.path = NULL)
+  ledger.path = NULL, conversion)
 }
 \arguments{
 \item{query}{ledger query}
@@ -15,6 +15,8 @@ generate.price.table(query, ofile = "food-prices.tex", ledger.options,
 \item{ledger.options}{extra options passed to ledger}
 
 \item{ledger.path}{path to the ledger binary}
+
+\item{conversion}{volume unit conversion rules}
 }
 \description{
 Generate a latex table with food prices

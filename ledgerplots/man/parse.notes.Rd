@@ -4,7 +4,12 @@
 \alias{parse.notes}
 \title{Parse comments and get prices and volumes}
 \usage{
-parse.notes(data)
+parse.notes(data, conversion = c("1kg = 1000g"))
+}
+\arguments{
+\item{data}{read ledger data}
+
+\item{conversion}{unit conversion rules}
 }
 \description{
 Parse transaction notes and get a data frame containing

@@ -73,6 +73,13 @@ option_list <- list(
                             "Multiple functions are separated by ';;' correspondingly to the queries. ",
                             "Default: %default."),
               metavar="character"),
+  make_option(c("-c","--unit-conversion"), type="character",
+              default = "1kg = 1000g",
+              help = paste0("Unit conversion rules given in the format ",
+                            "<left_value><left_unit> = <right_value><right_unit>. ",
+                            "All <right_unit> are converted to <left_unit>. ",
+                            "Multiple rules are separated by ';;'. Default: %default."),
+              metavar="character"),
   make_option(c("--order-function"), type="character",
               default="function(x) sum(abs(x))",
               help = "Function that specifies how to order the plots. Default: %default",
@@ -146,6 +153,7 @@ if (! is.null(opt$queries)) {
   q <- unlist(strsplit(opt$queries,split=";;"))
   f <- unlist(strsplit(opt$functions,split=";;"))
   t <- unlist(strsplit(opt$type,split=";;"))
+  conversion <- unlist(strsplit(opt$"unit-conversion", split=";;"))
 
   # make functions the same length
   if (length(f) < length(q)) {
@@ -169,6 +177,7 @@ if (! is.null(opt$queries)) {
                max.num.plots = opt$"number-of-plots",
                ledger.options = opt$"ledger-options",
                ledger.path = opt$"ledger-bin-path",
+               conversion = conversion,
                FUN=function(x)
                  do.call(eval(parse(text=f[i])),args=list(x)))
   })
