@@ -108,6 +108,11 @@ query.plot <- function(query,
   # parse notes
   if ("amount" != type) {
     transactions <- parse.notes(transactions)
+
+    # remove first NA values
+    transactions <-
+      transactions[head(which(cumsum(!is.na(transactions$Volume)) > 0),1):
+                     nrow(transactions),]
   }
 
   # in case there is no transactions
