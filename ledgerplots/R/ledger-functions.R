@@ -42,7 +42,11 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 
   # convert string to a data.frame
   con <- textConnection(lines)
-  res <- read.csv(con, header=FALSE)
+
+  # create an empty data.frame
+  res <- data.frame(matrix(ncol=8,nrow=0))
+  if (length(lines))
+    res <- read.csv(con, header=FALSE)
   close(con)
 
   # convert Date to a real Dates
@@ -105,6 +109,10 @@ query.plot <- function(query,
   if ("amount" != type) {
     transactions <- parse.notes(transactions)
   }
+
+  # in case there is no transactions
+  if (! nrow(transactions))
+    return(list())
 
   # get account tree
   cat("Generating accounts tree...\n")
@@ -185,7 +193,7 @@ account.plot <- function(X,title,
 
   # plot for each currency separately
   lapply(sort(unique(X$Currency)), function(currency) {
-    data <- data.frame("Date"=dates.series,"Amount"=0)
+    data <- data.frame("Date"=dates.series,"Amount"=rep(0,length(dates.series)))
     data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
     data <- aggregate(data[,2],FUN=duplicated_transactions,
                       by=list(data[,1]))
