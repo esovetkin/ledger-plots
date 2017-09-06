@@ -130,7 +130,7 @@ query.plot <- function(query,
   # get ordering of the accounts
   ord <- order(if (order.depth) -tree[,2] else rep(0,nrow(tree)),
                sapply(tree[,1], function(x) {
-                 idx <- grep(x,transactions$Category)
+                 idx <- grep(x,transactions$Category,fixed=TRUE)
                  order.function(transactions$Amount[idx])
                }),
                decreasing = TRUE)
@@ -141,7 +141,7 @@ query.plot <- function(query,
   # make a plots in the selected order
   plots <- lapply(ord, function(i) {
     cat(paste("Plotting:",tree[i,1],"\n"))
-    idx <- grep(tree[i,1],transactions$Category)
+    idx <- grep(tree[i,1],transactions$Category,fixed=TRUE)
     account.plot(X=transactions[idx,],
                  title=tree[i,1],
                  type = type,
