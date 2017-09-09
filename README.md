@@ -145,6 +145,19 @@ The thick vertical lines on the plots correspond to the first day of
 the month. The thin vertical lines correspond to the first day of the
 week (Monday).
 
+## Revalued plot
+
+With `-t "revalued"` one is able to plot the revalued valued of the
+query. This allows to see possible gain losses in a hypothetical
+situation "if I were buying some currency what would I have
+gained/lost"
+```
+ledger-plots -t "revalued" -f "cumsum" -q "-X EUR ;; -X GBP ;; -X USD ;; -X XBT" \
+             --ledger-options="^assets:"
+```
+
+Note that this feature relies on your ledger price database.
+
 # Food prices and volumes
 
 ledger-plots is also able to parse a special syntax of transaction

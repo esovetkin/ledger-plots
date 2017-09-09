@@ -95,7 +95,7 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #'
 #' @export
 query.plot <- function(query,
-                       type = c("amount","price","volume"),
+                       type = c("amount","price","volume","revalued"),
                        order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
@@ -110,13 +110,17 @@ query.plot <- function(query,
                               ledger.path = ledger.path)
 
   # parse notes
-  if ("amount" != type) {
+  if ( "price" == type || "volume" == type ) {
     transactions <- parse.notes(transactions, conversion)
 
     # remove first NA values
     transactions <-
       transactions[head(which(cumsum(!is.na(transactions$Volume)) > 0),1):
                      nrow(transactions),]
+  }
+
+  if ( "revalued" == type ) {
+    transactions <- transactions[grep("<Revalued>", transactions$Category,fixed=TRUE),]
   }
 
   # in case there is no transactions
@@ -178,7 +182,7 @@ query.plot <- function(query,
 #'
 #' @export
 account.plot <- function(X,title,
-                         type = c("amount","price","volume"),
+                         type = c("amount","price","volume","revalued"),
                          date.interval = c(Sys.Date()-365,Sys.Date()),
                          FUN=cumsum, ...) {
   type <- match.arg(type)

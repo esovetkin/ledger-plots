@@ -4,9 +4,9 @@
 \alias{query.plot}
 \title{Plot accounts for a given query}
 \usage{
-query.plot(query, type = c("amount", "price", "volume"), order.depth = TRUE,
-  order.function = function(x) sum(abs(x)), max.num.plots, ledger.options,
-  ledger.path = NULL, conversion, ...)
+query.plot(query, type = c("amount", "price", "volume", "revalued"),
+  order.depth = TRUE, order.function = function(x) sum(abs(x)),
+  max.num.plots, ledger.options, ledger.path = NULL, conversion, ...)
 }
 \arguments{
 \item{query}{query string that is used in read.ledger function to
