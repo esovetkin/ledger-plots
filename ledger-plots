@@ -36,6 +36,9 @@ install.missing.packages <- function() {
   if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2", repo = mirror)
   if (!require("gridExtra", quietly = TRUE)) install.packages("gridExtra", repo = mirror)
 
+  # for "melt" function
+  if (!require("reshape2", quietly = TRUE)) install.packages("reshape2", repo = mirror)
+
   # install xtable for plotting latex tables
   if (!require("xtable", quietly = TRUE)) install.packages("xtable", repo = mirror)
 }
@@ -63,8 +66,11 @@ option_list <- list(
   make_option(c("-f","--functions"), type="character",
               default="cumsum",
               help = paste0("Function (statistic) applied to each of the transaction vectors. ",
-                            "Multiple functions are separated by ';;' correspondingly to the queries. ",
-                            "This argument can be any R-function (e.g. cumsum, monthly). Default: %default"),
+                            "Multiple functions that are separated by ';;' correspondingly to the queries. ",
+                            "Multiple functions that are separated by '::' correspond to various function ",
+                            "to be calculated on each transaction vector and be ploted in one figure. ",
+                            "This argument can be any R-function (e.g. cumsum, monthly). ",
+                            "Default: %default"),
               metavar="character"),
   make_option(c("-t","--type"), type="character",
               default = "amount",
@@ -180,8 +186,7 @@ if (! is.null(opt$queries)) {
                ledger.options = opt$"ledger-options",
                ledger.path = opt$"ledger-bin-path",
                conversion = conversion,
-               FUN=function(x)
-                 do.call(eval(parse(text=f[i])),args=list(x)))
+               FUN=unlist(strsplit(f[i],split="::")))
   })
 
   # remove recursive lists

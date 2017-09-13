@@ -82,10 +82,9 @@ The query is specified using `-q` (`--queries`) option. Ledger-plots
 passes the specified query string to the ledger. You may also specify
 several queries together separating them by two semi-colons (";;")
 ```
-ledger-plots -q "^assets: -X EUR;; ^liability: -X EUR"
+ledger-plots -q "^assets: -X EUR ;; ^liability: -X EUR"
 ```
-This will
-make plots for each query one after another.
+This will make plots for each query one after another.
 
 You may also pass a function to be calculated on the transaction
 vector. This can be specified in `-f` (`--functions`) option. The
@@ -125,6 +124,16 @@ ledger-plots -f "cumsum  ;; monthly  ;; function(x) {-cumsum(x)}" \
 for the query "^assets:" accumulated sum is calculated, for the query
 "^expenses" a 30-days average and for the query "^income:" the
 inverted accumulated sum.
+
+One can also calculate and plot in one figure several function
+statistics. These functions can be specified by separating them with
+"::" symbol. For example,
+```
+ledger-plots -f "cumsum :: function(x) {i <- 1:length(x); predict(lm(x~i))}" \
+             -q "^assets: -X EUR"
+```
+plots cumulative sums plus a linear regression of the accumulated
+assets.
 
 ## Plots ordering and description
 

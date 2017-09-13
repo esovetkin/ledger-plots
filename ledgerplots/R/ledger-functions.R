@@ -184,7 +184,8 @@ query.plot <- function(query,
 account.plot <- function(X,title,
                          type = c("amount","price","volume","revalued"),
                          date.interval = c(Sys.Date()-365,Sys.Date()),
-                         FUN=cumsum, ...) {
+                         FUN=c("cumsum"),
+                         ...) {
   type <- match.arg(type)
 
   dates.series <- seq(date.interval[1],date.interval[2],1)
@@ -211,8 +212,14 @@ account.plot <- function(X,title,
     data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
     data <- aggregate(data[,2],FUN=duplicated_transactions,
                       by=list(data[,1]))
-    data[,2] <- FUN(data[,2],...)
     colnames(data) <- c("Date","Amount")
+
+    # calculate functions on the data
+    data[,as.character(FUN)] <- sapply(FUN,
+                                       function(f)
+                                         do.call(eval(parse(text=f)),
+                                                 args=list(data[,"Amount"])))
+    data[,"Amount"] <- NULL
 
     series.plot(data,currency=currency,title=title)
   })
@@ -229,11 +236,14 @@ account.plot <- function(X,title,
 #' @export
 series.plot <- function(data,currency,title) {
   require("ggplot2", quietly = TRUE)
+  require("reshape2", quietly = TRUE)
+
+  data <- melt(data,id="Date")
 
   # main plot
-  g <- ggplot(data, aes(Date,Amount))
+  g <- ggplot(data, aes(x=Date,y=value,colour=variable))
   # line type
-  g <- g + geom_line(color="firebrick")
+  g <- g + geom_line() + theme(legend.position="none")
   # minor grid: weeks, major grid: months
   g <- g + theme(panel.grid.minor = element_line(size=0.1),
                  panel.grid.major = element_line(size=0.5)) +
