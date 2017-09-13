@@ -5,7 +5,7 @@
 \title{Generate a latex table with food prices}
 \usage{
 generate.price.table(query, ofile = "food-prices.tex", ledger.options,
-  ledger.path = NULL, conversion)
+  ledger.path = NULL, conversion = c("1kg = 1000g"))
 }
 \arguments{
 \item{query}{ledger query}
