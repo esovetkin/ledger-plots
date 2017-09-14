@@ -12,6 +12,21 @@ yearly <- function(x) {
   filter(x,rep(1,365),sides=1)
 }
 
+#' @title Calculate quartely averages
+#'
+#' @param x a numeric vector
+#'
+#' @return a numeric vector of the same size as vector x
+#'
+#' @export
+quarterly <- function(x)
+{
+  if (length(x) < 90)
+    return(rep(NA,length(x)))
+
+  filter(x,rep(1,90),sides=1)
+}
+
 #' @title Calculate 30 days average of the given vector
 #'
 #' @description example of a functions can be used to be appled for
@@ -53,6 +68,22 @@ yearly.price <- function(x) {
   n <- filter(abs(x) > 0,rep(1,365),sides=1)
   n[! abs(n) > 0] <- 1
   filter(x,rep(1,365),sides=1)/n
+}
+
+#' @title Quarterly average price
+#'
+#' @description calculate monthly average price
+#'
+#' @param x a numeric vector
+#'
+#' @export
+quarterly.price <- function(x) {
+  if (length(x) < 90)
+    return(rep(NA,length(x)))
+
+  n <- filter(abs(x) > 0,rep(1,90),sides=1)
+  n[! abs(n) > 0] <- 1
+  filter(x,rep(1,90),sides=1)/n
 }
 
 #' @title Monthly average price

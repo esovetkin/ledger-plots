@@ -112,6 +112,9 @@ average can be specified as
 ledger-plots -f "function(x) {filter(x,rep(1,7),sides=1)}" -q "^expenses: -X EUR"
 ```
 
+There are several query statistic functions available: `weekly`,
+`monthly`, `quarterly` and `yearly`.
+
 Multiple function can be combined together for multiple queries by
 separating them by two semi-colons (";;"). The first function in
 the list of functions corresponds to the first query, second function
