@@ -206,6 +206,11 @@ account.plot <- function(X,title,
     X$Amount <- X$Volume
   }
 
+  if_legend <- FALSE
+  if ("if_legend" %in% names(list(...))) {
+    if_legend <- list(...)$if_legend
+  }
+
   # plot for each currency separately
   lapply(sort(unique(X$Currency)), function(currency) {
     data <- data.frame("Date"=dates.series,"Amount"=rep(0,length(dates.series)))
@@ -221,7 +226,8 @@ account.plot <- function(X,title,
                                                  args=list(data[,"Amount"])))
     data[,"Amount"] <- NULL
 
-    series.plot(data,currency=currency,title=title)
+    series.plot(data=data,currency=currency,
+                title=title,if_legend=if_legend)
   })
 }
 
@@ -231,10 +237,13 @@ account.plot <- function(X,title,
 #' @param currency type of series values (used as ylab)
 #' @param title account name (used as a plot name)
 #'
+#' @param if_legend boolean variable that controls wheather the legend
+#'   is drawn
+#'
 #' @return ggplot object
 #'
 #' @export
-series.plot <- function(data,currency,title) {
+series.plot <- function(data,currency,title,if_legend=FALSE) {
   require("ggplot2", quietly = TRUE)
   require("reshape2", quietly = TRUE)
 
@@ -242,8 +251,16 @@ series.plot <- function(data,currency,title) {
 
   # main plot
   g <- ggplot(data, aes(x=Date,y=value,colour=variable))
-  # line type
-  g <- g + geom_line() + theme(legend.position="none")
+  # line type plot
+  g <- g + geom_line()
+  # add legend
+  if (if_legend) {
+    g <- g + theme(legend.position="bottom",
+                   legend.text = element_text(size=7),
+                   legend.title = element_blank())
+  } else {
+    g <- g + theme(legend.position="none")
+  }
   # minor grid: weeks, major grid: months
   g <- g + theme(panel.grid.minor = element_line(size=0.1),
                  panel.grid.major = element_line(size=0.5)) +

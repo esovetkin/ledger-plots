@@ -136,7 +136,8 @@ ledger-plots -f "cumsum :: function(x) {i <- 1:length(x); predict(lm(x~i))}" \
              -q "^assets: -X EUR"
 ```
 plots cumulative sums plus a linear regression of the accumulated
-assets.
+assets. When plotting several query statistic, you might want to use
+`--plot-legend` argument, to create a legend for each plot.
 
 ## Plots ordering and description
 

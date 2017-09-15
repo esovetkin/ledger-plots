@@ -4,7 +4,7 @@
 \alias{series.plot}
 \title{Low level function that plots the series}
 \usage{
-series.plot(data, currency, title)
+series.plot(data, currency, title, if_legend = FALSE)
 }
 \arguments{
 \item{data}{data.frame to be plotted}
@@ -12,6 +12,9 @@ series.plot(data, currency, title)
 \item{currency}{type of series values (used as ylab)}
 
 \item{title}{account name (used as a plot name)}
+
+\item{if_legend}{boolean variable that controls wheather the legend
+is drawn}
 }
 \value{
 ggplot object
