@@ -6,7 +6,8 @@
 \usage{
 query.plot(query, type = c("amount", "price", "volume", "revalued"),
   order.depth = TRUE, order.function = function(x) sum(abs(x)),
-  max.num.plots, ledger.options, ledger.path = NULL, conversion, ...)
+  max.num.plots, ledger.options, ledger.path = NULL,
+  conversion = c("1kg = 1000g"), ...)
 }
 \arguments{
 \item{query}{query string that is used in read.ledger function to

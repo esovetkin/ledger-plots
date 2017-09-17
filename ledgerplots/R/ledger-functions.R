@@ -100,7 +100,7 @@ query.plot <- function(query,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
                        ledger.options, ledger.path = NULL,
-                       conversion,
+                       conversion = c("1kg = 1000g"),
                        ...) {
   type <- match.arg(type)
 
@@ -495,7 +495,7 @@ compound.poisson <- function(data, period = 365) {
 #' @export
 generate.price.table <- function(query, ofile="food-prices.tex",
                                  ledger.options, ledger.path=NULL,
-                                 conversion) {
+                                 conversion = c("1kg = 1000g")) {
   # read transactions
   cat(paste("Reading transactions for the query:",query,ledger.options,"\n"))
   data <- read.ledger(query = query, options = ledger.options,
