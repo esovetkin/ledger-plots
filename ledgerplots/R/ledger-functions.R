@@ -135,7 +135,18 @@ query.plot <- function(query,
   ord <- order(if (order.depth) -tree[,2] else rep(0,nrow(tree)),
                sapply(tree[,1], function(x) {
                  idx <- grep(x,transactions$Category,fixed=TRUE)
-                 order.function(transactions$Amount[idx])
+
+                 v <- transactions$Amount[idx]
+
+                 if ( "price" == type) {
+                   v <- transactions$Price[idx]
+                 }
+
+                 if ( "volume" == type) {
+                   v <- transactions$Volume[idx]
+                 }
+
+                 order.function(v)
                }),
                decreasing = TRUE)
 
