@@ -7,18 +7,18 @@ parse.account.constrains.matrix <- function(filename)
   require("yaml")
 
   filename <- "~/bank/nutrition-values/food-nutritions.yaml"
-  
+
   # raw data
   data <- yaml.load_file(filename)
-  
+
   # account names
   accounts <- unique(names(data))
 
   # characteristics names
   characteristics <- unique(unlist(lapply(data, names)))
-  
+
   # nutrition table (constrain matrix)
-  res <- matrix(0, ncol=length(characteristics), nrow=length(accounts))
+  res <- matrix(NA, ncol=length(characteristics), nrow=length(accounts))
   colnames(res) <- characteristics
   rownames(res) <- accounts
 
@@ -29,7 +29,7 @@ parse.account.constrains.matrix <- function(filename)
 
   re <- "(.*) (.*)/(.*)"
   v <- gsub(re,"\\1",res)
-  
+
   res <- sapply(v, function(x) eval(parse(text=x)))
   dim(res) <- dim(v)
   colnames(res) <- characteristics
