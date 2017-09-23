@@ -114,6 +114,48 @@ get.prices <- function()
   res
 }
 
+#' @title fill missing values for the nutrition values
+#'
+#' Fill missing values by taking averages from the children of the
+#' same node. Going from most bottom level to the most top level of
+#' the account tree.
+#'
+#' @param data data.frame containing columns of values with possibly
+#'   missing values
+#'
+#' @return vector with missing values replaces following the algorithm
+#'   described above
+fill.missing.nutritions <- function(data)
+{
+  tree <- account.tree.depth(rownames(data))
+
+  # get the parent node
+  tree$Parent <- gsub("(.*):[^:]+","\\1",tree$Account)
+
+  for (d in sort(unique(tree$Depth),decreasing=TRUE)) {
+    # get list of parent nodes with current depth
+    accounts <- unique(tree[tree$Depth == d,"Parent"])
+
+    # calculate averages of the missing values
+    for (a in accounts) {
+      data[grep(a,rownames(data)),] <- apply(
+        data[grep(a,rownames(data)),,drop=FALSE],2,function(x)
+        {
+          na.idx <- is.na(x)
+
+          if ( all(na.idx) )
+            return(x)
+
+          x[na.idx] <- mean(x[!na.idx])
+
+          x
+        })
+    }
+  }
+
+  data
+}
+
 #' @title find optimal combination of accounts and volumes
 #'
 #' 
