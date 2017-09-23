@@ -57,24 +57,27 @@ match.interval.constrains <- function(data)
 #' @param filename name of the file containing the nutrition
 #'   constrains
 #'
-#' 
+#'
 parse.nutrition.values <- function(filename)
 {
   require("yaml")
 
   ### temp
   filename <- "~/bank/nutrition-values/recommended-constrains.yaml"
-  
+
   # raw data
   data <- unlist(yaml.load_file(filename))
 
   # constrains
   constr <- match.interval.constrains(data)
 
+  # remove rows that have no interval
+  constr <- constr[!apply(is.na(constr[,c("lower","upper")]),1,all),]
+
   # convert periods to a common value
-  
+
   # index of rows to be duplicated for nutritions table
-  idx <- rep(1:nrow(constr),
+  idx <- rep(rownames(constr),
              as.numeric(apply(!is.na(constr[,c("lower","upper")]),1,all))+1)
 
   # generate the constraint vector
