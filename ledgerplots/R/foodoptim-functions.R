@@ -166,29 +166,34 @@ optimal.food <- function()
   # parse nutrition values for food
   constr <- parse.account.constrains.matrix("temp")
 
+  # fill missing nutrition value
+  constr <- fill.missing.nutritions(constr)
+
   # parse required limits
   v <- parse.nutrition.values("temp")
 
   # use prices as objective function
   obj <- get.prices()
 
-  obj <- obj[rownames(obj) %in% rownames(constr),]
-  constr <- constr[rownames(constr) %in% rownames(obj),]
+  obj <- obj[rownames(obj) %in% rownames(constr),,drop=FALSE]
+  constr <- constr[rownames(constr) %in% rownames(obj),,drop=FALSE]
+  constr <- constr[,colnames(constr) %in% v$idx,drop=FALSE]
 
-  constr <- constr[order(rownames(constr)),]
-  obj <- obj[order(rownames(obj)),]
+  # make account sorted in the same way
+  constr <- constr[order(rownames(constr)),,drop=FALSE]
+  obj <- obj[order(rownames(obj)),,drop=FALSE]
 
+  # remove accounts where no price is present
   i <- which(is.na(obj[,"Price"]))
-  
-  obj <- obj[!rownames(obj) %in% names(i),]
-  constr <- constr[!rownames(constr) %in% names(i),]
-  
+  obj <- obj[!rownames(obj) %in% names(i),,drop=FALSE]
+  constr <- constr[!rownames(constr) %in% names(i),,drop=FALSE]
+
   obj <- obj[,"Price"]
   obj <- unlist(obj)
-  
+
   constr <- constr[,v$idx]
   constr.dir <- v$constr.dir
   rhs <- v$rhs
-  
+
   l <- lp("min", obj, t(constr), constr.dir, rhs)
 }
