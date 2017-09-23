@@ -40,7 +40,7 @@ parse.account.constrains.matrix <- function(filename)
 #' @title match the interval values
 #'
 #' @param data raw strings read from file
-#' 
+#'
 match.interval.constrains <- function(data)
 {
   re <- "\\(([.0-9]*),([.0-9]*)\\)[ ]?(.*)/(.*)"
@@ -92,7 +92,7 @@ parse.nutrition.values <- function(filename)
 }
 
 #' @title get price vector
-#' 
+#'
 get.prices <- function()
 {
   data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger_2016.log -f ~/bank/food-ledger.log -X EUR")
@@ -101,7 +101,7 @@ get.prices <- function()
   data <- parse.notes(data, c("1kg = 1000g","1kg = 1l", "1kg = 1000ml"))
 
   data <- data[data$Price.curr %in% "EUR/kg" ,]
-  
+
   tree <- account.tree.depth(data$Category)
 
   res <- sapply(as.character(tree$Account), function(x)
@@ -110,7 +110,7 @@ get.prices <- function()
                stringsAsFactors=FALSE)
   })
   res <- t(res)
-  
+
   res
 }
 
@@ -158,7 +158,7 @@ fill.missing.nutritions <- function(data)
 
 #' @title find optimal combination of accounts and volumes
 #'
-#' 
+#'
 optimal.food <- function()
 {
   require(lpSolve)
