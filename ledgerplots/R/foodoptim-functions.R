@@ -156,6 +156,41 @@ fill.missing.nutritions <- function(data)
   data
 }
 
+#' @title fill missing values (another algorithm)
+#'
+#' Fill missing values propagating from parent to child.
+#'
+#' @param data data.frame
+#'
+#' @return data.frame
+fill.missing.nutritions2 <- function(data)
+{
+  tree <- account.tree.depth(rownames(data))
+
+  # get the parent node
+  tree$Parent <- gsub("(.*):[^:]+","\\1",tree$Account)
+
+  for (d in sort(unique(tree$Depth))) {
+    # get list of accounts at current level
+    accounts <- unique(tree[tree$Depth == d,"Account"])
+    accounts <- accounts[accounts %in% rownames(data)]
+
+    # for each account derive children
+    for (a in accounts) {
+      v <- data[a,]
+      children <- tree[grepl(a,tree$Account) & tree$Depth == d+1, "Account"]
+      children <- children[children %in% rownames(data)]
+
+      for (i in 1:ncol(data[children,,drop=FALSE]))
+      {
+        data[children,i][is.na(data[children,i])] <- v[i]
+      }
+    }
+  }
+
+  data
+}
+
 #' @title find optimal combination of accounts and volumes
 #'
 #'
@@ -167,7 +202,9 @@ optimal.food <- function()
   constr <- parse.account.constrains.matrix("temp")
 
   # fill missing nutrition value
-  constr <- fill.missing.nutritions(constr)
+  constr <- fill.missing.nutritions2(constr)
+  #constr <- fill.missing.nutritions(constr)
+  constr[is.na(constr)] <- 0
 
   # parse required limits
   v <- parse.nutrition.values("temp")
