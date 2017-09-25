@@ -95,7 +95,7 @@ parse.nutrition.values <- function(filename)
 #'
 get.prices <- function()
 {
-  data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger_2016.log -f ~/bank/food-ledger.log -X EUR")
+  data <- read.ledger(query="",options="-f ~/bank/data/food_2013.ledger -f ~/bank/data/food_2014.ledger -f ~/bank/data/food_2015.ledger -f ~/bank/data/food_2016.ledger -f ~/bank/data/food.ledger -X EUR")
 
   # parse transaction notes
   data <- parse.notes(data, c("1kg = 1000g","1kg = 1l", "1kg = 1000ml"))
@@ -196,4 +196,12 @@ optimal.food <- function()
   rhs <- v$rhs
 
   l <- lp("min", obj, t(constr), constr.dir, rhs)
+  l
+
+  x <- l$solution[l$solution > 0]
+  names(x) <- rownames(constr)[l$solution > 0]
+
+  l
+  x
+  t(constr) %*% l$solution
 }
