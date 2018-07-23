@@ -150,7 +150,7 @@ query.plot <- function(query,
   tree <- account.tree.depth(transactions$Category)
 
   if ("tags" == categorise_by) {
-    tree <- tree[tree$Depth == account_depth_for_each_tag,]
+    tree <- tree[tree$Depth <= account_depth_for_each_tag,]
 
     tags <- get_tuples_tags(get_tags(transactions))
   }

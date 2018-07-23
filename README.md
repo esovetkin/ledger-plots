@@ -171,6 +171,22 @@ ledger-plots -t "revalued" -f "cumsum" -q "-X EUR ;; -X GBP ;; -X USD ;; -X XBT"
 
 Note that this feature relies on your ledger price database.
 
+## Plot of tags
+
+Using option `-C "tags"` (or equivalently `--categorise-by="tags"`)
+one may make plots for different tags and combination of tags. By
+default, only plots for account with depth 1 are made (this behaviour
+is controlled with option `--min-tags-account-depth`). Plots are made
+only for tags combination with maximal length `--max-tags-tuples` and
+with a minimal number of transactions equal to `--min-tags-entries`.
+
+For example,
+```
+ledger-plots -C "tags" -f "monthly" -q "^expenses: -H -X EUR"
+```
+makes plot for expenses and different combinations of tags being used
+for those transactions.
+
 # Food prices and volumes
 
 ledger-plots is also able to parse a special syntax of transaction

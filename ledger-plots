@@ -137,6 +137,10 @@ option_list <- list(
               type="numeric", default = 5,
               help = paste0("Minimum number of transaction for ",
                             "a plot with tags to appear. Default: %default")),
+  make_option(c("--min-tags-account-depth"),
+              type="numeric", default = 1,
+              help = paste0("Depth of account to plot in combination with different tags. ",
+                            "Default: %default")),
   make_option(c("--plot-legend"), action = "store_true",
               default = FALSE,
               help = paste0("Add legend to plots indicating which query statistic ",
@@ -208,6 +212,7 @@ if (! is.null(opt$queries)) {
                ledger.path = opt$"ledger-bin-path",
                max_tags_tuples = opt$"max-tags-tuples",
                min_tags_entries = opt$"min-tags-entries",
+               account_depth_for_each_tag = opt$"min-tags-account-depth",
                conversion = conversion,
                FUN=unlist(strsplit(f[i],split="::")),
                if_legend = opt$"plot-legend")
