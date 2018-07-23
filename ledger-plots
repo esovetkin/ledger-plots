@@ -41,6 +41,9 @@ install.missing.packages <- function() {
 
   # install xtable for plotting latex tables
   if (!require("xtable", quietly = TRUE)) install.packages("xtable", repo = mirror)
+
+  # install stringr for some regex functions
+  if (!require("stringr", quietly = TRUE)) install.packages("stringr", repo = mirror)
 }
 
 # to install missing dependencies
@@ -81,6 +84,12 @@ option_list <- list(
                             "Multiple functions are separated by ';;' correspondingly to the queries. ",
                             "Default: %default."),
               metavar="character"),
+  make_option(c("-C","--categorise-by"), type="character",
+              default = "account",
+              help = paste0("The way plots are categorised. Possible values: ",
+                            "account, tags. ",
+                            "Default: %default."),
+              metavar = "character"),
   make_option(c("-c","--unit-conversion"), type="character",
               default = "1kg = 1000g",
               help = paste0("Unit conversion rules given in the format ",
@@ -121,6 +130,13 @@ option_list <- list(
   make_option(c("--output-pdf-height"),
               type="numeric", default = 7,
               help = paste0("Page height (in inches). Default: %default ")),
+  make_option(c("--max-tags-tuples"),
+              type="numeric", default = 3,
+              help = paste0("Maximum length of tags combinations. Default: %default")),
+  make_option(c("--min-tags-entries"),
+              type="numeric", default = 5,
+              help = paste0("Minimum number of transaction for ",
+                            "a plot with tags to appear. Default: %default")),
   make_option(c("--plot-legend"), action = "store_true",
               default = FALSE,
               help = paste0("Add legend to plots indicating which query statistic ",
@@ -183,12 +199,15 @@ if (! is.null(opt$queries)) {
   plots <- lapply(1:length(q), function(i) {
     query.plot(q[i],
                type = t[i],
+               categorise_by = opt$"categorise-by",
                order.depth = opt$"no-depth-order",
                order.function = function(x)
                  do.call(eval(parse(text=opt$"order-function")),args=list(x)),
                max.num.plots = opt$"number-of-plots",
                ledger.options = opt$"ledger-options",
                ledger.path = opt$"ledger-bin-path",
+               max_tags_tuples = opt$"max-tags-tuples",
+               min_tags_entries = opt$"min-tags-entries",
                conversion = conversion,
                FUN=unlist(strsplit(f[i],split="::")),
                if_legend = opt$"plot-legend")

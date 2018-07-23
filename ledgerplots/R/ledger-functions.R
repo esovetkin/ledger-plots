@@ -82,6 +82,19 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #'
 #' @param conversion volume unit conversion rules
 #'
+#' @param type type of plot to make (which amount to consider)
+#'
+#' @param categorise_by the way plot are categorised by. In case of
+#'   tags only accounts with depth 1 are considered
+#'
+#' @param account_depth_for_each_tag depth of accounts considered for
+#'   each tag (in case categorise_by == "tags")
+#'
+#' @param max_tags_tuples maximum length of tags combinations
+#'
+#' @param min_tags_entries ignore plots that have less than 5 tags
+#'   entries
+#'
 #' @param ... extra arguments given to plot.ledger function
 #'
 #' @details the plots are ordered by the depth of the ledger account
@@ -96,13 +109,18 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @export
 query.plot <- function(query,
                        type = c("amount","price","volume","revalued"),
+                       categorise_by = c("account","tags"),
                        order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
                        ledger.options, ledger.path = NULL,
                        conversion = c("1kg = 1000g"),
+                       account_depth_for_each_tag = 1,
+                       max_tags_tuples = 3,
+                       min_tags_entries = 5,
                        ...) {
   type <- match.arg(type)
+  categorise_by <- match.arg(categorise_by)
 
   # read transactions
   cat(paste("Reading transactions for the query:",query,ledger.options,"\n"))
@@ -131,6 +149,12 @@ query.plot <- function(query,
   cat("Generating accounts tree...\n")
   tree <- account.tree.depth(transactions$Category)
 
+  if ("tags" == categorise_by) {
+    tree <- tree[tree$Depth == account_depth_for_each_tag,]
+
+    tags <- get_tuples_tags(get_tags(transactions))
+  }
+
   # get ordering of the accounts
   ord <- order(if (order.depth) -tree[,2] else rep(0,nrow(tree)),
                sapply(tree[,1], function(x) {
@@ -157,11 +181,39 @@ query.plot <- function(query,
   plots <- lapply(ord, function(i) {
     cat(paste("Plotting:",tree[i,1],"\n"))
     idx <- grep(tree[i,1],transactions$Category,fixed=TRUE)
-    account.plot(X=transactions[idx,],
-                 title=tree[i,1],
-                 type = type,
-                 date.interval = c(min(transactions$Date),min(Sys.Date(),max(transactions$Date))),
-                 ...)
+
+    if ("account" == categorise_by) {
+      res <- account.plot(X=transactions[idx,],
+                          title=tree[i,1],
+                          type = type,
+                          date.interval = c(min(transactions$Date),
+                                            min(Sys.Date(),max(transactions$Date))),
+                          ...)
+    }
+
+    if ("tags" == categorise_by) {
+      res <- lapply(1:length(tags), function(j)
+      {
+        name <- paste(c(as.character(tree[i,1]),
+                        paste0("%",strsplit(names(tags)[j],".",fixed=TRUE)[[1]])),
+                      collapse=" & ")
+        cat(paste("Plotting:",name,"\n"))
+
+        idx2 <- tags[[j]]
+        idx2 <- idx[idx %in% idx2[idx2 %in% idx]]
+
+        account.plot(X=transactions[idx2,],
+                     title = name,
+                     type = type,
+                     date.interval = c(min(transactions$Date),
+                                       min(Sys.Date(),max(transactions$Date))),
+                     ...)
+      })
+
+      res <- unlist(res, recursive = FALSE)
+    }
+
+    res
   })
 
   # remove recursive lists
@@ -323,6 +375,95 @@ account.tree.depth <- function(names) {
                     "Depth" = sapply(res,function(x) length(strsplit(x,":")[[1]])))
 
   rownames(res) <- 1:nrow(res)
+
+  res
+}
+
+#' @title get tags and corresponding indices
+#'
+#' @description process Notes column from 'ledger csv' and generate a
+#'   list with tags and corresponding indices in the data
+#'
+#' @param data data.frame, output of the read.ledger
+#'
+#' @return a named list with tags and corresponding indices
+#'
+#' @export
+get_tags <- function(data)
+{
+  require("stringr",quietly = TRUE)
+
+  notes <- data$Notes
+  notes <- str_match(notes,"^.*?:([a-z:]+):.*?$")[,2]
+
+  tags <- unique(unlist(strsplit(notes,":")))
+
+  res <- lapply(tags, function(tag) {
+    if (is.na(tag))
+      return(integer(0))
+
+    grep(tag,notes,fixed=TRUE)
+  })
+  names(res) <- tags
+
+  # remove empty tags and NA
+  res[is.na(names(res)) | names(res) == ""] <- NULL
+
+  res <- res[order(sapply(res,length),decreasing = TRUE)]
+
+  return(res)
+}
+
+#' @title compute different combinations of tags
+#'
+#' @param tags names list returned by get_tags function
+#'
+#' @param n maximum number of tuples to consider
+#'
+#' @param min_num minimum number of entries for the tag combinations
+#'   to appear in plots
+#'
+#' @return named list with indices corresponding to tuples pf tags
+#'
+#' @export
+get_tuples_tags <- function(tags, n=3, min_num=5)
+{
+
+  res <- tags
+  k <- 2
+  tags.tuple <- tags
+
+  while (k <= n) {
+    x <- unlist(lapply(tags,function(x)
+      lapply(tags.tuple, function(y)
+        y[y %in% x[x %in% y]])),recursive=FALSE)
+
+    # remove empty pairs
+    x[sapply(x,length) == 0] <- NULL
+
+    # remove "diagonal", i.e. <tag1>.<tag2>.<tag3>.<tag4> when any of
+    # tags coincide.
+    x[sapply(strsplit(names(x),".",fixed=TRUE),
+             function(x) any(duplicated(x)))] <- NULL
+
+    # remove duplicated entries
+    x[duplicated(sapply(strsplit(names(x),".",fixed=TRUE),
+                        function(x) paste(sort(x),collapse=".")))] <- NULL
+
+    # sort remaining labels
+    names(x) <- sapply(strsplit(names(x),".",fixed=TRUE),
+                       function(x) paste(sort(x),collapse="."))
+
+
+    # sort items by popularity
+    x <- x[order(sapply(x,length),decreasing=TRUE)]
+
+    res <- append(res,x)
+    tags.tuple <- x
+    k <- k + 1
+  }
+
+  res[sapply(res,length) < min_num] <- NULL
 
   res
 }

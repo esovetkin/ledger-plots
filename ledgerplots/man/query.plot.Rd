@@ -5,13 +5,20 @@
 \title{Plot accounts for a given query}
 \usage{
 query.plot(query, type = c("amount", "price", "volume", "revalued"),
-  order.depth = TRUE, order.function = function(x) sum(abs(x)),
-  max.num.plots, ledger.options, ledger.path = NULL,
-  conversion = c("1kg = 1000g"), ...)
+  categorise_by = c("account", "tags"), order.depth = TRUE,
+  order.function = function(x) sum(abs(x)), max.num.plots, ledger.options,
+  ledger.path = NULL, conversion = c("1kg = 1000g"),
+  account_depth_for_each_tag = 1, max_tags_tuples = 3,
+  min_tags_entries = 5, ...)
 }
 \arguments{
 \item{query}{query string that is used in read.ledger function to
 query the ledger for transactions}
+
+\item{type}{type of plot to make (which amount to consider)}
+
+\item{categorise_by}{the way plot are categorised by. In case of
+tags only accounts with depth 1 are considered}
 
 \item{order.depth}{if do ordering by account depths first}
 
@@ -27,6 +34,14 @@ ledger}
 \item{ledger.path}{path to the ledger executable}
 
 \item{conversion}{volume unit conversion rules}
+
+\item{account_depth_for_each_tag}{depth of accounts considered for
+each tag (in case categorise_by == "tags")}
+
+\item{max_tags_tuples}{maximum length of tags combinations}
+
+\item{min_tags_entries}{ignore plots that have less than 5 tags
+entries}
 
 \item{...}{extra arguments given to plot.ledger function}
 }
