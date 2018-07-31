@@ -9,7 +9,7 @@ yearly <- function(x) {
   if (length(x) < 365)
     return(rep(NA,length(x)))
 
-  filter(x,rep(1,365),sides=1)
+  stats::filter(x,rep(1,365),sides=1)
 }
 
 #' @title Calculate quartely averages
@@ -24,7 +24,7 @@ quarterly <- function(x)
   if (length(x) < 90)
     return(rep(NA,length(x)))
 
-  filter(x,rep(1,90),sides=1)
+  stats::filter(x,rep(1,90),sides=1)
 }
 
 #' @title Calculate 30 days average of the given vector
@@ -39,7 +39,7 @@ monthly <- function(x) {
   if (length(x) < 30)
     return(rep(NA,length(x)))
 
-  filter(x,rep(1,30),sides=1)
+  stats::filter(x,rep(1,30),sides=1)
 }
 
 #' @title Calculate 7 days sum of the fiven vector
@@ -51,7 +51,7 @@ weekly <- function(x) {
   if (length(x) < 7)
     return(rep(NA,length(x)))
 
-  filter(x,rep(1,7),sides=1)
+  stats::filter(x,rep(1,7),sides=1)
 }
 
 #' @title Monthly average price
@@ -67,7 +67,7 @@ yearly.price <- function(x) {
 
   n <- filter(abs(x) > 0,rep(1,365),sides=1)
   n[! abs(n) > 0] <- 1
-  filter(x,rep(1,365),sides=1)/n
+  stats::filter(x,rep(1,365),sides=1)/n
 }
 
 #' @title Quarterly average price
@@ -83,7 +83,7 @@ quarterly.price <- function(x) {
 
   n <- filter(abs(x) > 0,rep(1,90),sides=1)
   n[! abs(n) > 0] <- 1
-  filter(x,rep(1,90),sides=1)/n
+  stats::filter(x,rep(1,90),sides=1)/n
 }
 
 #' @title Monthly average price
@@ -99,7 +99,7 @@ monthly.price <- function(x) {
 
   n <- filter(abs(x) > 0,rep(1,30),sides=1)
   n[! abs(n) > 0] <- 1
-  filter(x,rep(1,30),sides=1)/n
+  stats::filter(x,rep(1,30),sides=1)/n
 }
 
 #' @title Calculate 7 days average price
@@ -113,5 +113,5 @@ weekly.price <- function(x) {
 
   n <- filter(abs(x) > 0,rep(1,7),sides=1)
   n[! abs(n) > 0] <- 1
-  filter(x,rep(1,7),sides=1)
+  stats::filter(x,rep(1,7),sides=1)
 }

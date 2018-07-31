@@ -35,6 +35,9 @@ install.missing.packages <- function() {
   # install ggplot2
   if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2", repo = mirror)
   if (!require("gridExtra", quietly = TRUE)) install.packages("gridExtra", repo = mirror)
+  if (!require("ggalluvial", quietly = TRUE)) install.packages("ggalluvial", repo = mirror)
+  if (!require("dplyr", quietly = TRUE)) install.packages("dplyr", repo = mirror)
+  if (!require("lubridate", quietly = TRUE)) install.packages("lubridate", repo = mirror)
 
   # for "melt" function
   if (!require("reshape2", quietly = TRUE)) install.packages("reshape2", repo = mirror)
@@ -87,7 +90,7 @@ option_list <- list(
   make_option(c("-C","--categorise-by"), type="character",
               default = "account",
               help = paste0("The way plots are categorised. Possible values: ",
-                            "account, tags. ",
+                            "account, tags, alluvial. ",
                             "Default: %default."),
               metavar = "character"),
   make_option(c("-c","--unit-conversion"), type="character",

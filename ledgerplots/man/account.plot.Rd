@@ -4,7 +4,7 @@
 \alias{account.plot}
 \title{Plot ledger data in a current device}
 \usage{
-account.plot(X, title, type = c("amount", "price", "volume", "revalued"),
+account.plot(X, title, type, categorise_accounts = NULL,
   date.interval = c(Sys.Date() - 365, Sys.Date()), FUN = c("cumsum"), ...)
 }
 \arguments{

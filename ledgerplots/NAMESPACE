@@ -2,6 +2,8 @@
 
 export(account.plot)
 export(account.tree.depth)
+export(alluvial.plot)
+export(complete_dataframe_missing_dates)
 export(compound.poisson)
 export(convert.units)
 export(generate.price.table)

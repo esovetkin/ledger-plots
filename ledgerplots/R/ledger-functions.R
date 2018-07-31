@@ -109,7 +109,7 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @export
 query.plot <- function(query,
                        type = c("amount","price","volume","revalued"),
-                       categorise_by = c("account","tags"),
+                       categorise_by = c("account","tags","alluvial"),
                        order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
@@ -146,7 +146,6 @@ query.plot <- function(query,
     return(list())
 
   # get account tree
-  cat("Generating accounts tree...\n")
   tree <- account.tree.depth(transactions$Category)
 
   if ("tags" == categorise_by) {
@@ -191,6 +190,19 @@ query.plot <- function(query,
                           ...)
     }
 
+    if ("alluvial" == categorise_by) {
+      # get list of accounts of the current substree
+      categorise_accounts <- tree[(tree$Depth == tree[i,"Depth"] + 1) & grepl(tree[i,1],tree[,1],fixed=TRUE),1]
+
+      res <- account.plot(X=transactions[idx,],
+                          title=tree[i,1],
+                          type = type,
+                          categorise_accounts = categorise_accounts,
+                          date.interval = c(min(transactions$Date),
+                                            min(Sys.Date(),max(transactions$Date))),
+                          ...)
+    }
+
     if ("tags" == categorise_by) {
       res <- lapply(1:length(tags), function(j)
       {
@@ -220,6 +232,48 @@ query.plot <- function(query,
   unlist(plots, recursive = FALSE)
 }
 
+#' @title Complete data with all dates
+#'
+#' @param X dataframe with columns "Date" and "Amount"
+#'
+#' @param dates.series a vector of dates. Entries are added to X with
+#'   the dates corresponding to dates.series
+#'
+#' @param duplicated_transactions functions with which the several
+#'   transactions in one day are resolved
+#'
+#' @param FUN a character vector of function names to be applied to
+#'   transactions. Each function creates a column in transaction
+#'   data.frame
+#'
+#' @return a data.frame with "Date" and columns corresponding ot the
+#'   FUN names. The data.frame contains a value for each date in dates.series
+#'
+#' @export
+complete_dataframe_missing_dates <- function(X, dates.series,
+                                             duplicated_transactions,FUN)
+{
+  # remove present dates
+  dates.series <- dates.series[ !(dates.series %in% X[,"Date"])]
+
+  data <- data.frame("Date"=dates.series,"Amount"=rep(0,length(dates.series)))
+  data <- rbind(data,X[,c("Date","Amount")])
+  data <- aggregate(data[,2],FUN=duplicated_transactions,
+                    by=list(data[,1]))
+
+  colnames(data) <- c("Date","Amount")
+
+  # calculate functions on the data
+  data[,as.character(FUN)] <- sapply(FUN,
+                                     function(f)
+                                       do.call(eval(parse(text=f)),
+                                               args=list(data[,"Amount"])))
+
+  data[,"Amount"] <- NULL
+
+  return(data)
+}
+
 #' @title Plot ledger data in a current device
 #'
 #' @description A low lever function that do the actual
@@ -245,17 +299,14 @@ query.plot <- function(query,
 #'
 #' @export
 account.plot <- function(X,title,
-                         type = c("amount","price","volume","revalued"),
+                         type,
+                         categorise_accounts = NULL,
                          date.interval = c(Sys.Date()-365,Sys.Date()),
                          FUN=c("cumsum"),
                          ...) {
-  type <- match.arg(type)
-
   dates.series <- seq(date.interval[1],date.interval[2],1)
 
-  # remove present dates
-  dates.series <- dates.series[ !(dates.series %in% X[,"Date"])]
-
+  # the way the duplicated transactions in one day are treated
   duplicated_transactions <- sum
 
   if ("price" == type) {
@@ -274,24 +325,66 @@ account.plot <- function(X,title,
     if_legend <- list(...)$if_legend
   }
 
-  # plot for each currency separately
-  lapply(sort(unique(X$Currency)), function(currency) {
-    data <- data.frame("Date"=dates.series,"Amount"=rep(0,length(dates.series)))
-    data <- rbind(data,X[X$Currency %in% currency,c("Date","Amount")])
-    data <- aggregate(data[,2],FUN=duplicated_transactions,
-                      by=list(data[,1]))
-    colnames(data) <- c("Date","Amount")
+  # check if do alluvial plots
+  if (!is.null(categorise_accounts)) {
+    if (1 < length(FUN)) {
+      warning("FUN has length more than one. Using only the first one for the alluvium plot.")
+      FUN <- FUN[1]
+    }
 
-    # calculate functions on the data
-    data[,as.character(FUN)] <- sapply(FUN,
-                                       function(f)
-                                         do.call(eval(parse(text=f)),
-                                                 args=list(data[,"Amount"])))
-    data[,"Amount"] <- NULL
+    data <- lapply(categorise_accounts, function(account)
+    {
+      x <- X[grep(account,X$Category,fixed=TRUE),]
 
-    series.plot(data=data,currency=currency,
-                title=title,if_legend=if_legend)
-  })
+      x <- lapply(sort(unique(x$Currency)), function(currency)
+      {
+        res <- complete_dataframe_missing_dates(
+          X=x[x$Currency %in% currency,],
+          dates.series=dates.series,
+          duplicated_transactions=duplicated_transactions,
+          FUN=FUN)
+
+        res$Currency <- currency
+
+        res
+      })
+
+      x <- do.call(rbind,x)
+      x$Category <- account
+
+      x
+    })
+
+    data <- do.call(rbind,data)
+
+    # simplify label names
+    data$Category <- gsub(title,"",data$Category)
+
+    plots <- lapply(sort(unique(data$Currency)), function(currency)
+    {
+      x <- data[data$Currency == currency,]
+      x$Currency <- NULL
+
+      alluvial.plot(data=x,
+                    currency=currency,
+                    title=title)
+    })
+  } else {
+    # plot for each currency separately
+    plots <- lapply(sort(unique(X$Currency)), function(currency)
+    {
+      data <- complete_dataframe_missing_dates(
+        X=X[X$Currency %in% currency,],
+        dates.series=dates.series,
+        duplicated_transactions=duplicated_transactions,
+        FUN=FUN)
+
+      series.plot(data=data,currency=currency,
+                  title=title,if_legend=if_legend)
+    })
+  }
+
+  return(plots)
 }
 
 #' @title Low level function that plots the series
@@ -330,6 +423,61 @@ series.plot <- function(data,currency,title,if_legend=FALSE) {
     scale_x_date(minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
                  breaks = data$Date[format(data$Date,"%d") == "01"],
                  date_labels = "%b %Y")
+  # labs and title
+  g <- g + labs(title=title,x="Date",y=currency) +
+    theme(plot.title = element_text(hjust = 0.5, face="bold"))
+  # xlab
+  g <- g + theme(axis.text.x = element_text(angle=90, size=5))
+
+  g
+}
+
+#' @title alluvium plots
+#'
+#' @param data a data.frame with "Date", "Category", "Value" (not
+#'   necessarily this name)
+#'
+#' @param currency currency of the values (put as ylab)
+#'
+#' @param title plot title
+#'
+#' @return a ggplot object
+#'
+#' @export
+alluvial.plot <- function(data,currency,title)
+{
+  require("ggplot2", quietly = TRUE)
+  require("ggalluvial", quietly = TRUE)
+  require("reshape2", quietly = TRUE)
+
+  data <- melt(data,id=c("Date","Category"))
+
+  # convert value column to numeric (lubridate argues)
+  data$value <- as.numeric(data$value)
+
+  # remove na data, since alluvium plots require now NA present (NA
+  # may happen due to filter function)
+  data <- na.omit(data)
+
+  # reduce data to a monthly data
+  z <- dplyr::summarise(
+    dplyr::group_by(dplyr::mutate(data, Date = lubridate::floor_date(data$Date,"month")),
+                    Date, Category),
+    value = mean(value))
+
+  # generate a plot
+  g <- ggplot(data = z,
+         aes(x = Date, y = value, alluvium = Category)) +
+    geom_alluvium(aes(fill = Category, colour = Category),
+                  alpha = .75, decreasing = FALSE)
+
+  # minor grid: weeks, major grid: months
+  g <- g + theme(panel.grid.minor = element_line(size=0.1),
+                 panel.grid.major = element_line(size=0.5)) +
+    scale_x_date(minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
+                 breaks = data$Date[format(data$Date,"%d") == "01"],
+                 date_labels = "%b %Y")
+
   # labs and title
   g <- g + labs(title=title,x="Date",y=currency) +
     theme(plot.title = element_text(hjust = 0.5, face="bold"))
