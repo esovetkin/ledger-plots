@@ -320,6 +320,9 @@ account.plot <- function(X,title,
     X$Amount <- X$Volume
   }
 
+  # ignore items with missing currency
+  X <- X[!is.na(X$Currency),]
+
   if_legend <- FALSE
   if ("if_legend" %in% names(list(...))) {
     if_legend <- list(...)$if_legend
@@ -334,7 +337,7 @@ account.plot <- function(X,title,
 
     data <- lapply(categorise_accounts, function(account)
     {
-      x <- X[grep(account,X$Category,fixed=TRUE),]
+      x <- X[grep(account,X$Category,fixed=TRUE),,drop=FALSE]
 
       x <- lapply(sort(unique(x$Currency)), function(currency)
       {
@@ -350,10 +353,18 @@ account.plot <- function(X,title,
       })
 
       x <- do.call(rbind,x)
+
+      if (is.null(x)) {
+        return(NULL)
+      }
+
       x$Category <- account
 
       x
     })
+
+    # remove null entries
+    data <- data[!sapply(data,is.null)]
 
     data <- do.call(rbind,data)
 
