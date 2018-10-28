@@ -2,7 +2,7 @@
 
 Make plots for your ledger entries and save them to a pdf file.
 
-![plot of some expenses account](examples/assets.png?raw=true)
+![plot of some expenses account](examples/expenses-0.png?raw=true)
 
 # Installation
 
@@ -184,8 +184,20 @@ For example,
 ```
 ledger-plots -C "tags" -f "monthly" -q "^expenses: -H -X EUR"
 ```
-makes plot for expenses and different combinations of tags being used
+makes a plot for expenses and different combinations of tags being used
 for those transactions.
+
+## Alluvial plots
+
+Using option `-C "alluvial"` one may make alluvial plots.
+
+For example,
+```
+ledger-plots -C "alluvial" -f "function(x) yearly(x)/12" -q "\^expenses -H -X EUR"
+```
+generate an alluvial plot for different expenses categories.
+
+![example of alluvial plot](examples/alluvial-expenses-0.png?raw=true)
 
 # Food prices and volumes
 
