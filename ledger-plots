@@ -188,7 +188,7 @@ if (! is.null(opt$queries)) {
   q <- unlist(strsplit(opt$queries,split=";;"))
   f <- unlist(strsplit(opt$functions,split=";;"))
   t <- unlist(strsplit(opt$type,split=";;"))
-  conversion <- unlist(strsplit(opt$"unit-conversion", split=";;"))
+  conversion <- trimws(unlist(strsplit(opt$"unit-conversion", split=";;")))
 
   # make functions the same length
   if (length(f) < length(q)) {
