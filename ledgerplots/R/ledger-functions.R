@@ -553,7 +553,7 @@ get_tags <- function(data)
   require("stringr",quietly = TRUE)
 
   notes <- data$Notes
-  notes <- str_match(notes,"^.*?:([a-z:]+):.*?$")[,2]
+  notes <- str_match(notes,"^.*?:([[:alnum:]:]+):.*?$")[,2]
 
   tags <- unique(unlist(strsplit(notes,":")))
 
