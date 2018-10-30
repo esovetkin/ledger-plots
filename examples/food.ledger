@@ -1,392 +1,4380 @@
-2017/01/1 Lidl
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/2 Edeka
-    Food:Cookies                                   3 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/3 Sainsbury's
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/4 Lidl
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/5 Edeka
-    Food:Cookies                                   3 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/6 Sainsbury's
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/7 Lidl
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/8 Edeka
-    Food:Cookies                                   3 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/9 Sainsbury's
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/10 Lidl
-    Food:Cookies                                   3 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/11 Edeka
-    Food:Cookies                                   3 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/12 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/13 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/14 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/15 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/16 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/17 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/18 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/19 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/20 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/01/21 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/22 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      2 GBP ; 2x @ 1l
-    Expenses
-
-2017/01/23 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      2 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/1 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/2 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/3 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/4 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/5 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/6 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/7 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/8 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/9 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/10 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/11 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                1 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/12 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/13 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/14 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/15 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/16 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/17 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/18 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/19 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/20 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/02/21 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/22 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/02/23 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                5 EUR ; 3x
-    Expenses
-
-2017/03/1 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/2 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/3 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/4 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/5 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/6 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/7 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/8 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/9 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/10 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/11 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/12 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/13 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/14 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/15 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/16 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/17 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/18 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/19 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/20 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
-
-2017/03/21 Sainsbury's
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/22 Lidl
-    Food:Cookies                                   4 GBP ; 500g
-    Food:Milk                                      3 GBP ; 2x @ 1l
-    Expenses
-
-2017/03/23 Edeka
-    Food:Cookies                                   4 EUR ; 500g
-    Food:Milk                                      3 EUR ; 2x @ 1l
-    Bath:Toothpaste                                2 EUR ; 75ml
-    Bath:Toothbrush                                6 EUR ; 3x
-    Expenses
+2015/11/01 payee2
+    Food:Fruits                                18.02 EUR ; 2.31l
+    Assets
+
+2015/11/02 payee8
+    Food:Dairy                                 69.25 EUR ; 3.08qb
+    Assets
+
+2015/11/03 payee6
+    Food:Dairy                                 15.17 EUR ; 1.38qb
+    Assets
+
+2015/11/04 payee2
+    Food:Snacks                                 93.3 EUR ; 3.94l
+    Assets
+
+2015/11/05 payee10
+    Food:Vegetables                               21 EUR ; 2.54x
+    Assets
+
+2015/11/06 payee10
+    Food:Vegetables                            84.51 EUR ; 1.06x
+    Assets
+
+2015/11/07 payee2
+    Food:Fruits                                41.44 EUR ; 2.23kg
+    Assets
+
+2015/11/08 payee9
+    Food:Vegetables                            55.73 EUR ; 3.72x
+    Assets
+
+2015/11/09 payee5
+    Food:Dairy                                 77.13 EUR ; 4.76x
+    Assets
+
+2015/11/10 payee6
+    Food:Snacks                                95.22 EUR ; 1.8l
+    Assets
+
+2015/11/11 payee6
+    Food:Dairy                                 68.27 EUR ; 2.94kg
+    Assets
+
+2015/11/12 payee3
+    Food:Snacks                                 9.27 EUR ; 1.42l
+    Assets
+
+2015/11/13 payee8
+    Food:Snacks                                17.17 EUR ; 4.72l
+    Assets
+
+2015/11/14 payee2
+    Food:Fruits                                61.16 EUR ; 4.3x
+    Assets
+
+2015/11/15 payee5
+    Food:Fruits                                14.54 EUR ; 4.38qb
+    Assets
+
+2015/11/16 payee9
+    Food:Snacks                                46.45 EUR ; 3.95kg
+    Assets
+
+2015/11/17 payee10
+    Food:Snacks                                56.18 EUR ; 1.25kg
+    Assets
+
+2015/11/18 payee3
+    Food:Fruits                                85.63 EUR ; 4.31qb
+    Assets
+
+2015/11/19 payee5
+    Food:Dairy                                 30.13 EUR ; 2.46l
+    Assets
+
+2015/11/20 payee1
+    Food:Snacks                                44.35 EUR ; 4.71x
+    Assets
+
+2015/11/21 payee7
+    Food:Fruits                                93.08 EUR ; 2.42x
+    Assets
+
+2015/11/22 payee4
+    Food:Snacks                                85.01 EUR ; 3.07x
+    Assets
+
+2015/11/23 payee9
+    Food:Fruits                                82.66 EUR ; 2.64l
+    Assets
+
+2015/11/24 payee2
+    Food:Vegetables                            53.19 EUR ; 1.83kg
+    Assets
+
+2015/11/25 payee4
+    Food:Snacks                                30.29 EUR ; 3.22kg
+    Assets
+
+2015/11/26 payee5
+    Food:Snacks                                40.07 EUR ; 2.73qb
+    Assets
+
+2015/11/27 payee2
+    Food:Fruits                                63.33 EUR ; 2l
+    Assets
+
+2015/11/28 payee4
+    Food:Dairy                                 51.41 EUR ; 4.89kg
+    Assets
+
+2015/11/29 payee10
+    Food:Dairy                                 91.16 EUR ; 1.32x
+    Assets
+
+2015/11/30 payee2
+    Food:Snacks                                30.55 EUR ; 1.89qb
+    Assets
+
+2015/12/01 payee1
+    Food:Fruits                                20.15 EUR ; 3.25kg
+    Assets
+
+2015/12/02 payee2
+    Food:Dairy                                 67.35 EUR ; 2.47qb
+    Assets
+
+2015/12/03 payee9
+    Food:Dairy                                 25.67 EUR ; 3.26qb
+    Assets
+
+2015/12/04 payee9
+    Food:Dairy                                 75.62 EUR ; 4.27l
+    Assets
+
+2015/12/05 payee6
+    Food:Dairy                                  47.8 EUR ; 4.54kg
+    Assets
+
+2015/12/06 payee7
+    Food:Snacks                                15.92 EUR ; 1.15x
+    Assets
+
+2015/12/07 payee9
+    Food:Snacks                                25.43 EUR ; 4.71kg
+    Assets
+
+2015/12/08 payee3
+    Food:Snacks                                31.88 EUR ; 2.37kg
+    Assets
+
+2015/12/09 payee7
+    Food:Vegetables                            12.52 EUR ; 2.85qb
+    Assets
+
+2015/12/10 payee2
+    Food:Snacks                                64.83 EUR ; 2.18kg
+    Assets
+
+2015/12/11 payee10
+    Food:Snacks                                48.57 EUR ; 3.84qb
+    Assets
+
+2015/12/12 payee3
+    Food:Snacks                                35.89 EUR ; 3.78l
+    Assets
+
+2015/12/13 payee2
+    Food:Fruits                                88.82 EUR ; 3.52qb
+    Assets
+
+2015/12/14 payee2
+    Food:Fruits                                30.11 EUR ; 3.07x
+    Assets
+
+2015/12/15 payee10
+    Food:Fruits                                53.53 EUR ; 2.62kg
+    Assets
+
+2015/12/16 payee8
+    Food:Snacks                                55.42 EUR ; 1.32kg
+    Assets
+
+2015/12/17 payee10
+    Food:Snacks                                45.92 EUR ; 4.1l
+    Assets
+
+2015/12/18 payee4
+    Food:Snacks                                93.67 EUR ; 2.21l
+    Assets
+
+2015/12/19 payee6
+    Food:Snacks                                44.54 EUR ; 3.53x
+    Assets
+
+2015/12/20 payee9
+    Food:Vegetables                             8.15 EUR ; 3.91kg
+    Assets
+
+2015/12/21 payee1
+    Food:Snacks                                29.14 EUR ; 2.27x
+    Assets
+
+2015/12/22 payee1
+    Food:Fruits                                43.39 EUR ; 3.75kg
+    Assets
+
+2015/12/23 payee7
+    Food:Snacks                                94.48 EUR ; 1.57l
+    Assets
+
+2015/12/24 payee10
+    Food:Snacks                                   22 EUR ; 3.57x
+    Assets
+
+2015/12/25 payee3
+    Food:Snacks                                97.36 EUR ; 4.61kg
+    Assets
+
+2015/12/26 payee9
+    Food:Dairy                                 77.64 EUR ; 1.81kg
+    Assets
+
+2015/12/27 payee8
+    Food:Fruits                                39.89 EUR ; 1.8x
+    Assets
+
+2015/12/28 payee10
+    Food:Snacks                                15.67 EUR ; 2.12kg
+    Assets
+
+2015/12/29 payee7
+    Food:Fruits                                26.87 EUR ; 2.02qb
+    Assets
+
+2015/12/30 payee8
+    Food:Vegetables                            80.58 EUR ; 3.75kg
+    Assets
+
+2015/12/31 payee8
+    Food:Dairy                                 30.61 EUR ; 4.7x
+    Assets
+
+2016/01/01 payee9
+    Food:Snacks                                15.69 EUR ; 2.98qb
+    Assets
+
+2016/01/02 payee7
+    Food:Vegetables                            66.78 EUR ; 2.44qb
+    Assets
+
+2016/01/03 payee3
+    Food:Snacks                                47.47 EUR ; 2.28l
+    Assets
+
+2016/01/04 payee9
+    Food:Snacks                                13.36 EUR ; 3.54l
+    Assets
+
+2016/01/05 payee5
+    Food:Fruits                                49.24 EUR ; 3.06kg
+    Assets
+
+2016/01/06 payee4
+    Food:Fruits                                84.53 EUR ; 3.77qb
+    Assets
+
+2016/01/07 payee5
+    Food:Vegetables                            82.41 EUR ; 3.42qb
+    Assets
+
+2016/01/08 payee3
+    Food:Snacks                                98.11 EUR ; 3.36x
+    Assets
+
+2016/01/09 payee1
+    Food:Fruits                                40.84 EUR ; 4.25l
+    Assets
+
+2016/01/10 payee3
+    Food:Dairy                                 88.29 EUR ; 3.72kg
+    Assets
+
+2016/01/11 payee4
+    Food:Snacks                                   97 EUR ; 2.53qb
+    Assets
+
+2016/01/12 payee1
+    Food:Dairy                                 37.94 EUR ; 1.64qb
+    Assets
+
+2016/01/13 payee2
+    Food:Vegetables                            50.85 EUR ; 2.62qb
+    Assets
+
+2016/01/14 payee2
+    Food:Dairy                                 53.96 EUR ; 2.86l
+    Assets
+
+2016/01/15 payee8
+    Food:Fruits                                 9.19 EUR ; 2.29x
+    Assets
+
+2016/01/16 payee3
+    Food:Snacks                                46.77 EUR ; 3.76l
+    Assets
+
+2016/01/17 payee9
+    Food:Dairy                                 42.64 EUR ; 2.21l
+    Assets
+
+2016/01/18 payee5
+    Food:Vegetables                            74.69 EUR ; 2.24l
+    Assets
+
+2016/01/19 payee6
+    Food:Fruits                                85.12 EUR ; 1.27qb
+    Assets
+
+2016/01/20 payee4
+    Food:Fruits                                26.85 EUR ; 4.86kg
+    Assets
+
+2016/01/21 payee7
+    Food:Fruits                                37.64 EUR ; 1.87kg
+    Assets
+
+2016/01/22 payee1
+    Food:Fruits                                43.68 EUR ; 2.65qb
+    Assets
+
+2016/01/23 payee5
+    Food:Snacks                                94.87 EUR ; 2.81l
+    Assets
+
+2016/01/24 payee2
+    Food:Fruits                                46.99 EUR ; 1.95qb
+    Assets
+
+2016/01/25 payee9
+    Food:Dairy                                 10.82 EUR ; 1.85kg
+    Assets
+
+2016/01/26 payee10
+    Food:Dairy                                 53.26 EUR ; 1.69kg
+    Assets
+
+2016/01/27 payee4
+    Food:Vegetables                            16.51 EUR ; 4.92kg
+    Assets
+
+2016/01/28 payee8
+    Food:Fruits                                63.95 EUR ; 2.86x
+    Assets
+
+2016/01/29 payee4
+    Food:Dairy                                 20.37 EUR ; 2.81qb
+    Assets
+
+2016/01/30 payee10
+    Food:Snacks                                24.04 EUR ; 4.2kg
+    Assets
+
+2016/01/31 payee4
+    Food:Fruits                                 95.3 EUR ; 1.33qb
+    Assets
+
+2016/02/01 payee4
+    Food:Snacks                                71.64 EUR ; 3.17l
+    Assets
+
+2016/02/02 payee6
+    Food:Vegetables                            52.62 EUR ; 2.12kg
+    Assets
+
+2016/02/03 payee5
+    Food:Snacks                                80.43 EUR ; 4.84qb
+    Assets
+
+2016/02/04 payee2
+    Food:Dairy                                 49.92 EUR ; 1.78qb
+    Assets
+
+2016/02/05 payee5
+    Food:Dairy                                 61.34 EUR ; 1.79x
+    Assets
+
+2016/02/06 payee1
+    Food:Snacks                                76.13 EUR ; 3.71l
+    Assets
+
+2016/02/07 payee2
+    Food:Vegetables                            90.99 EUR ; 4.84x
+    Assets
+
+2016/02/08 payee5
+    Food:Fruits                                86.05 EUR ; 3.69kg
+    Assets
+
+2016/02/09 payee3
+    Food:Vegetables                                5 EUR ; 1l
+    Assets
+
+2016/02/10 payee5
+    Food:Dairy                                 98.38 EUR ; 1.28x
+    Assets
+
+2016/02/11 payee10
+    Food:Fruits                                81.02 EUR ; 3.1l
+    Assets
+
+2016/02/12 payee9
+    Food:Dairy                                 67.68 EUR ; 2.86kg
+    Assets
+
+2016/02/13 payee3
+    Food:Dairy                                 83.66 EUR ; 1.44qb
+    Assets
+
+2016/02/14 payee6
+    Food:Dairy                                 48.83 EUR ; 1.26kg
+    Assets
+
+2016/02/15 payee9
+    Food:Fruits                                89.03 EUR ; 1.17x
+    Assets
+
+2016/02/16 payee5
+    Food:Fruits                                 6.79 EUR ; 2.87l
+    Assets
+
+2016/02/17 payee2
+    Food:Vegetables                            32.12 EUR ; 3.72l
+    Assets
+
+2016/02/18 payee2
+    Food:Dairy                                  24.1 EUR ; 2.88kg
+    Assets
+
+2016/02/19 payee1
+    Food:Fruits                                 9.77 EUR ; 2.95x
+    Assets
+
+2016/02/20 payee8
+    Food:Fruits                                22.85 EUR ; 4l
+    Assets
+
+2016/02/21 payee4
+    Food:Vegetables                            39.07 EUR ; 4.28qb
+    Assets
+
+2016/02/22 payee6
+    Food:Snacks                                36.78 EUR ; 3.32kg
+    Assets
+
+2016/02/23 payee9
+    Food:Fruits                                80.67 EUR ; 2.78qb
+    Assets
+
+2016/02/24 payee9
+    Food:Snacks                                34.25 EUR ; 1.94l
+    Assets
+
+2016/02/25 payee9
+    Food:Snacks                                33.03 EUR ; 1.24x
+    Assets
+
+2016/02/26 payee2
+    Food:Vegetables                            13.74 EUR ; 4.05qb
+    Assets
+
+2016/02/27 payee10
+    Food:Snacks                                35.06 EUR ; 1.09l
+    Assets
+
+2016/02/28 payee6
+    Food:Snacks                                63.07 EUR ; 4.66kg
+    Assets
+
+2016/02/29 payee1
+    Food:Snacks                                28.18 EUR ; 4.75kg
+    Assets
+
+2016/03/01 payee3
+    Food:Snacks                                  7.2 EUR ; 1.65qb
+    Assets
+
+2016/03/02 payee10
+    Food:Dairy                                  95.8 EUR ; 3.63qb
+    Assets
+
+2016/03/03 payee9
+    Food:Dairy                                 11.57 EUR ; 3.39x
+    Assets
+
+2016/03/04 payee3
+    Food:Dairy                                 37.83 EUR ; 3.97l
+    Assets
+
+2016/03/05 payee8
+    Food:Fruits                                90.38 EUR ; 4.02l
+    Assets
+
+2016/03/06 payee6
+    Food:Snacks                                17.77 EUR ; 3.38l
+    Assets
+
+2016/03/07 payee4
+    Food:Dairy                                 57.22 EUR ; 3.89x
+    Assets
+
+2016/03/08 payee7
+    Food:Snacks                                74.13 EUR ; 1.39kg
+    Assets
+
+2016/03/09 payee4
+    Food:Vegetables                            77.49 EUR ; 3.61l
+    Assets
+
+2016/03/10 payee3
+    Food:Snacks                                 93.7 EUR ; 1.15qb
+    Assets
+
+2016/03/11 payee10
+    Food:Vegetables                             24.3 EUR ; 3.96qb
+    Assets
+
+2016/03/12 payee1
+    Food:Snacks                                85.28 EUR ; 2.75kg
+    Assets
+
+2016/03/13 payee10
+    Food:Vegetables                            10.41 EUR ; 2.91qb
+    Assets
+
+2016/03/14 payee4
+    Food:Fruits                                90.35 EUR ; 1.5qb
+    Assets
+
+2016/03/15 payee7
+    Food:Fruits                                 9.63 EUR ; 1.59kg
+    Assets
+
+2016/03/16 payee6
+    Food:Snacks                                17.44 EUR ; 2.16kg
+    Assets
+
+2016/03/17 payee9
+    Food:Snacks                                81.91 EUR ; 3.37qb
+    Assets
+
+2016/03/18 payee2
+    Food:Dairy                                  35.8 EUR ; 3.03qb
+    Assets
+
+2016/03/19 payee4
+    Food:Dairy                                  9.47 EUR ; 1.04kg
+    Assets
+
+2016/03/20 payee2
+    Food:Snacks                                87.34 EUR ; 4.81qb
+    Assets
+
+2016/03/21 payee3
+    Food:Fruits                                74.51 EUR ; 2.85x
+    Assets
+
+2016/03/22 payee7
+    Food:Vegetables                            51.43 EUR ; 4.38kg
+    Assets
+
+2016/03/23 payee4
+    Food:Vegetables                            30.73 EUR ; 2.24l
+    Assets
+
+2016/03/24 payee5
+    Food:Vegetables                            67.48 EUR ; 4.73x
+    Assets
+
+2016/03/25 payee8
+    Food:Fruits                                69.47 EUR ; 4.17l
+    Assets
+
+2016/03/26 payee7
+    Food:Vegetables                            27.84 EUR ; 1.87x
+    Assets
+
+2016/03/27 payee4
+    Food:Snacks                                16.75 EUR ; 2.6kg
+    Assets
+
+2016/03/28 payee5
+    Food:Vegetables                            39.13 EUR ; 4.56kg
+    Assets
+
+2016/03/29 payee3
+    Food:Vegetables                            92.71 EUR ; 3.99kg
+    Assets
+
+2016/03/30 payee2
+    Food:Snacks                                 61.6 EUR ; 4.7l
+    Assets
+
+2016/03/31 payee4
+    Food:Vegetables                            60.01 EUR ; 1.46x
+    Assets
+
+2016/04/01 payee10
+    Food:Fruits                                94.97 EUR ; 2.51l
+    Assets
+
+2016/04/02 payee4
+    Food:Snacks                                99.16 EUR ; 4.58kg
+    Assets
+
+2016/04/03 payee8
+    Food:Dairy                                 48.39 EUR ; 2.94kg
+    Assets
+
+2016/04/04 payee3
+    Food:Vegetables                            44.78 EUR ; 3.89x
+    Assets
+
+2016/04/05 payee9
+    Food:Snacks                                49.82 EUR ; 3.96kg
+    Assets
+
+2016/04/06 payee2
+    Food:Dairy                                 22.83 EUR ; 2.79l
+    Assets
+
+2016/04/07 payee1
+    Food:Dairy                                 29.32 EUR ; 4.33x
+    Assets
+
+2016/04/08 payee3
+    Food:Dairy                                 13.08 EUR ; 4.71l
+    Assets
+
+2016/04/09 payee9
+    Food:Snacks                                83.06 EUR ; 3.82qb
+    Assets
+
+2016/04/10 payee10
+    Food:Snacks                                41.68 EUR ; 2.32x
+    Assets
+
+2016/04/11 payee1
+    Food:Vegetables                            27.84 EUR ; 2.55l
+    Assets
+
+2016/04/12 payee8
+    Food:Dairy                                 81.93 EUR ; 2.78x
+    Assets
+
+2016/04/13 payee3
+    Food:Snacks                                81.78 EUR ; 3.53l
+    Assets
+
+2016/04/14 payee7
+    Food:Fruits                                94.35 EUR ; 3.04kg
+    Assets
+
+2016/04/15 payee1
+    Food:Snacks                                66.18 EUR ; 4.3l
+    Assets
+
+2016/04/16 payee10
+    Food:Snacks                                40.31 EUR ; 4.05l
+    Assets
+
+2016/04/17 payee1
+    Food:Dairy                                 16.66 EUR ; 1.48l
+    Assets
+
+2016/04/18 payee6
+    Food:Dairy                                 77.41 EUR ; 3.13l
+    Assets
+
+2016/04/19 payee10
+    Food:Snacks                                  6.4 EUR ; 1.73x
+    Assets
+
+2016/04/20 payee2
+    Food:Snacks                                79.28 EUR ; 2.4kg
+    Assets
+
+2016/04/21 payee3
+    Food:Dairy                                 61.17 EUR ; 3.85x
+    Assets
+
+2016/04/22 payee9
+    Food:Vegetables                            19.45 EUR ; 3.14qb
+    Assets
+
+2016/04/23 payee4
+    Food:Snacks                                28.29 EUR ; 4.52l
+    Assets
+
+2016/04/24 payee8
+    Food:Dairy                                 34.11 EUR ; 4.4qb
+    Assets
+
+2016/04/25 payee4
+    Food:Fruits                                68.99 EUR ; 2.68l
+    Assets
+
+2016/04/26 payee2
+    Food:Snacks                                27.29 EUR ; 1.49l
+    Assets
+
+2016/04/27 payee7
+    Food:Vegetables                            83.35 EUR ; 2.78x
+    Assets
+
+2016/04/28 payee6
+    Food:Dairy                                  95.2 EUR ; 2.32qb
+    Assets
+
+2016/04/29 payee10
+    Food:Vegetables                            17.62 EUR ; 2.36kg
+    Assets
+
+2016/04/30 payee6
+    Food:Fruits                                 74.1 EUR ; 4.64x
+    Assets
+
+2016/05/01 payee10
+    Food:Fruits                                49.74 EUR ; 4.17kg
+    Assets
+
+2016/05/02 payee8
+    Food:Snacks                                76.38 EUR ; 1.65x
+    Assets
+
+2016/05/03 payee2
+    Food:Vegetables                            61.41 EUR ; 1.49l
+    Assets
+
+2016/05/04 payee9
+    Food:Fruits                                47.77 EUR ; 1.7kg
+    Assets
+
+2016/05/05 payee1
+    Food:Dairy                                 91.52 EUR ; 2.16l
+    Assets
+
+2016/05/06 payee8
+    Food:Dairy                                 43.34 EUR ; 2.44qb
+    Assets
+
+2016/05/07 payee1
+    Food:Dairy                                 79.34 EUR ; 1.77kg
+    Assets
+
+2016/05/08 payee1
+    Food:Dairy                                 64.47 EUR ; 1.92qb
+    Assets
+
+2016/05/09 payee2
+    Food:Dairy                                 85.86 EUR ; 4.57x
+    Assets
+
+2016/05/10 payee5
+    Food:Dairy                                 97.37 EUR ; 2.72l
+    Assets
+
+2016/05/11 payee10
+    Food:Vegetables                            68.21 EUR ; 4.89qb
+    Assets
+
+2016/05/12 payee2
+    Food:Fruits                                71.23 EUR ; 2.16x
+    Assets
+
+2016/05/13 payee6
+    Food:Fruits                                30.08 EUR ; 4.92x
+    Assets
+
+2016/05/14 payee3
+    Food:Snacks                                93.34 EUR ; 2.51x
+    Assets
+
+2016/05/15 payee2
+    Food:Vegetables                            18.03 EUR ; 4.72l
+    Assets
+
+2016/05/16 payee2
+    Food:Dairy                                 25.62 EUR ; 3.54l
+    Assets
+
+2016/05/17 payee3
+    Food:Snacks                                59.29 EUR ; 3.71kg
+    Assets
+
+2016/05/18 payee2
+    Food:Vegetables                            12.45 EUR ; 2.99l
+    Assets
+
+2016/05/19 payee9
+    Food:Snacks                                41.44 EUR ; 2.41x
+    Assets
+
+2016/05/20 payee7
+    Food:Dairy                                 64.02 EUR ; 1.85l
+    Assets
+
+2016/05/21 payee7
+    Food:Vegetables                            74.24 EUR ; 4.92qb
+    Assets
+
+2016/05/22 payee10
+    Food:Fruits                                26.04 EUR ; 2.21kg
+    Assets
+
+2016/05/23 payee4
+    Food:Snacks                                24.49 EUR ; 4.42qb
+    Assets
+
+2016/05/24 payee9
+    Food:Snacks                                94.04 EUR ; 1.83l
+    Assets
+
+2016/05/25 payee3
+    Food:Dairy                                 73.73 EUR ; 4.41kg
+    Assets
+
+2016/05/26 payee3
+    Food:Snacks                                30.01 EUR ; 4.3kg
+    Assets
+
+2016/05/27 payee2
+    Food:Fruits                                74.42 EUR ; 1.12qb
+    Assets
+
+2016/05/28 payee3
+    Food:Vegetables                            55.34 EUR ; 3.46l
+    Assets
+
+2016/05/29 payee10
+    Food:Snacks                                69.63 EUR ; 4.21x
+    Assets
+
+2016/05/30 payee6
+    Food:Dairy                                  5.18 EUR ; 4.14x
+    Assets
+
+2016/05/31 payee9
+    Food:Dairy                                 14.19 EUR ; 3.67l
+    Assets
+
+2016/06/01 payee7
+    Food:Snacks                                47.33 EUR ; 4.46kg
+    Assets
+
+2016/06/02 payee10
+    Food:Snacks                                43.02 EUR ; 4.4l
+    Assets
+
+2016/06/03 payee1
+    Food:Vegetables                            56.29 EUR ; 3.06x
+    Assets
+
+2016/06/04 payee4
+    Food:Dairy                                 84.13 EUR ; 2.85qb
+    Assets
+
+2016/06/05 payee1
+    Food:Fruits                                64.56 EUR ; 1.28qb
+    Assets
+
+2016/06/06 payee4
+    Food:Vegetables                            44.56 EUR ; 1.27qb
+    Assets
+
+2016/06/07 payee3
+    Food:Dairy                                 62.78 EUR ; 4.53qb
+    Assets
+
+2016/06/08 payee2
+    Food:Snacks                                12.78 EUR ; 1.63l
+    Assets
+
+2016/06/09 payee10
+    Food:Dairy                                 38.89 EUR ; 1.63qb
+    Assets
+
+2016/06/10 payee5
+    Food:Fruits                                97.72 EUR ; 1.48l
+    Assets
+
+2016/06/11 payee5
+    Food:Dairy                                 27.87 EUR ; 2.26qb
+    Assets
+
+2016/06/12 payee7
+    Food:Fruits                                30.94 EUR ; 4.64l
+    Assets
+
+2016/06/13 payee9
+    Food:Dairy                                 72.04 EUR ; 2.02qb
+    Assets
+
+2016/06/14 payee10
+    Food:Snacks                                23.02 EUR ; 4.88kg
+    Assets
+
+2016/06/15 payee5
+    Food:Snacks                                45.67 EUR ; 3.22qb
+    Assets
+
+2016/06/16 payee8
+    Food:Fruits                                66.24 EUR ; 4.9qb
+    Assets
+
+2016/06/17 payee9
+    Food:Snacks                                35.94 EUR ; 3.64l
+    Assets
+
+2016/06/18 payee7
+    Food:Vegetables                            37.12 EUR ; 2.41l
+    Assets
+
+2016/06/19 payee4
+    Food:Dairy                                 33.42 EUR ; 4.56qb
+    Assets
+
+2016/06/20 payee9
+    Food:Vegetables                             54.7 EUR ; 4.26l
+    Assets
+
+2016/06/21 payee6
+    Food:Snacks                                29.11 EUR ; 2.21l
+    Assets
+
+2016/06/22 payee9
+    Food:Dairy                                 47.56 EUR ; 1.66kg
+    Assets
+
+2016/06/23 payee3
+    Food:Fruits                                25.49 EUR ; 4.93l
+    Assets
+
+2016/06/24 payee6
+    Food:Snacks                                78.97 EUR ; 2.08x
+    Assets
+
+2016/06/25 payee3
+    Food:Snacks                                81.76 EUR ; 1.66l
+    Assets
+
+2016/06/26 payee3
+    Food:Fruits                                53.92 EUR ; 3.44l
+    Assets
+
+2016/06/27 payee5
+    Food:Fruits                                11.99 EUR ; 1.03kg
+    Assets
+
+2016/06/28 payee9
+    Food:Fruits                                31.07 EUR ; 2.13x
+    Assets
+
+2016/06/29 payee4
+    Food:Dairy                                 33.52 EUR ; 4.11l
+    Assets
+
+2016/06/30 payee6
+    Food:Vegetables                            49.91 EUR ; 4.74qb
+    Assets
+
+2016/07/01 payee8
+    Food:Snacks                                68.19 EUR ; 3.91x
+    Assets
+
+2016/07/02 payee10
+    Food:Dairy                                  18.7 EUR ; 2.8qb
+    Assets
+
+2016/07/03 payee10
+    Food:Dairy                                 95.85 EUR ; 1.39l
+    Assets
+
+2016/07/04 payee4
+    Food:Dairy                                  20.8 EUR ; 4.4x
+    Assets
+
+2016/07/05 payee6
+    Food:Vegetables                            57.07 EUR ; 4.47x
+    Assets
+
+2016/07/06 payee2
+    Food:Vegetables                            32.27 EUR ; 1.91x
+    Assets
+
+2016/07/07 payee4
+    Food:Fruits                                82.96 EUR ; 1.28x
+    Assets
+
+2016/07/08 payee8
+    Food:Vegetables                            83.35 EUR ; 3.83l
+    Assets
+
+2016/07/09 payee1
+    Food:Snacks                                62.31 EUR ; 1.47x
+    Assets
+
+2016/07/10 payee3
+    Food:Vegetables                            14.41 EUR ; 4.15qb
+    Assets
+
+2016/07/11 payee1
+    Food:Fruits                                 99.7 EUR ; 4.67qb
+    Assets
+
+2016/07/12 payee8
+    Food:Dairy                                 80.13 EUR ; 3.5qb
+    Assets
+
+2016/07/13 payee1
+    Food:Dairy                                 47.52 EUR ; 3.12l
+    Assets
+
+2016/07/14 payee1
+    Food:Dairy                                 22.43 EUR ; 1.46x
+    Assets
+
+2016/07/15 payee3
+    Food:Dairy                                 82.47 EUR ; 3.73qb
+    Assets
+
+2016/07/16 payee1
+    Food:Dairy                                 83.02 EUR ; 2.91x
+    Assets
+
+2016/07/17 payee7
+    Food:Vegetables                              9.7 EUR ; 3.57kg
+    Assets
+
+2016/07/18 payee8
+    Food:Fruits                                54.04 EUR ; 3.41l
+    Assets
+
+2016/07/19 payee1
+    Food:Fruits                                76.46 EUR ; 1.38kg
+    Assets
+
+2016/07/20 payee7
+    Food:Dairy                                  70.3 EUR ; 2.38kg
+    Assets
+
+2016/07/21 payee4
+    Food:Dairy                                 84.96 EUR ; 1.99x
+    Assets
+
+2016/07/22 payee9
+    Food:Dairy                                  44.9 EUR ; 1.73kg
+    Assets
+
+2016/07/23 payee7
+    Food:Dairy                                 88.84 EUR ; 4.56x
+    Assets
+
+2016/07/24 payee1
+    Food:Dairy                                 70.02 EUR ; 5l
+    Assets
+
+2016/07/25 payee7
+    Food:Vegetables                            47.92 EUR ; 1.38kg
+    Assets
+
+2016/07/26 payee9
+    Food:Fruits                                69.15 EUR ; 1.28kg
+    Assets
+
+2016/07/27 payee6
+    Food:Vegetables                             5.94 EUR ; 3.73kg
+    Assets
+
+2016/07/28 payee9
+    Food:Dairy                                 65.63 EUR ; 4.02l
+    Assets
+
+2016/07/29 payee10
+    Food:Fruits                                 64.4 EUR ; 1.12l
+    Assets
+
+2016/07/30 payee9
+    Food:Snacks                                 7.22 EUR ; 3.29x
+    Assets
+
+2016/07/31 payee3
+    Food:Fruits                                44.52 EUR ; 2.49x
+    Assets
+
+2016/08/01 payee8
+    Food:Dairy                                 40.28 EUR ; 4.06x
+    Assets
+
+2016/08/02 payee5
+    Food:Vegetables                            10.03 EUR ; 1.67l
+    Assets
+
+2016/08/03 payee10
+    Food:Dairy                                 22.26 EUR ; 3.63kg
+    Assets
+
+2016/08/04 payee3
+    Food:Fruits                                85.63 EUR ; 3.22qb
+    Assets
+
+2016/08/05 payee1
+    Food:Dairy                                 61.43 EUR ; 4.57l
+    Assets
+
+2016/08/06 payee3
+    Food:Fruits                                90.03 EUR ; 1.68x
+    Assets
+
+2016/08/07 payee3
+    Food:Vegetables                            53.41 EUR ; 2.87x
+    Assets
+
+2016/08/08 payee10
+    Food:Fruits                                77.27 EUR ; 2.34l
+    Assets
+
+2016/08/09 payee7
+    Food:Fruits                                 39.1 EUR ; 3.81kg
+    Assets
+
+2016/08/10 payee7
+    Food:Fruits                                98.04 EUR ; 3.5l
+    Assets
+
+2016/08/11 payee3
+    Food:Dairy                                 90.89 EUR ; 3.64x
+    Assets
+
+2016/08/12 payee10
+    Food:Vegetables                            97.12 EUR ; 3.73qb
+    Assets
+
+2016/08/13 payee6
+    Food:Dairy                                 78.37 EUR ; 3.55kg
+    Assets
+
+2016/08/14 payee6
+    Food:Dairy                                 30.27 EUR ; 2.78kg
+    Assets
+
+2016/08/15 payee8
+    Food:Snacks                                11.08 EUR ; 1.24x
+    Assets
+
+2016/08/16 payee4
+    Food:Snacks                                74.74 EUR ; 3.32x
+    Assets
+
+2016/08/17 payee3
+    Food:Snacks                                 52.8 EUR ; 2.55kg
+    Assets
+
+2016/08/18 payee4
+    Food:Fruits                                 80.8 EUR ; 1.41l
+    Assets
+
+2016/08/19 payee8
+    Food:Vegetables                             9.19 EUR ; 2.98x
+    Assets
+
+2016/08/20 payee5
+    Food:Vegetables                            53.33 EUR ; 2.64kg
+    Assets
+
+2016/08/21 payee8
+    Food:Snacks                                86.39 EUR ; 3.44x
+    Assets
+
+2016/08/22 payee5
+    Food:Vegetables                            14.95 EUR ; 4.72x
+    Assets
+
+2016/08/23 payee3
+    Food:Fruits                                84.78 EUR ; 4.48qb
+    Assets
+
+2016/08/24 payee1
+    Food:Dairy                                    75 EUR ; 2.34x
+    Assets
+
+2016/08/25 payee2
+    Food:Dairy                                 37.02 EUR ; 1.35x
+    Assets
+
+2016/08/26 payee6
+    Food:Fruits                                26.61 EUR ; 3.53qb
+    Assets
+
+2016/08/27 payee9
+    Food:Snacks                                40.22 EUR ; 3.32qb
+    Assets
+
+2016/08/28 payee5
+    Food:Snacks                                89.18 EUR ; 2.3qb
+    Assets
+
+2016/08/29 payee5
+    Food:Dairy                                  6.82 EUR ; 1.14qb
+    Assets
+
+2016/08/30 payee9
+    Food:Vegetables                            64.33 EUR ; 1.54l
+    Assets
+
+2016/08/31 payee8
+    Food:Dairy                                 83.38 EUR ; 1.68x
+    Assets
+
+2016/09/01 payee1
+    Food:Snacks                                96.04 EUR ; 2.91kg
+    Assets
+
+2016/09/02 payee2
+    Food:Dairy                                 94.24 EUR ; 1.37x
+    Assets
+
+2016/09/03 payee7
+    Food:Vegetables                             59.7 EUR ; 3.28kg
+    Assets
+
+2016/09/04 payee9
+    Food:Fruits                                17.25 EUR ; 1.18x
+    Assets
+
+2016/09/05 payee1
+    Food:Fruits                                33.61 EUR ; 4.64x
+    Assets
+
+2016/09/06 payee1
+    Food:Snacks                                24.27 EUR ; 1.51kg
+    Assets
+
+2016/09/07 payee5
+    Food:Snacks                                13.81 EUR ; 4.32x
+    Assets
+
+2016/09/08 payee8
+    Food:Fruits                                18.74 EUR ; 2.7kg
+    Assets
+
+2016/09/09 payee2
+    Food:Vegetables                            26.14 EUR ; 3.3kg
+    Assets
+
+2016/09/10 payee7
+    Food:Dairy                                 12.72 EUR ; 4.06x
+    Assets
+
+2016/09/11 payee1
+    Food:Snacks                                55.25 EUR ; 4.02qb
+    Assets
+
+2016/09/12 payee7
+    Food:Snacks                                96.77 EUR ; 3.69kg
+    Assets
+
+2016/09/13 payee5
+    Food:Vegetables                            77.54 EUR ; 4.81l
+    Assets
+
+2016/09/14 payee8
+    Food:Snacks                                71.84 EUR ; 2.37l
+    Assets
+
+2016/09/15 payee2
+    Food:Fruits                                 58.3 EUR ; 4.96l
+    Assets
+
+2016/09/16 payee7
+    Food:Fruits                                29.09 EUR ; 2.97qb
+    Assets
+
+2016/09/17 payee2
+    Food:Dairy                                 93.25 EUR ; 3.98x
+    Assets
+
+2016/09/18 payee3
+    Food:Fruits                                 9.14 EUR ; 1.39l
+    Assets
+
+2016/09/19 payee1
+    Food:Vegetables                            60.16 EUR ; 4.3qb
+    Assets
+
+2016/09/20 payee4
+    Food:Vegetables                            28.05 EUR ; 4.75x
+    Assets
+
+2016/09/21 payee3
+    Food:Dairy                                  6.59 EUR ; 4.07x
+    Assets
+
+2016/09/22 payee7
+    Food:Snacks                                70.26 EUR ; 1.24qb
+    Assets
+
+2016/09/23 payee3
+    Food:Snacks                                10.89 EUR ; 1kg
+    Assets
+
+2016/09/24 payee1
+    Food:Vegetables                            18.43 EUR ; 2.41kg
+    Assets
+
+2016/09/25 payee1
+    Food:Snacks                                42.62 EUR ; 2.46qb
+    Assets
+
+2016/09/26 payee2
+    Food:Snacks                                70.58 EUR ; 4.69x
+    Assets
+
+2016/09/27 payee9
+    Food:Vegetables                            64.28 EUR ; 3.58qb
+    Assets
+
+2016/09/28 payee10
+    Food:Fruits                                82.73 EUR ; 3.61qb
+    Assets
+
+2016/09/29 payee4
+    Food:Vegetables                             94.7 EUR ; 2.33kg
+    Assets
+
+2016/09/30 payee1
+    Food:Dairy                                 33.66 EUR ; 4.3x
+    Assets
+
+2016/10/01 payee1
+    Food:Vegetables                            27.06 EUR ; 2.33kg
+    Assets
+
+2016/10/02 payee2
+    Food:Fruits                                97.87 EUR ; 1.48kg
+    Assets
+
+2016/10/03 payee6
+    Food:Snacks                                24.25 EUR ; 1.08kg
+    Assets
+
+2016/10/04 payee9
+    Food:Vegetables                             82.7 EUR ; 3.79kg
+    Assets
+
+2016/10/05 payee9
+    Food:Dairy                                 25.95 EUR ; 3.07qb
+    Assets
+
+2016/10/06 payee9
+    Food:Dairy                                 12.68 EUR ; 1.87x
+    Assets
+
+2016/10/07 payee9
+    Food:Snacks                                12.19 EUR ; 3.39kg
+    Assets
+
+2016/10/08 payee8
+    Food:Dairy                                 78.54 EUR ; 4.81qb
+    Assets
+
+2016/10/09 payee1
+    Food:Snacks                                56.35 EUR ; 2.19l
+    Assets
+
+2016/10/10 payee6
+    Food:Fruits                                62.97 EUR ; 1.13qb
+    Assets
+
+2016/10/11 payee4
+    Food:Vegetables                            65.39 EUR ; 2.98l
+    Assets
+
+2016/10/12 payee7
+    Food:Fruits                                44.48 EUR ; 3.82x
+    Assets
+
+2016/10/13 payee10
+    Food:Vegetables                            28.51 EUR ; 2.43x
+    Assets
+
+2016/10/14 payee2
+    Food:Snacks                                73.48 EUR ; 3.14l
+    Assets
+
+2016/10/15 payee5
+    Food:Snacks                                34.85 EUR ; 4.51x
+    Assets
+
+2016/10/16 payee3
+    Food:Snacks                                41.76 EUR ; 3.58x
+    Assets
+
+2016/10/17 payee6
+    Food:Dairy                                 65.73 EUR ; 4.1qb
+    Assets
+
+2016/10/18 payee4
+    Food:Vegetables                            57.54 EUR ; 2.34x
+    Assets
+
+2016/10/19 payee9
+    Food:Dairy                                 71.54 EUR ; 2.6qb
+    Assets
+
+2016/10/20 payee2
+    Food:Snacks                                51.07 EUR ; 3.05x
+    Assets
+
+2016/10/21 payee9
+    Food:Snacks                                31.56 EUR ; 1.45l
+    Assets
+
+2016/10/22 payee8
+    Food:Vegetables                            41.65 EUR ; 3.82l
+    Assets
+
+2016/10/23 payee7
+    Food:Fruits                                64.89 EUR ; 3.92x
+    Assets
+
+2016/10/24 payee1
+    Food:Snacks                                97.55 EUR ; 3.22kg
+    Assets
+
+2016/10/25 payee7
+    Food:Snacks                                69.68 EUR ; 2.29x
+    Assets
+
+2016/10/26 payee2
+    Food:Dairy                                 76.22 EUR ; 3.36l
+    Assets
+
+2016/10/27 payee3
+    Food:Dairy                                 77.97 EUR ; 2.25qb
+    Assets
+
+2016/10/28 payee2
+    Food:Dairy                                 60.11 EUR ; 2.27kg
+    Assets
+
+2016/10/29 payee1
+    Food:Dairy                                 41.24 EUR ; 1.19kg
+    Assets
+
+2016/10/30 payee7
+    Food:Snacks                                74.73 EUR ; 4.47x
+    Assets
+
+2016/10/31 payee3
+    Food:Snacks                                77.56 EUR ; 4.4qb
+    Assets
+
+2016/11/01 payee2
+    Food:Snacks                                70.08 EUR ; 1.58kg
+    Assets
+
+2016/11/02 payee1
+    Food:Snacks                                 9.32 EUR ; 4.03kg
+    Assets
+
+2016/11/03 payee8
+    Food:Dairy                                 45.03 EUR ; 4.26kg
+    Assets
+
+2016/11/04 payee1
+    Food:Snacks                                 64.5 EUR ; 3.65qb
+    Assets
+
+2016/11/05 payee9
+    Food:Fruits                                78.16 EUR ; 4.2kg
+    Assets
+
+2016/11/06 payee1
+    Food:Vegetables                            68.89 EUR ; 1.24l
+    Assets
+
+2016/11/07 payee6
+    Food:Vegetables                             56.7 EUR ; 4.66x
+    Assets
+
+2016/11/08 payee7
+    Food:Snacks                                55.96 EUR ; 2.46qb
+    Assets
+
+2016/11/09 payee7
+    Food:Fruits                                99.24 EUR ; 2.94kg
+    Assets
+
+2016/11/10 payee7
+    Food:Vegetables                            49.94 EUR ; 4.62x
+    Assets
+
+2016/11/11 payee3
+    Food:Vegetables                            30.55 EUR ; 4.08qb
+    Assets
+
+2016/11/12 payee10
+    Food:Fruits                                41.81 EUR ; 1.34l
+    Assets
+
+2016/11/13 payee7
+    Food:Dairy                                 81.87 EUR ; 1.43qb
+    Assets
+
+2016/11/14 payee1
+    Food:Dairy                                  50.9 EUR ; 1.44x
+    Assets
+
+2016/11/15 payee2
+    Food:Snacks                                71.82 EUR ; 1.67qb
+    Assets
+
+2016/11/16 payee5
+    Food:Snacks                                49.61 EUR ; 4.58kg
+    Assets
+
+2016/11/17 payee5
+    Food:Vegetables                             18.9 EUR ; 2.7x
+    Assets
+
+2016/11/18 payee3
+    Food:Fruits                                91.97 EUR ; 4.2x
+    Assets
+
+2016/11/19 payee1
+    Food:Vegetables                            32.98 EUR ; 3.05qb
+    Assets
+
+2016/11/20 payee7
+    Food:Vegetables                             11.3 EUR ; 3.29l
+    Assets
+
+2016/11/21 payee4
+    Food:Dairy                                 25.85 EUR ; 2.36x
+    Assets
+
+2016/11/22 payee6
+    Food:Snacks                                28.62 EUR ; 4.79x
+    Assets
+
+2016/11/23 payee9
+    Food:Vegetables                            75.91 EUR ; 4.41x
+    Assets
+
+2016/11/24 payee8
+    Food:Snacks                                79.14 EUR ; 3.87l
+    Assets
+
+2016/11/25 payee8
+    Food:Fruits                                71.46 EUR ; 1.01l
+    Assets
+
+2016/11/26 payee10
+    Food:Vegetables                            76.74 EUR ; 2.37qb
+    Assets
+
+2016/11/27 payee4
+    Food:Fruits                                99.91 EUR ; 2.19qb
+    Assets
+
+2016/11/28 payee2
+    Food:Fruits                                 92.5 EUR ; 1.34l
+    Assets
+
+2016/11/29 payee3
+    Food:Dairy                                 97.29 EUR ; 1.44qb
+    Assets
+
+2016/11/30 payee2
+    Food:Fruits                                56.97 EUR ; 4.05kg
+    Assets
+
+2016/12/01 payee2
+    Food:Fruits                                57.69 EUR ; 3.76kg
+    Assets
+
+2016/12/02 payee9
+    Food:Fruits                                64.06 EUR ; 1.5qb
+    Assets
+
+2016/12/03 payee3
+    Food:Fruits                                22.79 EUR ; 4.07l
+    Assets
+
+2016/12/04 payee8
+    Food:Snacks                                84.13 EUR ; 3.91x
+    Assets
+
+2016/12/05 payee7
+    Food:Vegetables                            20.31 EUR ; 3.42kg
+    Assets
+
+2016/12/06 payee6
+    Food:Snacks                                77.51 EUR ; 3.1x
+    Assets
+
+2016/12/07 payee2
+    Food:Vegetables                            97.18 EUR ; 1.68x
+    Assets
+
+2016/12/08 payee1
+    Food:Vegetables                            52.43 EUR ; 2.37l
+    Assets
+
+2016/12/09 payee10
+    Food:Snacks                                16.28 EUR ; 4.75kg
+    Assets
+
+2016/12/10 payee9
+    Food:Vegetables                            35.87 EUR ; 2.46qb
+    Assets
+
+2016/12/11 payee6
+    Food:Vegetables                            38.95 EUR ; 1.31x
+    Assets
+
+2016/12/12 payee4
+    Food:Fruits                                90.54 EUR ; 1.4qb
+    Assets
+
+2016/12/13 payee2
+    Food:Vegetables                            41.38 EUR ; 3.94x
+    Assets
+
+2016/12/14 payee9
+    Food:Vegetables                            78.39 EUR ; 4.55l
+    Assets
+
+2016/12/15 payee7
+    Food:Vegetables                            10.18 EUR ; 2.3qb
+    Assets
+
+2016/12/16 payee8
+    Food:Dairy                                 72.52 EUR ; 4.75qb
+    Assets
+
+2016/12/17 payee5
+    Food:Vegetables                            68.32 EUR ; 2.02qb
+    Assets
+
+2016/12/18 payee1
+    Food:Fruits                                84.96 EUR ; 1.77qb
+    Assets
+
+2016/12/19 payee4
+    Food:Snacks                                84.83 EUR ; 3.53kg
+    Assets
+
+2016/12/20 payee7
+    Food:Vegetables                            85.24 EUR ; 3.65x
+    Assets
+
+2016/12/21 payee8
+    Food:Dairy                                 59.42 EUR ; 3.55kg
+    Assets
+
+2016/12/22 payee5
+    Food:Dairy                                 70.89 EUR ; 4.33x
+    Assets
+
+2016/12/23 payee6
+    Food:Fruits                                12.74 EUR ; 1.23l
+    Assets
+
+2016/12/24 payee8
+    Food:Dairy                                 61.19 EUR ; 2.02kg
+    Assets
+
+2016/12/25 payee9
+    Food:Vegetables                            89.72 EUR ; 1.43kg
+    Assets
+
+2016/12/26 payee1
+    Food:Dairy                                 16.53 EUR ; 4.74qb
+    Assets
+
+2016/12/27 payee3
+    Food:Fruits                                22.43 EUR ; 3.76l
+    Assets
+
+2016/12/28 payee7
+    Food:Vegetables                            84.54 EUR ; 4.83kg
+    Assets
+
+2016/12/29 payee10
+    Food:Fruits                                38.33 EUR ; 4.5l
+    Assets
+
+2016/12/30 payee2
+    Food:Fruits                                90.48 EUR ; 4.45qb
+    Assets
+
+2016/12/31 payee1
+    Food:Dairy                                 88.23 EUR ; 2.56l
+    Assets
+
+2017/01/01 payee6
+    Food:Vegetables                            25.97 EUR ; 1.39kg
+    Assets
+
+2017/01/02 payee6
+    Food:Fruits                                71.78 EUR ; 1.37qb
+    Assets
+
+2017/01/03 payee1
+    Food:Fruits                                96.48 EUR ; 1.7x
+    Assets
+
+2017/01/04 payee7
+    Food:Vegetables                            16.39 EUR ; 3.08qb
+    Assets
+
+2017/01/05 payee10
+    Food:Fruits                                63.32 EUR ; 2.44x
+    Assets
+
+2017/01/06 payee9
+    Food:Vegetables                             93.9 EUR ; 1.44qb
+    Assets
+
+2017/01/07 payee4
+    Food:Snacks                                24.63 EUR ; 3.91qb
+    Assets
+
+2017/01/08 payee1
+    Food:Fruits                                33.48 EUR ; 4.76l
+    Assets
+
+2017/01/09 payee9
+    Food:Vegetables                            50.49 EUR ; 2.6x
+    Assets
+
+2017/01/10 payee2
+    Food:Snacks                                31.11 EUR ; 3.77kg
+    Assets
+
+2017/01/11 payee9
+    Food:Vegetables                            31.93 EUR ; 3.11kg
+    Assets
+
+2017/01/12 payee10
+    Food:Vegetables                            57.73 EUR ; 3.83kg
+    Assets
+
+2017/01/13 payee5
+    Food:Dairy                                  6.44 EUR ; 4.85kg
+    Assets
+
+2017/01/14 payee7
+    Food:Dairy                                 64.84 EUR ; 4.25qb
+    Assets
+
+2017/01/15 payee2
+    Food:Fruits                                89.04 EUR ; 3.15kg
+    Assets
+
+2017/01/16 payee8
+    Food:Snacks                                35.68 EUR ; 3qb
+    Assets
+
+2017/01/17 payee6
+    Food:Dairy                                  96.3 EUR ; 3.78qb
+    Assets
+
+2017/01/18 payee3
+    Food:Vegetables                            93.83 EUR ; 4.54l
+    Assets
+
+2017/01/19 payee7
+    Food:Snacks                                84.52 EUR ; 4.88qb
+    Assets
+
+2017/01/20 payee10
+    Food:Dairy                                 76.46 EUR ; 4.18l
+    Assets
+
+2017/01/21 payee6
+    Food:Fruits                                39.03 EUR ; 1.35x
+    Assets
+
+2017/01/22 payee6
+    Food:Fruits                                30.95 EUR ; 4.04l
+    Assets
+
+2017/01/23 payee3
+    Food:Fruits                                93.37 EUR ; 2.98x
+    Assets
+
+2017/01/24 payee7
+    Food:Snacks                                55.17 EUR ; 4.23l
+    Assets
+
+2017/01/25 payee8
+    Food:Vegetables                             7.36 EUR ; 1.92x
+    Assets
+
+2017/01/26 payee5
+    Food:Dairy                                 74.78 EUR ; 3.73qb
+    Assets
+
+2017/01/27 payee2
+    Food:Fruits                                36.74 EUR ; 4.26x
+    Assets
+
+2017/01/28 payee9
+    Food:Snacks                                74.53 EUR ; 2.94x
+    Assets
+
+2017/01/29 payee9
+    Food:Vegetables                            53.09 EUR ; 3.18qb
+    Assets
+
+2017/01/30 payee4
+    Food:Dairy                                 72.73 EUR ; 1.67qb
+    Assets
+
+2017/01/31 payee10
+    Food:Dairy                                 21.17 EUR ; 2.41kg
+    Assets
+
+2017/02/01 payee10
+    Food:Snacks                                65.48 EUR ; 4.38qb
+    Assets
+
+2017/02/02 payee7
+    Food:Vegetables                            11.06 EUR ; 3.04kg
+    Assets
+
+2017/02/03 payee10
+    Food:Dairy                                 76.55 EUR ; 2.65x
+    Assets
+
+2017/02/04 payee1
+    Food:Fruits                                32.47 EUR ; 1.61kg
+    Assets
+
+2017/02/05 payee1
+    Food:Fruits                                 45.3 EUR ; 3.2kg
+    Assets
+
+2017/02/06 payee5
+    Food:Dairy                                 66.79 EUR ; 4.72qb
+    Assets
+
+2017/02/07 payee3
+    Food:Snacks                                75.42 EUR ; 4.43l
+    Assets
+
+2017/02/08 payee8
+    Food:Fruits                                96.95 EUR ; 4.54x
+    Assets
+
+2017/02/09 payee5
+    Food:Dairy                                 18.11 EUR ; 1.88x
+    Assets
+
+2017/02/10 payee8
+    Food:Dairy                                 74.55 EUR ; 1.14x
+    Assets
+
+2017/02/11 payee1
+    Food:Vegetables                            35.91 EUR ; 1.65l
+    Assets
+
+2017/02/12 payee5
+    Food:Vegetables                            94.62 EUR ; 3.32x
+    Assets
+
+2017/02/13 payee2
+    Food:Fruits                                77.04 EUR ; 4.83kg
+    Assets
+
+2017/02/14 payee5
+    Food:Vegetables                            92.06 EUR ; 4.1kg
+    Assets
+
+2017/02/15 payee3
+    Food:Fruits                                55.01 EUR ; 2.29x
+    Assets
+
+2017/02/16 payee1
+    Food:Vegetables                            45.77 EUR ; 1.83kg
+    Assets
+
+2017/02/17 payee7
+    Food:Vegetables                            88.28 EUR ; 2.66qb
+    Assets
+
+2017/02/18 payee8
+    Food:Fruits                                88.63 EUR ; 3.37l
+    Assets
+
+2017/02/19 payee6
+    Food:Fruits                                53.01 EUR ; 4x
+    Assets
+
+2017/02/20 payee1
+    Food:Snacks                                79.76 EUR ; 1.7l
+    Assets
+
+2017/02/21 payee3
+    Food:Snacks                                20.28 EUR ; 4.19x
+    Assets
+
+2017/02/22 payee9
+    Food:Snacks                                17.21 EUR ; 3.42qb
+    Assets
+
+2017/02/23 payee5
+    Food:Vegetables                            80.49 EUR ; 4.6l
+    Assets
+
+2017/02/24 payee8
+    Food:Fruits                                 32.9 EUR ; 4.88l
+    Assets
+
+2017/02/25 payee10
+    Food:Vegetables                            11.19 EUR ; 4.91kg
+    Assets
+
+2017/02/26 payee8
+    Food:Vegetables                            28.14 EUR ; 4.47x
+    Assets
+
+2017/02/27 payee9
+    Food:Snacks                                56.02 EUR ; 4.74x
+    Assets
+
+2017/02/28 payee5
+    Food:Snacks                                12.88 EUR ; 2.95l
+    Assets
+
+2017/03/01 payee8
+    Food:Dairy                                 56.62 EUR ; 3.77l
+    Assets
+
+2017/03/02 payee5
+    Food:Vegetables                            79.18 EUR ; 1.77qb
+    Assets
+
+2017/03/03 payee8
+    Food:Fruits                                15.16 EUR ; 1.94kg
+    Assets
+
+2017/03/04 payee10
+    Food:Dairy                                 23.36 EUR ; 3.12kg
+    Assets
+
+2017/03/05 payee3
+    Food:Vegetables                            63.68 EUR ; 4.6qb
+    Assets
+
+2017/03/06 payee7
+    Food:Fruits                                64.26 EUR ; 1.27x
+    Assets
+
+2017/03/07 payee6
+    Food:Dairy                                 56.03 EUR ; 3.5l
+    Assets
+
+2017/03/08 payee10
+    Food:Fruits                                31.17 EUR ; 1.67qb
+    Assets
+
+2017/03/09 payee7
+    Food:Fruits                                 9.29 EUR ; 2.54l
+    Assets
+
+2017/03/10 payee3
+    Food:Fruits                                34.84 EUR ; 2.45x
+    Assets
+
+2017/03/11 payee4
+    Food:Vegetables                            38.97 EUR ; 2.25kg
+    Assets
+
+2017/03/12 payee10
+    Food:Vegetables                            82.99 EUR ; 1.26qb
+    Assets
+
+2017/03/13 payee4
+    Food:Dairy                                 89.17 EUR ; 4.7l
+    Assets
+
+2017/03/14 payee6
+    Food:Fruits                                16.31 EUR ; 3.56qb
+    Assets
+
+2017/03/15 payee7
+    Food:Snacks                                 32.3 EUR ; 4.44l
+    Assets
+
+2017/03/16 payee6
+    Food:Snacks                                51.56 EUR ; 1.99kg
+    Assets
+
+2017/03/17 payee4
+    Food:Vegetables                            39.47 EUR ; 3.06kg
+    Assets
+
+2017/03/18 payee3
+    Food:Snacks                                62.47 EUR ; 4.16x
+    Assets
+
+2017/03/19 payee5
+    Food:Snacks                                 7.27 EUR ; 3.7qb
+    Assets
+
+2017/03/20 payee8
+    Food:Fruits                                30.48 EUR ; 4.42qb
+    Assets
+
+2017/03/21 payee4
+    Food:Fruits                                91.75 EUR ; 2.88x
+    Assets
+
+2017/03/22 payee5
+    Food:Dairy                                 47.37 EUR ; 1.11x
+    Assets
+
+2017/03/23 payee9
+    Food:Snacks                                31.13 EUR ; 2.85kg
+    Assets
+
+2017/03/24 payee7
+    Food:Vegetables                            97.19 EUR ; 1.1x
+    Assets
+
+2017/03/25 payee7
+    Food:Snacks                                45.95 EUR ; 3.13kg
+    Assets
+
+2017/03/26 payee1
+    Food:Fruits                                30.28 EUR ; 1.61l
+    Assets
+
+2017/03/27 payee4
+    Food:Vegetables                            36.84 EUR ; 2.25x
+    Assets
+
+2017/03/28 payee5
+    Food:Fruits                                10.56 EUR ; 1.26qb
+    Assets
+
+2017/03/29 payee4
+    Food:Dairy                                 99.93 EUR ; 2.77qb
+    Assets
+
+2017/03/30 payee6
+    Food:Dairy                                 37.43 EUR ; 2.83l
+    Assets
+
+2017/03/31 payee9
+    Food:Dairy                                  7.67 EUR ; 1.17kg
+    Assets
+
+2017/04/01 payee6
+    Food:Snacks                                48.26 EUR ; 1.16qb
+    Assets
+
+2017/04/02 payee5
+    Food:Dairy                                 66.27 EUR ; 1.95x
+    Assets
+
+2017/04/03 payee9
+    Food:Snacks                                73.95 EUR ; 1.14x
+    Assets
+
+2017/04/04 payee10
+    Food:Dairy                                  36.2 EUR ; 4.96l
+    Assets
+
+2017/04/05 payee1
+    Food:Snacks                                92.32 EUR ; 4.75qb
+    Assets
+
+2017/04/06 payee5
+    Food:Snacks                                 5.53 EUR ; 2.05l
+    Assets
+
+2017/04/07 payee8
+    Food:Fruits                                87.33 EUR ; 1x
+    Assets
+
+2017/04/08 payee4
+    Food:Dairy                                 13.95 EUR ; 4.72x
+    Assets
+
+2017/04/09 payee1
+    Food:Fruits                                56.54 EUR ; 4.78x
+    Assets
+
+2017/04/10 payee1
+    Food:Fruits                                44.29 EUR ; 1.07kg
+    Assets
+
+2017/04/11 payee7
+    Food:Dairy                                 95.55 EUR ; 1.36x
+    Assets
+
+2017/04/12 payee3
+    Food:Vegetables                            56.95 EUR ; 2.52x
+    Assets
+
+2017/04/13 payee9
+    Food:Vegetables                            92.09 EUR ; 1.99l
+    Assets
+
+2017/04/14 payee1
+    Food:Fruits                                15.84 EUR ; 4.76qb
+    Assets
+
+2017/04/15 payee10
+    Food:Dairy                                  6.13 EUR ; 1.19qb
+    Assets
+
+2017/04/16 payee10
+    Food:Snacks                                64.36 EUR ; 3.63kg
+    Assets
+
+2017/04/17 payee2
+    Food:Fruits                                35.62 EUR ; 3.63qb
+    Assets
+
+2017/04/18 payee7
+    Food:Dairy                                 91.19 EUR ; 2.9x
+    Assets
+
+2017/04/19 payee8
+    Food:Fruits                                48.26 EUR ; 4.01x
+    Assets
+
+2017/04/20 payee8
+    Food:Fruits                                61.73 EUR ; 1.31l
+    Assets
+
+2017/04/21 payee3
+    Food:Dairy                                 97.35 EUR ; 2.96qb
+    Assets
+
+2017/04/22 payee5
+    Food:Fruits                                51.73 EUR ; 3.51x
+    Assets
+
+2017/04/23 payee9
+    Food:Fruits                                95.66 EUR ; 3.16kg
+    Assets
+
+2017/04/24 payee1
+    Food:Vegetables                             5.33 EUR ; 2.21qb
+    Assets
+
+2017/04/25 payee10
+    Food:Vegetables                            48.44 EUR ; 1.81qb
+    Assets
+
+2017/04/26 payee5
+    Food:Snacks                                35.87 EUR ; 3.92qb
+    Assets
+
+2017/04/27 payee10
+    Food:Dairy                                  6.94 EUR ; 1.34l
+    Assets
+
+2017/04/28 payee6
+    Food:Fruits                                33.39 EUR ; 4.28kg
+    Assets
+
+2017/04/29 payee1
+    Food:Dairy                                 69.29 EUR ; 3.69l
+    Assets
+
+2017/04/30 payee2
+    Food:Snacks                                57.98 EUR ; 3.97kg
+    Assets
+
+2017/05/01 payee8
+    Food:Snacks                                24.37 EUR ; 1.57qb
+    Assets
+
+2017/05/02 payee6
+    Food:Vegetables                            70.24 EUR ; 4.78x
+    Assets
+
+2017/05/03 payee8
+    Food:Snacks                                 86.5 EUR ; 4.11qb
+    Assets
+
+2017/05/04 payee10
+    Food:Dairy                                 36.45 EUR ; 2.49x
+    Assets
+
+2017/05/05 payee4
+    Food:Vegetables                            14.76 EUR ; 4.44x
+    Assets
+
+2017/05/06 payee5
+    Food:Fruits                                99.45 EUR ; 3.66kg
+    Assets
+
+2017/05/07 payee6
+    Food:Dairy                                 23.04 EUR ; 1.78kg
+    Assets
+
+2017/05/08 payee9
+    Food:Vegetables                            36.21 EUR ; 3.19l
+    Assets
+
+2017/05/09 payee6
+    Food:Vegetables                            40.55 EUR ; 2.64x
+    Assets
+
+2017/05/10 payee4
+    Food:Vegetables                            64.74 EUR ; 1.37qb
+    Assets
+
+2017/05/11 payee6
+    Food:Vegetables                            20.65 EUR ; 3.2kg
+    Assets
+
+2017/05/12 payee6
+    Food:Vegetables                            27.33 EUR ; 1.1l
+    Assets
+
+2017/05/13 payee10
+    Food:Dairy                                 70.54 EUR ; 3.89qb
+    Assets
+
+2017/05/14 payee10
+    Food:Fruits                                29.39 EUR ; 2.87qb
+    Assets
+
+2017/05/15 payee1
+    Food:Fruits                                95.91 EUR ; 1.27kg
+    Assets
+
+2017/05/16 payee8
+    Food:Vegetables                            78.77 EUR ; 2.9qb
+    Assets
+
+2017/05/17 payee5
+    Food:Snacks                                97.67 EUR ; 4.93l
+    Assets
+
+2017/05/18 payee9
+    Food:Vegetables                            61.36 EUR ; 4.78l
+    Assets
+
+2017/05/19 payee4
+    Food:Vegetables                            76.46 EUR ; 2.28kg
+    Assets
+
+2017/05/20 payee3
+    Food:Fruits                                56.22 EUR ; 2.78qb
+    Assets
+
+2017/05/21 payee6
+    Food:Snacks                                19.54 EUR ; 4.64qb
+    Assets
+
+2017/05/22 payee10
+    Food:Dairy                                 35.03 EUR ; 1.61qb
+    Assets
+
+2017/05/23 payee2
+    Food:Fruits                                57.58 EUR ; 4.35kg
+    Assets
+
+2017/05/24 payee10
+    Food:Vegetables                            90.53 EUR ; 3.06l
+    Assets
+
+2017/05/25 payee6
+    Food:Vegetables                            58.92 EUR ; 1.45l
+    Assets
+
+2017/05/26 payee9
+    Food:Dairy                                  20.7 EUR ; 1.97x
+    Assets
+
+2017/05/27 payee9
+    Food:Snacks                                 36.6 EUR ; 1.3x
+    Assets
+
+2017/05/28 payee6
+    Food:Fruits                                40.65 EUR ; 1.55qb
+    Assets
+
+2017/05/29 payee9
+    Food:Fruits                                67.98 EUR ; 2.42qb
+    Assets
+
+2017/05/30 payee10
+    Food:Dairy                                  7.14 EUR ; 4.54qb
+    Assets
+
+2017/05/31 payee1
+    Food:Snacks                                81.49 EUR ; 4.65l
+    Assets
+
+2017/06/01 payee5
+    Food:Dairy                                 15.18 EUR ; 1.14qb
+    Assets
+
+2017/06/02 payee2
+    Food:Dairy                                 99.71 EUR ; 2.6x
+    Assets
+
+2017/06/03 payee2
+    Food:Fruits                                  7.7 EUR ; 3.77qb
+    Assets
+
+2017/06/04 payee2
+    Food:Vegetables                            76.34 EUR ; 1.71x
+    Assets
+
+2017/06/05 payee8
+    Food:Snacks                                13.28 EUR ; 2.6qb
+    Assets
+
+2017/06/06 payee6
+    Food:Vegetables                            18.88 EUR ; 4.97kg
+    Assets
+
+2017/06/07 payee6
+    Food:Fruits                                50.59 EUR ; 1.41l
+    Assets
+
+2017/06/08 payee8
+    Food:Snacks                                11.11 EUR ; 3.64kg
+    Assets
+
+2017/06/09 payee5
+    Food:Snacks                                70.48 EUR ; 3.77kg
+    Assets
+
+2017/06/10 payee1
+    Food:Snacks                                57.73 EUR ; 3.78qb
+    Assets
+
+2017/06/11 payee10
+    Food:Snacks                                65.31 EUR ; 3.67kg
+    Assets
+
+2017/06/12 payee8
+    Food:Snacks                                90.31 EUR ; 1.01kg
+    Assets
+
+2017/06/13 payee4
+    Food:Vegetables                            24.62 EUR ; 1.88l
+    Assets
+
+2017/06/14 payee5
+    Food:Dairy                                 84.61 EUR ; 1.32qb
+    Assets
+
+2017/06/15 payee7
+    Food:Dairy                                 79.43 EUR ; 2.98kg
+    Assets
+
+2017/06/16 payee1
+    Food:Vegetables                            53.46 EUR ; 4.82x
+    Assets
+
+2017/06/17 payee1
+    Food:Fruits                                79.19 EUR ; 1.32qb
+    Assets
+
+2017/06/18 payee8
+    Food:Fruits                                92.05 EUR ; 4.18x
+    Assets
+
+2017/06/19 payee1
+    Food:Dairy                                  92.9 EUR ; 3.26l
+    Assets
+
+2017/06/20 payee3
+    Food:Fruits                                13.73 EUR ; 3.08kg
+    Assets
+
+2017/06/21 payee3
+    Food:Snacks                                52.23 EUR ; 3.09x
+    Assets
+
+2017/06/22 payee1
+    Food:Vegetables                            46.55 EUR ; 4.8l
+    Assets
+
+2017/06/23 payee4
+    Food:Fruits                                87.63 EUR ; 5kg
+    Assets
+
+2017/06/24 payee1
+    Food:Dairy                                 12.53 EUR ; 3.53l
+    Assets
+
+2017/06/25 payee4
+    Food:Dairy                                 83.09 EUR ; 3.44kg
+    Assets
+
+2017/06/26 payee3
+    Food:Fruits                                21.17 EUR ; 1.13x
+    Assets
+
+2017/06/27 payee9
+    Food:Vegetables                            91.47 EUR ; 1.87x
+    Assets
+
+2017/06/28 payee2
+    Food:Dairy                                 34.82 EUR ; 2.34qb
+    Assets
+
+2017/06/29 payee1
+    Food:Snacks                                70.65 EUR ; 1.23kg
+    Assets
+
+2017/06/30 payee3
+    Food:Fruits                                96.27 EUR ; 1.29kg
+    Assets
+
+2017/07/01 payee8
+    Food:Snacks                                17.95 EUR ; 1.33kg
+    Assets
+
+2017/07/02 payee7
+    Food:Snacks                                 32.3 EUR ; 4.81kg
+    Assets
+
+2017/07/03 payee8
+    Food:Dairy                                 88.09 EUR ; 4.63kg
+    Assets
+
+2017/07/04 payee4
+    Food:Dairy                                    21 EUR ; 2.41qb
+    Assets
+
+2017/07/05 payee6
+    Food:Snacks                                97.74 EUR ; 2.09x
+    Assets
+
+2017/07/06 payee3
+    Food:Vegetables                            67.85 EUR ; 2.07kg
+    Assets
+
+2017/07/07 payee9
+    Food:Vegetables                            44.59 EUR ; 4.45qb
+    Assets
+
+2017/07/08 payee3
+    Food:Fruits                                22.66 EUR ; 1.31qb
+    Assets
+
+2017/07/09 payee9
+    Food:Fruits                                17.58 EUR ; 2.78x
+    Assets
+
+2017/07/10 payee7
+    Food:Snacks                                10.87 EUR ; 4.6l
+    Assets
+
+2017/07/11 payee3
+    Food:Snacks                                 64.8 EUR ; 4.26l
+    Assets
+
+2017/07/12 payee10
+    Food:Fruits                                78.52 EUR ; 4.01l
+    Assets
+
+2017/07/13 payee7
+    Food:Vegetables                            11.62 EUR ; 1.68l
+    Assets
+
+2017/07/14 payee7
+    Food:Dairy                                 74.76 EUR ; 2.86l
+    Assets
+
+2017/07/15 payee4
+    Food:Snacks                                97.06 EUR ; 1.32l
+    Assets
+
+2017/07/16 payee4
+    Food:Snacks                                27.66 EUR ; 4.46x
+    Assets
+
+2017/07/17 payee4
+    Food:Dairy                                 14.84 EUR ; 3.82qb
+    Assets
+
+2017/07/18 payee1
+    Food:Snacks                                44.67 EUR ; 1.97x
+    Assets
+
+2017/07/19 payee1
+    Food:Dairy                                 47.06 EUR ; 1.43kg
+    Assets
+
+2017/07/20 payee9
+    Food:Fruits                                62.89 EUR ; 4.5l
+    Assets
+
+2017/07/21 payee3
+    Food:Dairy                                 50.04 EUR ; 1.08qb
+    Assets
+
+2017/07/22 payee3
+    Food:Snacks                                29.26 EUR ; 3.01x
+    Assets
+
+2017/07/23 payee7
+    Food:Fruits                                46.66 EUR ; 3.04kg
+    Assets
+
+2017/07/24 payee4
+    Food:Snacks                                93.72 EUR ; 4.98l
+    Assets
+
+2017/07/25 payee9
+    Food:Snacks                                86.26 EUR ; 2.26x
+    Assets
+
+2017/07/26 payee7
+    Food:Dairy                                 69.57 EUR ; 3.92x
+    Assets
+
+2017/07/27 payee6
+    Food:Snacks                                31.01 EUR ; 3.62kg
+    Assets
+
+2017/07/28 payee7
+    Food:Snacks                                64.95 EUR ; 2.29qb
+    Assets
+
+2017/07/29 payee6
+    Food:Fruits                                75.95 EUR ; 3.29qb
+    Assets
+
+2017/07/30 payee2
+    Food:Fruits                                52.86 EUR ; 1.72x
+    Assets
+
+2017/07/31 payee5
+    Food:Vegetables                            52.44 EUR ; 4.7qb
+    Assets
+
+2017/08/01 payee5
+    Food:Dairy                                 61.03 EUR ; 3.73x
+    Assets
+
+2017/08/02 payee4
+    Food:Snacks                                66.47 EUR ; 4.13qb
+    Assets
+
+2017/08/03 payee10
+    Food:Fruits                                51.74 EUR ; 4.99qb
+    Assets
+
+2017/08/04 payee9
+    Food:Snacks                                44.49 EUR ; 3.15kg
+    Assets
+
+2017/08/05 payee3
+    Food:Dairy                                 66.68 EUR ; 2.71x
+    Assets
+
+2017/08/06 payee9
+    Food:Dairy                                 99.67 EUR ; 4.59l
+    Assets
+
+2017/08/07 payee7
+    Food:Dairy                                 36.44 EUR ; 1.53l
+    Assets
+
+2017/08/08 payee7
+    Food:Vegetables                            81.54 EUR ; 2.25x
+    Assets
+
+2017/08/09 payee8
+    Food:Snacks                                86.49 EUR ; 3.32kg
+    Assets
+
+2017/08/10 payee7
+    Food:Fruits                                99.23 EUR ; 4.74x
+    Assets
+
+2017/08/11 payee2
+    Food:Fruits                                95.49 EUR ; 3.85x
+    Assets
+
+2017/08/12 payee8
+    Food:Fruits                                 9.62 EUR ; 3.72qb
+    Assets
+
+2017/08/13 payee5
+    Food:Vegetables                            13.86 EUR ; 1.44qb
+    Assets
+
+2017/08/14 payee9
+    Food:Dairy                                 68.65 EUR ; 3.79kg
+    Assets
+
+2017/08/15 payee4
+    Food:Fruits                                58.51 EUR ; 1.09kg
+    Assets
+
+2017/08/16 payee10
+    Food:Vegetables                            26.69 EUR ; 4.78kg
+    Assets
+
+2017/08/17 payee5
+    Food:Fruits                                67.73 EUR ; 2.79l
+    Assets
+
+2017/08/18 payee10
+    Food:Dairy                                 52.08 EUR ; 4.95qb
+    Assets
+
+2017/08/19 payee7
+    Food:Vegetables                            49.79 EUR ; 1.97qb
+    Assets
+
+2017/08/20 payee4
+    Food:Snacks                                29.69 EUR ; 4.46kg
+    Assets
+
+2017/08/21 payee2
+    Food:Fruits                                95.31 EUR ; 4.58kg
+    Assets
+
+2017/08/22 payee9
+    Food:Vegetables                            76.67 EUR ; 4.67l
+    Assets
+
+2017/08/23 payee6
+    Food:Dairy                                  52.9 EUR ; 1.28x
+    Assets
+
+2017/08/24 payee5
+    Food:Fruits                                36.24 EUR ; 2.83l
+    Assets
+
+2017/08/25 payee10
+    Food:Vegetables                            37.39 EUR ; 3.92qb
+    Assets
+
+2017/08/26 payee5
+    Food:Fruits                                73.15 EUR ; 1.59kg
+    Assets
+
+2017/08/27 payee1
+    Food:Vegetables                            55.78 EUR ; 2.09l
+    Assets
+
+2017/08/28 payee8
+    Food:Fruits                                46.89 EUR ; 3.61qb
+    Assets
+
+2017/08/29 payee1
+    Food:Snacks                                30.57 EUR ; 1.12x
+    Assets
+
+2017/08/30 payee9
+    Food:Fruits                                25.07 EUR ; 4.07x
+    Assets
+
+2017/08/31 payee1
+    Food:Snacks                                44.08 EUR ; 1.78qb
+    Assets
+
+2017/09/01 payee4
+    Food:Vegetables                            53.81 EUR ; 4.67qb
+    Assets
+
+2017/09/02 payee4
+    Food:Vegetables                            76.96 EUR ; 4.23kg
+    Assets
+
+2017/09/03 payee8
+    Food:Fruits                                52.46 EUR ; 4.11l
+    Assets
+
+2017/09/04 payee1
+    Food:Dairy                                 34.61 EUR ; 1.56qb
+    Assets
+
+2017/09/05 payee5
+    Food:Fruits                                 82.4 EUR ; 3.86qb
+    Assets
+
+2017/09/06 payee9
+    Food:Vegetables                            85.67 EUR ; 4.76qb
+    Assets
+
+2017/09/07 payee10
+    Food:Fruits                                48.61 EUR ; 1.75qb
+    Assets
+
+2017/09/08 payee9
+    Food:Fruits                                84.49 EUR ; 2.68l
+    Assets
+
+2017/09/09 payee7
+    Food:Vegetables                            89.79 EUR ; 3.72x
+    Assets
+
+2017/09/10 payee2
+    Food:Vegetables                            16.92 EUR ; 4.86l
+    Assets
+
+2017/09/11 payee6
+    Food:Fruits                                24.94 EUR ; 3.93x
+    Assets
+
+2017/09/12 payee2
+    Food:Snacks                                91.52 EUR ; 3.94qb
+    Assets
+
+2017/09/13 payee7
+    Food:Fruits                                36.64 EUR ; 4.97kg
+    Assets
+
+2017/09/14 payee4
+    Food:Dairy                                 91.49 EUR ; 2.05qb
+    Assets
+
+2017/09/15 payee1
+    Food:Vegetables                            20.96 EUR ; 4.75l
+    Assets
+
+2017/09/16 payee3
+    Food:Fruits                                58.29 EUR ; 1.24kg
+    Assets
+
+2017/09/17 payee6
+    Food:Dairy                                 93.87 EUR ; 4.8kg
+    Assets
+
+2017/09/18 payee6
+    Food:Vegetables                            86.88 EUR ; 2.07x
+    Assets
+
+2017/09/19 payee8
+    Food:Vegetables                            61.72 EUR ; 2.44qb
+    Assets
+
+2017/09/20 payee7
+    Food:Dairy                                 10.26 EUR ; 3.97kg
+    Assets
+
+2017/09/21 payee5
+    Food:Vegetables                            76.02 EUR ; 3.5l
+    Assets
+
+2017/09/22 payee1
+    Food:Dairy                                 74.32 EUR ; 1.68qb
+    Assets
+
+2017/09/23 payee4
+    Food:Vegetables                            64.51 EUR ; 3.75qb
+    Assets
+
+2017/09/24 payee1
+    Food:Vegetables                            31.12 EUR ; 3.82qb
+    Assets
+
+2017/09/25 payee9
+    Food:Dairy                                 49.26 EUR ; 3.55kg
+    Assets
+
+2017/09/26 payee3
+    Food:Fruits                                 49.3 EUR ; 2.61l
+    Assets
+
+2017/09/27 payee8
+    Food:Vegetables                            15.68 EUR ; 4.08kg
+    Assets
+
+2017/09/28 payee7
+    Food:Vegetables                            43.08 EUR ; 2.96qb
+    Assets
+
+2017/09/29 payee7
+    Food:Fruits                                34.55 EUR ; 4.18kg
+    Assets
+
+2017/09/30 payee6
+    Food:Snacks                                56.78 EUR ; 2.45l
+    Assets
+
+2017/10/01 payee10
+    Food:Fruits                                83.61 EUR ; 4.74l
+    Assets
+
+2017/10/02 payee9
+    Food:Vegetables                            88.69 EUR ; 4.09kg
+    Assets
+
+2017/10/03 payee8
+    Food:Dairy                                 63.15 EUR ; 1.7l
+    Assets
+
+2017/10/04 payee6
+    Food:Fruits                                 33.7 EUR ; 4.47l
+    Assets
+
+2017/10/05 payee4
+    Food:Vegetables                            37.15 EUR ; 3.64l
+    Assets
+
+2017/10/06 payee1
+    Food:Vegetables                            41.97 EUR ; 2.45qb
+    Assets
+
+2017/10/07 payee10
+    Food:Dairy                                 65.88 EUR ; 1.59l
+    Assets
+
+2017/10/08 payee5
+    Food:Snacks                                52.72 EUR ; 1.99x
+    Assets
+
+2017/10/09 payee10
+    Food:Dairy                                 53.25 EUR ; 3.68qb
+    Assets
+
+2017/10/10 payee1
+    Food:Vegetables                            82.93 EUR ; 3.55l
+    Assets
+
+2017/10/11 payee10
+    Food:Dairy                                 62.24 EUR ; 1.77kg
+    Assets
+
+2017/10/12 payee2
+    Food:Fruits                                18.48 EUR ; 3.07x
+    Assets
+
+2017/10/13 payee2
+    Food:Dairy                                 57.09 EUR ; 4.99x
+    Assets
+
+2017/10/14 payee3
+    Food:Fruits                                65.31 EUR ; 1.11kg
+    Assets
+
+2017/10/15 payee8
+    Food:Fruits                                85.21 EUR ; 4.89l
+    Assets
+
+2017/10/16 payee3
+    Food:Vegetables                               86 EUR ; 3.67qb
+    Assets
+
+2017/10/17 payee8
+    Food:Vegetables                            38.74 EUR ; 2.04x
+    Assets
+
+2017/10/18 payee6
+    Food:Vegetables                            83.87 EUR ; 2.72kg
+    Assets
+
+2017/10/19 payee6
+    Food:Dairy                                 68.18 EUR ; 2.98kg
+    Assets
+
+2017/10/20 payee3
+    Food:Vegetables                            86.22 EUR ; 1.6l
+    Assets
+
+2017/10/21 payee10
+    Food:Vegetables                            24.13 EUR ; 1.73l
+    Assets
+
+2017/10/22 payee9
+    Food:Dairy                                  6.45 EUR ; 1.72qb
+    Assets
+
+2017/10/23 payee10
+    Food:Vegetables                            68.33 EUR ; 1.17qb
+    Assets
+
+2017/10/24 payee4
+    Food:Fruits                                67.92 EUR ; 4.23kg
+    Assets
+
+2017/10/25 payee4
+    Food:Fruits                                44.92 EUR ; 3.98l
+    Assets
+
+2017/10/26 payee8
+    Food:Snacks                                35.44 EUR ; 4.34kg
+    Assets
+
+2017/10/27 payee4
+    Food:Vegetables                            18.11 EUR ; 4.59x
+    Assets
+
+2017/10/28 payee10
+    Food:Vegetables                            58.78 EUR ; 4.44kg
+    Assets
+
+2017/10/29 payee1
+    Food:Snacks                                47.46 EUR ; 4.95kg
+    Assets
+
+2017/10/30 payee4
+    Food:Snacks                                83.54 EUR ; 3.33l
+    Assets
+
+2017/10/31 payee2
+    Food:Vegetables                            23.39 EUR ; 1.83l
+    Assets
+
+2017/11/01 payee7
+    Food:Snacks                                23.35 EUR ; 2.15qb
+    Assets
+
+2017/11/02 payee4
+    Food:Snacks                                91.96 EUR ; 4.23x
+    Assets
+
+2017/11/03 payee10
+    Food:Snacks                                 10.3 EUR ; 4.93l
+    Assets
+
+2017/11/04 payee9
+    Food:Dairy                                 35.76 EUR ; 1.93kg
+    Assets
+
+2017/11/05 payee4
+    Food:Snacks                                71.15 EUR ; 4.48x
+    Assets
+
+2017/11/06 payee4
+    Food:Fruits                                46.58 EUR ; 1.51kg
+    Assets
+
+2017/11/07 payee6
+    Food:Fruits                                17.12 EUR ; 1.31qb
+    Assets
+
+2017/11/08 payee6
+    Food:Dairy                                 46.02 EUR ; 4.36l
+    Assets
+
+2017/11/09 payee3
+    Food:Snacks                                61.56 EUR ; 4.66kg
+    Assets
+
+2017/11/10 payee5
+    Food:Snacks                                25.93 EUR ; 3.88qb
+    Assets
+
+2017/11/11 payee4
+    Food:Vegetables                            32.77 EUR ; 3.21x
+    Assets
+
+2017/11/12 payee10
+    Food:Snacks                                66.98 EUR ; 2.37qb
+    Assets
+
+2017/11/13 payee7
+    Food:Dairy                                 62.07 EUR ; 3.6x
+    Assets
+
+2017/11/14 payee3
+    Food:Fruits                                54.02 EUR ; 4.18kg
+    Assets
+
+2017/11/15 payee5
+    Food:Vegetables                               37 EUR ; 2.2l
+    Assets
+
+2017/11/16 payee9
+    Food:Dairy                                 59.03 EUR ; 2.4l
+    Assets
+
+2017/11/17 payee7
+    Food:Snacks                                92.88 EUR ; 4.1kg
+    Assets
+
+2017/11/18 payee5
+    Food:Fruits                                65.36 EUR ; 2.09x
+    Assets
+
+2017/11/19 payee3
+    Food:Vegetables                            80.81 EUR ; 2.74qb
+    Assets
+
+2017/11/20 payee3
+    Food:Vegetables                            51.03 EUR ; 4.29kg
+    Assets
+
+2017/11/21 payee4
+    Food:Vegetables                            53.88 EUR ; 2.13l
+    Assets
+
+2017/11/22 payee5
+    Food:Snacks                                14.81 EUR ; 2.95x
+    Assets
+
+2017/11/23 payee10
+    Food:Vegetables                            83.51 EUR ; 3.24l
+    Assets
+
+2017/11/24 payee10
+    Food:Snacks                                50.94 EUR ; 2.61kg
+    Assets
+
+2017/11/25 payee5
+    Food:Dairy                                 54.03 EUR ; 4.94kg
+    Assets
+
+2017/11/26 payee6
+    Food:Snacks                                26.54 EUR ; 2.41kg
+    Assets
+
+2017/11/27 payee1
+    Food:Fruits                                80.24 EUR ; 3.65l
+    Assets
+
+2017/11/28 payee8
+    Food:Fruits                                25.14 EUR ; 3.38kg
+    Assets
+
+2017/11/29 payee10
+    Food:Vegetables                            22.93 EUR ; 3.16qb
+    Assets
+
+2017/11/30 payee4
+    Food:Snacks                                99.32 EUR ; 3.7x
+    Assets
+
+2017/12/01 payee5
+    Food:Fruits                                60.07 EUR ; 3.09x
+    Assets
+
+2017/12/02 payee3
+    Food:Vegetables                            25.67 EUR ; 4.87x
+    Assets
+
+2017/12/03 payee10
+    Food:Vegetables                             95.2 EUR ; 1.92kg
+    Assets
+
+2017/12/04 payee6
+    Food:Dairy                                 79.08 EUR ; 2.62x
+    Assets
+
+2017/12/05 payee7
+    Food:Fruits                                 10.9 EUR ; 3.09kg
+    Assets
+
+2017/12/06 payee3
+    Food:Dairy                                 18.19 EUR ; 1.37qb
+    Assets
+
+2017/12/07 payee5
+    Food:Dairy                                 11.05 EUR ; 4.49l
+    Assets
+
+2017/12/08 payee10
+    Food:Fruits                                48.42 EUR ; 1.51l
+    Assets
+
+2017/12/09 payee6
+    Food:Vegetables                            98.21 EUR ; 2.78l
+    Assets
+
+2017/12/10 payee1
+    Food:Snacks                                12.94 EUR ; 4.75kg
+    Assets
+
+2017/12/11 payee2
+    Food:Fruits                                73.84 EUR ; 2.31kg
+    Assets
+
+2017/12/12 payee6
+    Food:Dairy                                 72.79 EUR ; 1.36l
+    Assets
+
+2017/12/13 payee4
+    Food:Snacks                                48.67 EUR ; 2.85kg
+    Assets
+
+2017/12/14 payee5
+    Food:Fruits                                53.62 EUR ; 3.01l
+    Assets
+
+2017/12/15 payee2
+    Food:Dairy                                 76.89 EUR ; 3.66l
+    Assets
+
+2017/12/16 payee10
+    Food:Dairy                                 70.09 EUR ; 3.67kg
+    Assets
+
+2017/12/17 payee8
+    Food:Snacks                                17.74 EUR ; 2.78qb
+    Assets
+
+2017/12/18 payee8
+    Food:Fruits                                66.85 EUR ; 4.03x
+    Assets
+
+2017/12/19 payee4
+    Food:Snacks                                39.18 EUR ; 2.98l
+    Assets
+
+2017/12/20 payee6
+    Food:Snacks                                45.72 EUR ; 4.16x
+    Assets
+
+2017/12/21 payee4
+    Food:Dairy                                 65.42 EUR ; 2.76qb
+    Assets
+
+2017/12/22 payee10
+    Food:Dairy                                 83.51 EUR ; 3.02qb
+    Assets
+
+2017/12/23 payee7
+    Food:Vegetables                            63.56 EUR ; 3.66l
+    Assets
+
+2017/12/24 payee9
+    Food:Vegetables                            77.18 EUR ; 1.88l
+    Assets
+
+2017/12/25 payee1
+    Food:Vegetables                             24.9 EUR ; 4.25l
+    Assets
+
+2017/12/26 payee9
+    Food:Snacks                                16.26 EUR ; 2.43kg
+    Assets
+
+2017/12/27 payee1
+    Food:Vegetables                            13.25 EUR ; 1.04qb
+    Assets
+
+2017/12/28 payee5
+    Food:Fruits                                53.25 EUR ; 3.48x
+    Assets
+
+2017/12/29 payee2
+    Food:Vegetables                            68.16 EUR ; 4.2kg
+    Assets
+
+2017/12/30 payee7
+    Food:Dairy                                 88.56 EUR ; 4.37qb
+    Assets
+
+2017/12/31 payee8
+    Food:Dairy                                 85.23 EUR ; 2.36x
+    Assets
+
+2018/01/01 payee2
+    Food:Vegetables                               63 EUR ; 3.5x
+    Assets
+
+2018/01/02 payee2
+    Food:Snacks                                91.32 EUR ; 2.47qb
+    Assets
+
+2018/01/03 payee9
+    Food:Dairy                                 82.72 EUR ; 3.47qb
+    Assets
+
+2018/01/04 payee3
+    Food:Vegetables                            64.81 EUR ; 4.65x
+    Assets
+
+2018/01/05 payee6
+    Food:Snacks                                58.83 EUR ; 2.17x
+    Assets
+
+2018/01/06 payee8
+    Food:Dairy                                 58.52 EUR ; 3.89l
+    Assets
+
+2018/01/07 payee9
+    Food:Snacks                                59.66 EUR ; 2.96kg
+    Assets
+
+2018/01/08 payee8
+    Food:Vegetables                            66.16 EUR ; 3.32l
+    Assets
+
+2018/01/09 payee5
+    Food:Dairy                                 20.24 EUR ; 4.79qb
+    Assets
+
+2018/01/10 payee6
+    Food:Vegetables                            94.96 EUR ; 4.49kg
+    Assets
+
+2018/01/11 payee1
+    Food:Fruits                                58.87 EUR ; 1.84l
+    Assets
+
+2018/01/12 payee3
+    Food:Fruits                                 46.2 EUR ; 1.9x
+    Assets
+
+2018/01/13 payee2
+    Food:Vegetables                            18.41 EUR ; 3.18x
+    Assets
+
+2018/01/14 payee9
+    Food:Dairy                                 81.42 EUR ; 4.2l
+    Assets
+
+2018/01/15 payee3
+    Food:Snacks                                92.04 EUR ; 3.6x
+    Assets
+
+2018/01/16 payee6
+    Food:Fruits                                85.52 EUR ; 2.59qb
+    Assets
+
+2018/01/17 payee9
+    Food:Dairy                                 65.69 EUR ; 1.6kg
+    Assets
+
+2018/01/18 payee3
+    Food:Dairy                                 12.76 EUR ; 2.81l
+    Assets
+
+2018/01/19 payee5
+    Food:Dairy                                 23.85 EUR ; 2.2x
+    Assets
+
+2018/01/20 payee4
+    Food:Snacks                                97.15 EUR ; 3.39x
+    Assets
+
+2018/01/21 payee3
+    Food:Vegetables                            55.17 EUR ; 2.05kg
+    Assets
+
+2018/01/22 payee9
+    Food:Vegetables                            16.17 EUR ; 3.64qb
+    Assets
+
+2018/01/23 payee1
+    Food:Fruits                                94.59 EUR ; 2.81l
+    Assets
+
+2018/01/24 payee5
+    Food:Vegetables                            53.82 EUR ; 2.3qb
+    Assets
+
+2018/01/25 payee9
+    Food:Vegetables                            53.28 EUR ; 1.93qb
+    Assets
+
+2018/01/26 payee6
+    Food:Fruits                                79.76 EUR ; 2.21kg
+    Assets
+
+2018/01/27 payee6
+    Food:Fruits                                47.84 EUR ; 2.83l
+    Assets
+
+2018/01/28 payee9
+    Food:Vegetables                            27.64 EUR ; 3.44l
+    Assets
+
+2018/01/29 payee6
+    Food:Snacks                                14.91 EUR ; 3.88qb
+    Assets
+
+2018/01/30 payee1
+    Food:Dairy                                  9.06 EUR ; 2.78qb
+    Assets
+
+2018/01/31 payee2
+    Food:Vegetables                            99.15 EUR ; 3.4kg
+    Assets
+
+2018/02/01 payee1
+    Food:Fruits                                70.07 EUR ; 3.15qb
+    Assets
+
+2018/02/02 payee6
+    Food:Vegetables                            69.89 EUR ; 3.42l
+    Assets
+
+2018/02/03 payee1
+    Food:Fruits                                74.61 EUR ; 1.11x
+    Assets
+
+2018/02/04 payee2
+    Food:Fruits                                48.12 EUR ; 2.16l
+    Assets
+
+2018/02/05 payee1
+    Food:Fruits                                80.45 EUR ; 4.65x
+    Assets
+
+2018/02/06 payee5
+    Food:Fruits                                 66.1 EUR ; 1.39l
+    Assets
+
+2018/02/07 payee9
+    Food:Vegetables                            62.53 EUR ; 2.61qb
+    Assets
+
+2018/02/08 payee1
+    Food:Snacks                                 29.4 EUR ; 1.41x
+    Assets
+
+2018/02/09 payee1
+    Food:Dairy                                 64.93 EUR ; 4.84qb
+    Assets
+
+2018/02/10 payee9
+    Food:Dairy                                 14.59 EUR ; 1.39x
+    Assets
+
+2018/02/11 payee6
+    Food:Dairy                                 65.68 EUR ; 1.76x
+    Assets
+
+2018/02/12 payee2
+    Food:Snacks                                36.95 EUR ; 2.46kg
+    Assets
+
+2018/02/13 payee6
+    Food:Dairy                                 81.27 EUR ; 2.52qb
+    Assets
+
+2018/02/14 payee10
+    Food:Snacks                                84.15 EUR ; 1.94qb
+    Assets
+
+2018/02/15 payee9
+    Food:Vegetables                            31.83 EUR ; 1.86x
+    Assets
+
+2018/02/16 payee7
+    Food:Dairy                                 54.31 EUR ; 1.34x
+    Assets
+
+2018/02/17 payee7
+    Food:Fruits                                48.36 EUR ; 3.05qb
+    Assets
+
+2018/02/18 payee8
+    Food:Fruits                                30.74 EUR ; 3.17l
+    Assets
+
+2018/02/19 payee6
+    Food:Snacks                                 74.2 EUR ; 2.27qb
+    Assets
+
+2018/02/20 payee2
+    Food:Snacks                                24.23 EUR ; 3.56qb
+    Assets
+
+2018/02/21 payee2
+    Food:Snacks                                93.19 EUR ; 2.02l
+    Assets
+
+2018/02/22 payee10
+    Food:Snacks                                20.86 EUR ; 3.05x
+    Assets
+
+2018/02/23 payee9
+    Food:Snacks                                47.69 EUR ; 1.45kg
+    Assets
+
+2018/02/24 payee8
+    Food:Vegetables                            72.11 EUR ; 3.26x
+    Assets
+
+2018/02/25 payee1
+    Food:Vegetables                            91.38 EUR ; 4.49l
+    Assets
+
+2018/02/26 payee10
+    Food:Vegetables                            56.37 EUR ; 3.76qb
+    Assets
+
+2018/02/27 payee5
+    Food:Dairy                                 56.05 EUR ; 4.54qb
+    Assets
+
+2018/02/28 payee9
+    Food:Snacks                                58.78 EUR ; 2.58x
+    Assets
+
+2018/03/01 payee2
+    Food:Dairy                                 28.28 EUR ; 3.64qb
+    Assets
+
+2018/03/02 payee8
+    Food:Fruits                                92.42 EUR ; 1.43qb
+    Assets
+
+2018/03/03 payee2
+    Food:Dairy                                  28.5 EUR ; 3.66l
+    Assets
+
+2018/03/04 payee8
+    Food:Vegetables                            35.33 EUR ; 2.08qb
+    Assets
+
+2018/03/05 payee3
+    Food:Dairy                                  7.06 EUR ; 1.72l
+    Assets
+
+2018/03/06 payee2
+    Food:Dairy                                    34 EUR ; 1.49qb
+    Assets
+
+2018/03/07 payee10
+    Food:Dairy                                 72.69 EUR ; 4.94l
+    Assets
+
+2018/03/08 payee7
+    Food:Dairy                                 93.28 EUR ; 4.94l
+    Assets
+
+2018/03/09 payee5
+    Food:Vegetables                            87.45 EUR ; 1.15l
+    Assets
+
+2018/03/10 payee2
+    Food:Fruits                                85.97 EUR ; 3.4kg
+    Assets
+
+2018/03/11 payee5
+    Food:Vegetables                            44.04 EUR ; 3.97qb
+    Assets
+
+2018/03/12 payee4
+    Food:Fruits                                34.56 EUR ; 1.06kg
+    Assets
+
+2018/03/13 payee10
+    Food:Fruits                                 8.25 EUR ; 2.58qb
+    Assets
+
+2018/03/14 payee2
+    Food:Dairy                                 33.78 EUR ; 3.85qb
+    Assets
+
+2018/03/15 payee9
+    Food:Snacks                                32.54 EUR ; 2.73x
+    Assets
+
+2018/03/16 payee10
+    Food:Snacks                                74.72 EUR ; 3.29kg
+    Assets
+
+2018/03/17 payee9
+    Food:Dairy                                 41.26 EUR ; 2.52qb
+    Assets
+
+2018/03/18 payee6
+    Food:Fruits                                60.53 EUR ; 2.76kg
+    Assets
+
+2018/03/19 payee5
+    Food:Fruits                                45.16 EUR ; 3.39l
+    Assets
+
+2018/03/20 payee5
+    Food:Snacks                                76.11 EUR ; 3.19l
+    Assets
+
+2018/03/21 payee2
+    Food:Fruits                                17.76 EUR ; 1.26x
+    Assets
+
+2018/03/22 payee4
+    Food:Snacks                                72.41 EUR ; 3.22kg
+    Assets
+
+2018/03/23 payee10
+    Food:Fruits                                98.92 EUR ; 2.47x
+    Assets
+
+2018/03/24 payee6
+    Food:Fruits                                69.09 EUR ; 2.02l
+    Assets
+
+2018/03/25 payee7
+    Food:Vegetables                            31.83 EUR ; 4.13x
+    Assets
+
+2018/03/26 payee5
+    Food:Vegetables                            22.69 EUR ; 4.66x
+    Assets
+
+2018/03/27 payee6
+    Food:Dairy                                 68.89 EUR ; 2.15qb
+    Assets
+
+2018/03/28 payee4
+    Food:Dairy                                 92.74 EUR ; 1.01kg
+    Assets
+
+2018/03/29 payee6
+    Food:Vegetables                            15.28 EUR ; 4.96kg
+    Assets
+
+2018/03/30 payee1
+    Food:Fruits                                81.32 EUR ; 2.95x
+    Assets
+
+2018/03/31 payee1
+    Food:Dairy                                 95.33 EUR ; 4.13kg
+    Assets
+
+2018/04/01 payee4
+    Food:Dairy                                 78.24 EUR ; 3.15l
+    Assets
+
+2018/04/02 payee2
+    Food:Fruits                                14.63 EUR ; 2.24qb
+    Assets
+
+2018/04/03 payee1
+    Food:Dairy                                 58.97 EUR ; 2.45kg
+    Assets
+
+2018/04/04 payee2
+    Food:Fruits                                46.94 EUR ; 1.33kg
+    Assets
+
+2018/04/05 payee7
+    Food:Snacks                                68.04 EUR ; 4.29l
+    Assets
+
+2018/04/06 payee6
+    Food:Vegetables                            34.82 EUR ; 1.93kg
+    Assets
+
+2018/04/07 payee6
+    Food:Dairy                                 14.84 EUR ; 4.27qb
+    Assets
+
+2018/04/08 payee10
+    Food:Vegetables                            62.75 EUR ; 4.19qb
+    Assets
+
+2018/04/09 payee5
+    Food:Dairy                                 13.86 EUR ; 1.11kg
+    Assets
+
+2018/04/10 payee8
+    Food:Snacks                                13.41 EUR ; 1.31kg
+    Assets
+
+2018/04/11 payee3
+    Food:Vegetables                            66.04 EUR ; 3.21qb
+    Assets
+
+2018/04/12 payee2
+    Food:Vegetables                            79.76 EUR ; 3.04kg
+    Assets
+
+2018/04/13 payee9
+    Food:Snacks                                49.44 EUR ; 3.58qb
+    Assets
+
+2018/04/14 payee1
+    Food:Vegetables                             39.8 EUR ; 3.03kg
+    Assets
+
+2018/04/15 payee1
+    Food:Snacks                                45.59 EUR ; 4.61kg
+    Assets
+
+2018/04/16 payee2
+    Food:Dairy                                  6.22 EUR ; 4.14l
+    Assets
+
+2018/04/17 payee7
+    Food:Fruits                                19.31 EUR ; 3.48l
+    Assets
+
+2018/04/18 payee5
+    Food:Fruits                                15.17 EUR ; 3.45l
+    Assets
+
+2018/04/19 payee3
+    Food:Snacks                                77.55 EUR ; 4.49kg
+    Assets
+
+2018/04/20 payee5
+    Food:Fruits                                 75.3 EUR ; 1.18l
+    Assets
+
+2018/04/21 payee6
+    Food:Dairy                                  5.23 EUR ; 2.38l
+    Assets
+
+2018/04/22 payee3
+    Food:Dairy                                  9.16 EUR ; 4.93x
+    Assets
+
+2018/04/23 payee5
+    Food:Snacks                                15.01 EUR ; 3.71x
+    Assets
+
+2018/04/24 payee8
+    Food:Vegetables                            63.19 EUR ; 4.09qb
+    Assets
+
+2018/04/25 payee2
+    Food:Vegetables                            88.78 EUR ; 3.43kg
+    Assets
+
+2018/04/26 payee10
+    Food:Snacks                                76.01 EUR ; 4.63x
+    Assets
+
+2018/04/27 payee10
+    Food:Fruits                                98.85 EUR ; 4.31x
+    Assets
+
+2018/04/28 payee4
+    Food:Dairy                                 29.54 EUR ; 4.1qb
+    Assets
+
+2018/04/29 payee4
+    Food:Fruits                                21.73 EUR ; 4.13l
+    Assets
+
+2018/04/30 payee3
+    Food:Vegetables                            43.63 EUR ; 1.82l
+    Assets
+
+2018/05/01 payee4
+    Food:Snacks                                 9.31 EUR ; 3.66x
+    Assets
+
+2018/05/02 payee2
+    Food:Dairy                                 40.83 EUR ; 2.55l
+    Assets
+
+2018/05/03 payee10
+    Food:Dairy                                 18.27 EUR ; 1.2qb
+    Assets
+
+2018/05/04 payee6
+    Food:Vegetables                            24.33 EUR ; 1.38qb
+    Assets
+
+2018/05/05 payee8
+    Food:Dairy                                  85.7 EUR ; 3.08qb
+    Assets
+
+2018/05/06 payee1
+    Food:Fruits                                38.23 EUR ; 4.96kg
+    Assets
+
+2018/05/07 payee6
+    Food:Snacks                                27.49 EUR ; 4.32l
+    Assets
+
+2018/05/08 payee7
+    Food:Dairy                                  76.1 EUR ; 1.27l
+    Assets
+
+2018/05/09 payee5
+    Food:Fruits                                56.23 EUR ; 4.71kg
+    Assets
+
+2018/05/10 payee8
+    Food:Fruits                                86.28 EUR ; 1.29kg
+    Assets
+
+2018/05/11 payee6
+    Food:Dairy                                 65.27 EUR ; 3.96kg
+    Assets
+
+2018/05/12 payee7
+    Food:Snacks                                21.98 EUR ; 4.83qb
+    Assets
+
+2018/05/13 payee4
+    Food:Dairy                                 92.91 EUR ; 4.43x
+    Assets
+
+2018/05/14 payee3
+    Food:Vegetables                            95.24 EUR ; 2.03l
+    Assets
+
+2018/05/15 payee3
+    Food:Fruits                                 56.1 EUR ; 2kg
+    Assets
+
+2018/05/16 payee3
+    Food:Snacks                                30.78 EUR ; 4.15qb
+    Assets
+
+2018/05/17 payee9
+    Food:Vegetables                            60.86 EUR ; 4.76l
+    Assets
+
+2018/05/18 payee6
+    Food:Vegetables                             55.1 EUR ; 2.8qb
+    Assets
+
+2018/05/19 payee7
+    Food:Fruits                                34.31 EUR ; 2.57qb
+    Assets
+
+2018/05/20 payee10
+    Food:Snacks                                46.12 EUR ; 2.85kg
+    Assets
+
+2018/05/21 payee7
+    Food:Dairy                                 73.57 EUR ; 2.31qb
+    Assets
+
+2018/05/22 payee9
+    Food:Vegetables                            64.56 EUR ; 4.96l
+    Assets
+
+2018/05/23 payee5
+    Food:Fruits                                73.35 EUR ; 3.23x
+    Assets
+
+2018/05/24 payee6
+    Food:Fruits                                27.25 EUR ; 2.04l
+    Assets
+
+2018/05/25 payee10
+    Food:Snacks                                74.87 EUR ; 2.22qb
+    Assets
+
+2018/05/26 payee10
+    Food:Fruits                                62.11 EUR ; 4.25l
+    Assets
+
+2018/05/27 payee1
+    Food:Snacks                                80.19 EUR ; 2.53x
+    Assets
+
+2018/05/28 payee6
+    Food:Dairy                                  9.01 EUR ; 2.42l
+    Assets
+
+2018/05/29 payee10
+    Food:Fruits                                93.19 EUR ; 4.81kg
+    Assets
+
+2018/05/30 payee2
+    Food:Snacks                                90.14 EUR ; 2.51l
+    Assets
+
+2018/05/31 payee10
+    Food:Snacks                                 7.16 EUR ; 2.19kg
+    Assets
+
+2018/06/01 payee1
+    Food:Vegetables                            13.56 EUR ; 1.5kg
+    Assets
+
+2018/06/02 payee9
+    Food:Dairy                                 90.44 EUR ; 3.91x
+    Assets
+
+2018/06/03 payee9
+    Food:Fruits                                24.04 EUR ; 1.99l
+    Assets
+
+2018/06/04 payee1
+    Food:Snacks                                27.98 EUR ; 2.72qb
+    Assets
+
+2018/06/05 payee1
+    Food:Snacks                                37.54 EUR ; 3.93kg
+    Assets
+
+2018/06/06 payee7
+    Food:Vegetables                            15.81 EUR ; 4.45l
+    Assets
+
+2018/06/07 payee4
+    Food:Fruits                                   99 EUR ; 3.17qb
+    Assets
+
+2018/06/08 payee3
+    Food:Snacks                                53.43 EUR ; 3.76kg
+    Assets
+
+2018/06/09 payee7
+    Food:Fruits                                 38.7 EUR ; 2.49kg
+    Assets
+
+2018/06/10 payee4
+    Food:Vegetables                            81.46 EUR ; 2.43l
+    Assets
+
+2018/06/11 payee9
+    Food:Fruits                                91.92 EUR ; 1.04qb
+    Assets
+
+2018/06/12 payee3
+    Food:Fruits                                10.29 EUR ; 4.56kg
+    Assets
+
+2018/06/13 payee10
+    Food:Snacks                                11.58 EUR ; 3.74kg
+    Assets
+
+2018/06/14 payee1
+    Food:Vegetables                            24.21 EUR ; 3.2qb
+    Assets
+
+2018/06/15 payee5
+    Food:Dairy                                 31.13 EUR ; 2.6kg
+    Assets
+
+2018/06/16 payee4
+    Food:Fruits                                41.98 EUR ; 2.44kg
+    Assets
+
+2018/06/17 payee1
+    Food:Snacks                                79.82 EUR ; 1.34l
+    Assets
+
+2018/06/18 payee2
+    Food:Fruits                                47.86 EUR ; 1.31l
+    Assets
+
+2018/06/19 payee10
+    Food:Snacks                                91.87 EUR ; 1.3qb
+    Assets
+
+2018/06/20 payee6
+    Food:Vegetables                            29.16 EUR ; 3.31l
+    Assets
+
+2018/06/21 payee6
+    Food:Snacks                                75.05 EUR ; 3.08l
+    Assets
+
+2018/06/22 payee2
+    Food:Snacks                                 97.2 EUR ; 1.92qb
+    Assets
+
+2018/06/23 payee9
+    Food:Vegetables                            44.08 EUR ; 3.91qb
+    Assets
+
+2018/06/24 payee5
+    Food:Vegetables                             40.8 EUR ; 4.12x
+    Assets
+
+2018/06/25 payee10
+    Food:Vegetables                            33.22 EUR ; 3.66kg
+    Assets
+
+2018/06/26 payee10
+    Food:Vegetables                            87.98 EUR ; 4.88l
+    Assets
+
+2018/06/27 payee4
+    Food:Snacks                                 5.68 EUR ; 1.34l
+    Assets
+
+2018/06/28 payee2
+    Food:Dairy                                 30.01 EUR ; 4.94l
+    Assets
+
+2018/06/29 payee6
+    Food:Vegetables                            49.61 EUR ; 1.76x
+    Assets
+
+2018/06/30 payee1
+    Food:Vegetables                            46.51 EUR ; 3.59kg
+    Assets
+
+2018/07/01 payee8
+    Food:Snacks                                56.63 EUR ; 3.62l
+    Assets
+
+2018/07/02 payee6
+    Food:Snacks                                83.23 EUR ; 2.45qb
+    Assets
+
+2018/07/03 payee7
+    Food:Fruits                                65.41 EUR ; 2.07l
+    Assets
+
+2018/07/04 payee2
+    Food:Vegetables                            68.11 EUR ; 3.27qb
+    Assets
+
+2018/07/05 payee10
+    Food:Dairy                                 98.93 EUR ; 2.68l
+    Assets
+
+2018/07/06 payee2
+    Food:Fruits                                87.29 EUR ; 3.95l
+    Assets
+
+2018/07/07 payee7
+    Food:Snacks                                28.63 EUR ; 4.06x
+    Assets
+
+2018/07/08 payee9
+    Food:Dairy                                 13.59 EUR ; 2.13l
+    Assets
+
+2018/07/09 payee2
+    Food:Snacks                                34.06 EUR ; 1.78x
+    Assets
+
+2018/07/10 payee6
+    Food:Snacks                                29.57 EUR ; 2.82l
+    Assets
+
+2018/07/11 payee5
+    Food:Snacks                                38.51 EUR ; 1.51l
+    Assets
+
+2018/07/12 payee10
+    Food:Vegetables                            63.55 EUR ; 2.14kg
+    Assets
+
+2018/07/13 payee5
+    Food:Fruits                                84.44 EUR ; 1.98kg
+    Assets
+
+2018/07/14 payee2
+    Food:Dairy                                 49.48 EUR ; 3.23x
+    Assets
+
+2018/07/15 payee8
+    Food:Dairy                                  9.71 EUR ; 1.1x
+    Assets
+
+2018/07/16 payee7
+    Food:Fruits                                54.41 EUR ; 2.61kg
+    Assets
+
+2018/07/17 payee5
+    Food:Dairy                                 81.07 EUR ; 4.74kg
+    Assets
+
+2018/07/18 payee5
+    Food:Dairy                                 57.38 EUR ; 1.02l
+    Assets
+
+2018/07/19 payee10
+    Food:Vegetables                            49.77 EUR ; 4.44x
+    Assets
+
+2018/07/20 payee2
+    Food:Dairy                                 44.18 EUR ; 2.6qb
+    Assets
+
+2018/07/21 payee4
+    Food:Dairy                                 86.03 EUR ; 4.66qb
+    Assets
+
+2018/07/22 payee2
+    Food:Fruits                                14.18 EUR ; 3.12qb
+    Assets
+
+2018/07/23 payee3
+    Food:Fruits                                62.64 EUR ; 2.33kg
+    Assets
+
+2018/07/24 payee5
+    Food:Fruits                                23.46 EUR ; 4.91kg
+    Assets
+
+2018/07/25 payee10
+    Food:Fruits                                21.04 EUR ; 1.46kg
+    Assets
+
+2018/07/26 payee6
+    Food:Vegetables                             9.31 EUR ; 4.81l
+    Assets
+
+2018/07/27 payee2
+    Food:Fruits                                99.69 EUR ; 1.55kg
+    Assets
+
+2018/07/28 payee4
+    Food:Snacks                                66.06 EUR ; 4.46l
+    Assets
+
+2018/07/29 payee1
+    Food:Snacks                                45.05 EUR ; 4.06qb
+    Assets
+
+2018/07/30 payee8
+    Food:Vegetables                            90.76 EUR ; 2.64kg
+    Assets
+
+2018/07/31 payee5
+    Food:Vegetables                            33.48 EUR ; 3.66qb
+    Assets
+
+2018/08/01 payee3
+    Food:Vegetables                            29.42 EUR ; 3.56x
+    Assets
+
+2018/08/02 payee2
+    Food:Fruits                                89.89 EUR ; 3.05l
+    Assets
+
+2018/08/03 payee3
+    Food:Snacks                                58.75 EUR ; 1.44qb
+    Assets
+
+2018/08/04 payee10
+    Food:Fruits                                78.75 EUR ; 3.79l
+    Assets
+
+2018/08/05 payee6
+    Food:Dairy                                 57.34 EUR ; 4.27qb
+    Assets
+
+2018/08/06 payee4
+    Food:Dairy                                 99.12 EUR ; 1.02qb
+    Assets
+
+2018/08/07 payee9
+    Food:Vegetables                             65.1 EUR ; 1.25kg
+    Assets
+
+2018/08/08 payee3
+    Food:Dairy                                 52.59 EUR ; 1.21kg
+    Assets
+
+2018/08/09 payee3
+    Food:Dairy                                  42.5 EUR ; 2.94l
+    Assets
+
+2018/08/10 payee4
+    Food:Dairy                                 60.46 EUR ; 1.81qb
+    Assets
+
+2018/08/11 payee9
+    Food:Snacks                                58.09 EUR ; 1.03kg
+    Assets
+
+2018/08/12 payee2
+    Food:Dairy                                 14.54 EUR ; 3.25x
+    Assets
+
+2018/08/13 payee2
+    Food:Vegetables                            90.08 EUR ; 4.24x
+    Assets
+
+2018/08/14 payee2
+    Food:Fruits                                54.58 EUR ; 4.13x
+    Assets
+
+2018/08/15 payee10
+    Food:Fruits                                29.61 EUR ; 4.28x
+    Assets
+
+2018/08/16 payee1
+    Food:Dairy                                 47.36 EUR ; 3.82l
+    Assets
+
+2018/08/17 payee1
+    Food:Vegetables                             59.3 EUR ; 1.35x
+    Assets
+
+2018/08/18 payee8
+    Food:Vegetables                            30.93 EUR ; 3.27l
+    Assets
+
+2018/08/19 payee6
+    Food:Dairy                                 61.21 EUR ; 3.53x
+    Assets
+
+2018/08/20 payee3
+    Food:Dairy                                 13.73 EUR ; 2.51x
+    Assets
+
+2018/08/21 payee1
+    Food:Vegetables                            27.69 EUR ; 3.33qb
+    Assets
+
+2018/08/22 payee8
+    Food:Dairy                                 21.86 EUR ; 2.5x
+    Assets
+
+2018/08/23 payee10
+    Food:Vegetables                            89.64 EUR ; 4.63x
+    Assets
+
+2018/08/24 payee3
+    Food:Fruits                                73.09 EUR ; 4.99l
+    Assets
+
+2018/08/25 payee7
+    Food:Dairy                                 68.49 EUR ; 1.15x
+    Assets
+
+2018/08/26 payee9
+    Food:Snacks                                50.29 EUR ; 3.02l
+    Assets
+
+2018/08/27 payee7
+    Food:Dairy                                  7.85 EUR ; 1.83l
+    Assets
+
+2018/08/28 payee4
+    Food:Fruits                                34.56 EUR ; 2.53qb
+    Assets
+
+2018/08/29 payee10
+    Food:Vegetables                            86.77 EUR ; 4.38kg
+    Assets
+
+2018/08/30 payee9
+    Food:Fruits                                44.59 EUR ; 2.64x
+    Assets
+
+2018/08/31 payee8
+    Food:Fruits                                34.34 EUR ; 4.74qb
+    Assets
+
+2018/09/01 payee8
+    Food:Snacks                                87.98 EUR ; 2.55qb
+    Assets
+
+2018/09/02 payee5
+    Food:Fruits                                96.95 EUR ; 3.94l
+    Assets
+
+2018/09/03 payee1
+    Food:Snacks                                25.04 EUR ; 1.22l
+    Assets
+
+2018/09/04 payee8
+    Food:Dairy                                 95.34 EUR ; 1.43kg
+    Assets
+
+2018/09/05 payee1
+    Food:Vegetables                            30.02 EUR ; 2.4x
+    Assets
+
+2018/09/06 payee6
+    Food:Dairy                                 18.79 EUR ; 4.17x
+    Assets
+
+2018/09/07 payee7
+    Food:Vegetables                            95.06 EUR ; 4.94l
+    Assets
+
+2018/09/08 payee8
+    Food:Fruits                                51.67 EUR ; 4.16l
+    Assets
+
+2018/09/09 payee8
+    Food:Snacks                                45.65 EUR ; 4.39x
+    Assets
+
+2018/09/10 payee7
+    Food:Dairy                                  76.5 EUR ; 2.84x
+    Assets
+
+2018/09/11 payee6
+    Food:Snacks                                20.95 EUR ; 3.33x
+    Assets
+
+2018/09/12 payee6
+    Food:Vegetables                            17.23 EUR ; 1.59qb
+    Assets
+
+2018/09/13 payee10
+    Food:Vegetables                            14.48 EUR ; 4.54x
+    Assets
+
+2018/09/14 payee5
+    Food:Fruits                                 64.4 EUR ; 4.51kg
+    Assets
+
+2018/09/15 payee10
+    Food:Snacks                                59.62 EUR ; 1.18kg
+    Assets
+
+2018/09/16 payee8
+    Food:Dairy                                  5.79 EUR ; 3.99l
+    Assets
+
+2018/09/17 payee4
+    Food:Snacks                                16.12 EUR ; 3.42x
+    Assets
+
+2018/09/18 payee9
+    Food:Vegetables                            59.61 EUR ; 3.8x
+    Assets
+
+2018/09/19 payee8
+    Food:Dairy                                  9.75 EUR ; 4.32kg
+    Assets
+
+2018/09/20 payee6
+    Food:Fruits                                76.02 EUR ; 2.91x
+    Assets
+
+2018/09/21 payee1
+    Food:Vegetables                            54.41 EUR ; 3.63x
+    Assets
+
+2018/09/22 payee10
+    Food:Fruits                                33.18 EUR ; 4.43kg
+    Assets
+
+2018/09/23 payee5
+    Food:Snacks                                63.88 EUR ; 1.41l
+    Assets
+
+2018/09/24 payee6
+    Food:Snacks                                 6.19 EUR ; 2.31l
+    Assets
+
+2018/09/25 payee2
+    Food:Vegetables                             54.6 EUR ; 4.65kg
+    Assets
+
+2018/09/26 payee1
+    Food:Dairy                                 44.21 EUR ; 1.61kg
+    Assets
+
+2018/09/27 payee2
+    Food:Snacks                                16.05 EUR ; 3.78x
+    Assets
+
+2018/09/28 payee4
+    Food:Fruits                                51.65 EUR ; 2.61qb
+    Assets
+
+2018/09/29 payee3
+    Food:Dairy                                    75 EUR ; 2.96kg
+    Assets
+
+2018/09/30 payee10
+    Food:Vegetables                            10.84 EUR ; 4.96qb
+    Assets
+
+2018/10/01 payee6
+    Food:Snacks                                36.88 EUR ; 1.69x
+    Assets
+
+2018/10/02 payee9
+    Food:Vegetables                            28.46 EUR ; 4.14qb
+    Assets
+
+2018/10/03 payee8
+    Food:Snacks                                84.65 EUR ; 3.54l
+    Assets
+
+2018/10/04 payee5
+    Food:Dairy                                 76.68 EUR ; 1.16kg
+    Assets
+
+2018/10/05 payee7
+    Food:Snacks                                78.88 EUR ; 3.64x
+    Assets
+
+2018/10/06 payee4
+    Food:Vegetables                            81.19 EUR ; 4.37l
+    Assets
+
+2018/10/07 payee10
+    Food:Snacks                                49.12 EUR ; 3.18l
+    Assets
+
+2018/10/08 payee10
+    Food:Snacks                                23.15 EUR ; 4.86qb
+    Assets
+
+2018/10/09 payee2
+    Food:Vegetables                            17.81 EUR ; 3.93l
+    Assets
+
+2018/10/10 payee4
+    Food:Vegetables                            37.56 EUR ; 1.53kg
+    Assets
+
+2018/10/11 payee9
+    Food:Dairy                                 47.16 EUR ; 4.97x
+    Assets
+
+2018/10/12 payee9
+    Food:Fruits                                78.06 EUR ; 2.62kg
+    Assets
+
+2018/10/13 payee1
+    Food:Dairy                                 29.32 EUR ; 1.67l
+    Assets
+
+2018/10/14 payee8
+    Food:Fruits                                45.92 EUR ; 4.35x
+    Assets
+
+2018/10/15 payee1
+    Food:Dairy                                 94.83 EUR ; 1.27x
+    Assets
+
+2018/10/16 payee6
+    Food:Dairy                                 60.86 EUR ; 2.38x
+    Assets
+
+2018/10/17 payee5
+    Food:Dairy                                 60.93 EUR ; 3.75l
+    Assets
+
+2018/10/18 payee5
+    Food:Snacks                                67.94 EUR ; 1.8qb
+    Assets
+
+2018/10/19 payee3
+    Food:Vegetables                            47.95 EUR ; 3.65qb
+    Assets
+
+2018/10/20 payee3
+    Food:Snacks                                50.89 EUR ; 2.96x
+    Assets
+
+2018/10/21 payee8
+    Food:Fruits                                69.73 EUR ; 4.88qb
+    Assets
+
+2018/10/22 payee10
+    Food:Snacks                                98.45 EUR ; 3.86l
+    Assets
+
+2018/10/23 payee6
+    Food:Fruits                                52.91 EUR ; 1.69l
+    Assets
+
+2018/10/24 payee2
+    Food:Dairy                                 89.02 EUR ; 2.02qb
+    Assets
+
+2018/10/25 payee1
+    Food:Dairy                                 10.14 EUR ; 3.71qb
+    Assets
+
+2018/10/26 payee8
+    Food:Fruits                                67.12 EUR ; 3.66x
+    Assets
+
+2018/10/27 payee2
+    Food:Fruits                                43.63 EUR ; 4.18qb
+    Assets
+
+2018/10/28 payee4
+    Food:Vegetables                            57.84 EUR ; 2.86kg
+    Assets
+
+2018/10/29 payee10
+    Food:Snacks                                 6.38 EUR ; 2.56qb
+    Assets
+
+2018/10/30 payee2
+    Food:Dairy                                 76.76 EUR ; 3.21qb
+    Assets
+

@@ -2,7 +2,7 @@
 
 Make plots for your ledger entries and save them to a pdf file.
 
-![plot of some expenses account](examples/expenses-0.png?raw=true)
+![example of expenses plot](examples/figs/expenses.png?raw=true)
 
 # Installation
 
@@ -132,12 +132,47 @@ One can also calculate and plot in one figure several function
 statistics. These functions can be specified by separating them with
 "::" symbol. For example,
 ```
-ledger-plots -f "cumsum :: function(x) {i <- 1:length(x); predict(lm(x~i))}" \
+ledger-plots -f "cumsum :: function(x) {i <- 1:length(x); predict(lm(cumsum(x)~i))}" \
              -q "^assets: -X EUR"
 ```
 plots cumulative sums plus a linear regression of the accumulated
 assets. When plotting several query statistic, you might want to use
 `--plot-legend` argument, to create a legend for each plot.
+
+### Examples
+
+For example consider the following call.
+```
+cd examples
+../ledger-plots -q "\^assets" \
+                -f "cumsum :: function(x) {i<-1:length(x); predict(lm(cumsum(x)~i))}" \
+                --ledger-options='-f expenses.ledger' \
+                --output-pdf-ncol=1 \
+                --output-pdf-nrow=1 \
+                -n 1 \
+                -o figs/assets.pdf
+```
+
+The red line in the figure shows total amount of assets in EUR for
+different dates. The blue line shows linear regression fitted to the data.
+
+![example of assets plot](examples/figs/assets-0.png?raw=true)
+
+The following example queries expenses.
+```
+cd examples
+../ledger-plots -q "\^expenses" \
+                -f "monthly :: function(x) yearly(x)/12 :: function(x) { res <- 30*cumsum(x)/(1:length(x)); res[1:100]<-NA; res }" \
+                --ledger-options='-f expenses.ledger -H -X EUR' \
+                -n 4 \
+                -o figs/expenses.pdf
+```
+
+The red line shows monthly average for each data, the green line shows
+yearly average adjusted to a monthly data and the blue line shows
+accumulated average adjusted to a monthly data.
+
+![example of expenses plot](examples/figs/expenses.png?raw=true)
 
 ## Plots ordering and description
 
@@ -171,6 +206,32 @@ ledger-plots -t "revalued" -f "cumsum" -q "-X EUR ;; -X GBP ;; -X USD ;; -X XBT"
 
 Note that this feature relies on your ledger price database.
 
+### Example
+
+As an example consider the following call.
+```
+cd examples
+../ledger-plots --queries="-X EUR ;; -X USD" \
+                -f "cumsum :: function(x) {i<-1:length(x); predict(lm(cumsum(x)~i))}" \
+                --ledger-options='-f expenses.ledger \^assets' \
+                --type "revalued" \
+                --output-pdf-ncol=2 \
+                --output-pdf-nrow=1 \
+                --output-pdf-height="3.5" \
+                -o figs/assets-revalued.pdf
+
+```
+
+In the `examples/expenses.ledger` two different currencies occur: EUR
+and USD. However, one may use arbitrary currencies, provided that the
+exchange rates are present in the ledger prices file.
+
+The figure shows gains/losses for a hypothetical situation, when one
+had stored all assets in a one currency.
+
+![example of revalued plot](examples/figs/assets-revalued.png?raw=true)
+
+
 ## Plot of tags
 
 Using option `-C "tags"` (or equivalently `--categorise-by="tags"`)
@@ -193,21 +254,25 @@ Using option `-C "alluvial"` one may make alluvial plots.
 
 For example,
 ```
-ledger-plots -C "alluvial" -f "function(x) yearly(x)/12" -q "\^expenses -H -X EUR"
+cd examples
+../ledger-plots -q "\^expenses" \
+                -C "alluvial" \
+                -f "function(x) yearly(x)/12" \
+                --output-pdf-ncol=1 \
+                --output-pdf-nrow=1 \
+                --ledger-options='-f expenses.ledger -H -X EUR' \
+                -n 1 \
+                -o figs/expenses-alluvial.pdf
 ```
-generate an alluvial plot for different expenses categories.
+generates an alluvial plot for different expenses categories.
 
-![example of alluvial plot](examples/alluvial-expenses-0.png?raw=true)
+![example of alluvial plot](examples/figs/expenses-alluvial.png?raw=true)
 
 # Food prices and volumes
 
 ledger-plots is also able to parse a special syntax of transaction
-notes. For example, this can be used to keep a track on the consumed
-amounts of food and food prices.
-
-![food price plot](examples/food-prices.png?raw=true)
-
-![food volume plot](examples/food-volumes.png?raw=true)
+comments. For example, this can be used to keep a track on the
+consumed amounts of food and food prices.
 
 In order to keep track on the food prices/volumes one has to put an
 extra entry to the transaction notes. For example, like in the following transactions:
@@ -259,3 +324,47 @@ ledger-plots -q "-H -X EUR" -f "monthly" \
 Note that statistic value `monthly` doesn't make much sense for price
 plots, therefore, use `monthly.price` that calculates a moving average
 of 30 days price.
+
+## Examples
+
+Here is an example of the consumed food volumes.
+```
+cd examples
+../ledger-plots -q "\^food" \
+                -f "monthly :: function(x) quarterly(x)/3 :: function(x) yearly(x)/12 " \
+                --type "volume" \
+                --ledger-options="-f food.ledger -H -X EUR" \
+                -n 4 \
+                -o figs/food-volume.pdf
+```
+
+![example of food volume plot](examples/figs/food-volume-1.png?raw=true)
+
+The price can be generated with a similar call.
+```
+cd examples
+../ledger-plots -q "\^food" \
+                -f "monthly :: function(x) quarterly(x)/3 :: function(x) yearly(x)/12 " \
+                --type "price" \
+                --ledger-options="-f food.ledger -H -X EUR" \
+                -n 4 \
+                -o figs/food-price.pdf
+```
+
+![example of food volume plot](examples/figs/food-price-1.png?raw=true)
+
+One can also do alluvial plots for volume, price or currency
+data. Here we plot an example an alluvial plot of the consumed volumes.
+```
+cd examples
+../ledger-plots -q "\^food" \
+                -f "function(x) yearly(x)/12" \
+                --type "volume" \
+                -C "alluvial" \
+                --ledger-options="-f food.ledger -H -X EUR" \
+                -n 4 \
+                -o figs/food-volume-alluvial.pdf
+
+```
+
+![example of food volume plot](examples/figs/food-volume-alluvial.png?raw=true)
