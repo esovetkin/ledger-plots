@@ -248,6 +248,22 @@ ledger-plots -C "tags" -f "monthly" -q "^expenses: -H -X EUR"
 makes a plot for expenses and different combinations of tags being used
 for those transactions.
 
+### Example
+
+The following example
+```
+cd examples
+../ledger-plots -q "\^expenses" \
+                -f "monthly :: function(x) yearly(x)/12 :: function(x) { res <- 30*cumsum(x)/(1:length(x)); res[1:100]<-NA; res }" \
+                --ledger-options='-f expenses.ledger -H -X EUR' \
+                -C "tags" \
+                -n 4 \
+                -o figs/expenses-tags.pdf
+```
+plot expenses with various combinations of tags.
+
+![example of tags plot](examples/figs/expenses-tags-1.png?raw=true)
+
 ## Alluvial plots
 
 Using option `-C "alluvial"` one may make alluvial plots.
