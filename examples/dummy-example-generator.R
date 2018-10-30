@@ -64,6 +64,10 @@ expenses$tags[idx] <- paste0(expenses$tags[idx],":tag3")
 idx <- sample(1:nrow(expenses),nrow(expenses)/4) # where tags will be put
 expenses$tags[idx] <- paste0(expenses$tags[idx],":tag4")
 
+# add colon in the end of each tag
+idx <- nchar(expenses$tags) != 0
+expenses$tags[idx] <- paste0(expenses$tags[idx],":")
+
 # save expenses entries
 save_dataframe(data=expenses, file = "expenses.ledger", volume = FALSE, tags=TRUE)
 
