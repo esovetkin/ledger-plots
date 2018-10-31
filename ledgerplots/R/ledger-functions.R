@@ -804,7 +804,7 @@ compound.poisson <- function(data, period = 365) {
 #' @param conversion volume unit conversion rules
 #'
 #' @export
-generate.price.table <- function(query, ofile="food-prices.tex",
+generate.price.table <- function(FUN, query, ofile="food-prices.tex",
                                  ledger.options, ledger.path=NULL,
                                  conversion = c("1kg = 1000g")) {
   # read transactions
@@ -819,19 +819,19 @@ generate.price.table <- function(query, ofile="food-prices.tex",
   data$Description <- tolower(data$Description)
 
   # evaluate some statistics on prices
-  prices <- aggregate(data$Price,by=list(data$Category,data$Description,data$Price.curr),
-                      function(x) c("min"=min(x),"mean"=mean(x),"last"=tail(x,1)))
+  prices <- aggregate(data$Price,
+                      by=list(data$Category,data$Description,data$Price.curr),
+                      function(x) sapply(FUN, function(f) tail(eval(parse(text=f))(x),n=1)))
 
-  # rename column names
-  prices$min <- prices$x[,1]
-  prices$mean <- prices$x[,2]
-  prices$last <- prices$x[,3]
+  # rename columns
+  for (i in 1:length(FUN))
+    prices[,FUN[i]] <- prices$x[,i]
   prices$x <- NULL
-  colnames(prices) <- c("category","shop","currency","min","mean","last")
+  colnames(prices) <- c("category","payee","currency",FUN)
 
   # order by category and currency
   data <- prices[grep("*",prices[,1],ignore.case = TRUE),]
-  data <- data[order(data$category,data$min,data$currency),]
+  data <- data[do.call(order,split.default(data,colnames(data))[c("category","currency",FUN)]),]
 
   # positions of the horizontal lines
   hline.after <- c(-1,0,which(diff(as.numeric(data$category)) > 0),nrow(data))
@@ -843,7 +843,7 @@ generate.price.table <- function(query, ofile="food-prices.tex",
               " \\usepackage[utf8]{inputenc} \\usepackage{longtable}",
               " \\usepackage[left=1cm, right=1cm, bottom=1cm,top=1cm]{geometry}",
               "\\begin{document}"),file=ofile)
-  print(xtable(data,digits=5),type="latex",file=ofile,
+  print(xtable(data,digits=2),type="latex",file=ofile,
         append=TRUE,tabular.environment = 'longtable',
         include.rownames=FALSE,floating=FALSE,
         hline.after = hline.after)

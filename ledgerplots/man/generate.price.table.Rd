@@ -4,10 +4,12 @@
 \alias{generate.price.table}
 \title{Generate a latex table with food prices}
 \usage{
-generate.price.table(query, ofile = "food-prices.tex", ledger.options,
-  ledger.path = NULL, conversion = c("1kg = 1000g"))
+generate.price.table(FUN, query, ofile = "food-prices.tex",
+  ledger.options, ledger.path = NULL, conversion = c("1kg = 1000g"))
 }
 \arguments{
+\item{FUN}{list of functions to call on prices}
+
 \item{query}{ledger query}
 
 \item{ofile}{output filename}

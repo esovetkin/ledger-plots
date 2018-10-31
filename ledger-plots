@@ -47,6 +47,9 @@ install.missing.packages <- function() {
 
   # install stringr for some regex functions
   if (!require("stringr", quietly = TRUE)) install.packages("stringr", repo = mirror)
+
+  # install tools package (needed for latex compile)
+  if (!require("tools", quietly = TRUE)) install.packages("tools", repo = mirror)
 }
 
 # to install missing dependencies
@@ -93,6 +96,13 @@ option_list <- list(
                             "account, tags, alluvial. ",
                             "Default: %default."),
               metavar = "character"),
+  make_option(c("--generate-price-table"), action="store_true",
+              default=FALSE,
+              help = paste0("Specify this argument to generate price LaTeX table. ",
+                            "Script also tries to run pdflatex. ",
+                            "Functions in -f argument must return a single value, ",
+                            "otherwise only the last value is used. ",
+                            "Currently, multiple queries are not supported and ignored.")),
   make_option(c("-c","--unit-conversion"), type="character",
               default = "1kg = 1000g",
               help = paste0("Unit conversion rules given in the format ",
@@ -198,6 +208,27 @@ if (! is.null(opt$queries)) {
   # make type the same length
   if (length(t) < length(q)) {
     t <- t[(1:length(q) - 1) %% length(t) + 1]
+  }
+
+  # in case only one needs to generate table
+  if (opt$"generate-price-table") {
+
+    # do a single query ignore others
+    generate.price.table(FUN = unlist(strsplit(f[1],split="::")),
+                         query = q[1],
+                         ofile = opt$output,
+                         ledger.options = opt$"ledger-options",
+                         ledger.path = opt$"ledger-bin-path",
+                         conversion = conversion)
+
+    # generate pdf
+    dir <- dirname(opt$output)
+    file  <- basename(opt$output)
+    old.dir <- setwd(dir)
+    tools::texi2pdf(file=file)
+    setwd(old.dir)
+
+    quit(save="no")
   }
 
   require("ggplot2", quietly = TRUE)
