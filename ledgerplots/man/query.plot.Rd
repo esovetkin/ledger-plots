@@ -6,8 +6,8 @@
 \usage{
 query.plot(query, type = c("amount", "price", "volume", "revalued"),
   categorise_by = c("account", "tags", "alluvial"), order.depth = TRUE,
-  order.function = function(x) sum(abs(x)), max.num.plots, ledger.options,
-  ledger.path = NULL, conversion = c("1kg = 1000g"),
+  order.function = function(x) sum(abs(x)), max.num.plots,
+  ledger.options, ledger.path = NULL, conversion = c("1kg = 1000g"),
   account_depth_for_each_tag = 1, max_tags_tuples = 3,
   min_tags_entries = 5, ...)
 }

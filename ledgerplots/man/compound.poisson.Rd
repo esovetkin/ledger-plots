@@ -12,3 +12,7 @@ compound.poisson(data, period = 365)
 
 \item{period}{period in days of which the average is calculated}
 }
+\description{
+estimate average/variance of transaction expense per given
+  period using Poisson compound process
+}

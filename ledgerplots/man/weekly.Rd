@@ -9,3 +9,6 @@ weekly(x)
 \arguments{
 \item{x}{a numeric vector}
 }
+\description{
+Calculate 7 days sum of the fiven vector
+}

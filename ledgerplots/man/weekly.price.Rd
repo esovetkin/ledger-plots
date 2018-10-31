@@ -9,3 +9,6 @@ weekly.price(x)
 \arguments{
 \item{x}{a numeric vector}
 }
+\description{
+Calculate 7 days average price
+}

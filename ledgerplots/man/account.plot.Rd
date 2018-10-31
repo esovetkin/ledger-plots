@@ -5,7 +5,8 @@
 \title{Plot ledger data in a current device}
 \usage{
 account.plot(X, title, type, categorise_accounts = NULL,
-  date.interval = c(Sys.Date() - 365, Sys.Date()), FUN = c("cumsum"), ...)
+  date.interval = c(Sys.Date() - 365, Sys.Date()), FUN = c("cumsum"),
+  ...)
 }
 \arguments{
 \item{X}{data. First column date, Second column amount}

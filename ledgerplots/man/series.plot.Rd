@@ -19,3 +19,6 @@ is drawn}
 \value{
 ggplot object
 }
+\description{
+Low level function that plots the series
+}

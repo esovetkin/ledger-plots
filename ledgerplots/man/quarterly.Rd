@@ -12,3 +12,6 @@ quarterly(x)
 \value{
 a numeric vector of the same size as vector x
 }
+\description{
+Calculate quartely averages
+}

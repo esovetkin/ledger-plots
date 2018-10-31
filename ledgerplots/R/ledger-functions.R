@@ -793,6 +793,8 @@ compound.poisson <- function(data, period = 365) {
 
 #' Generate a latex table with food prices
 #'
+#' @param FUN list of functions to call on prices
+#'
 #' @param ofile output filename
 #'
 #' @param query ledger query
