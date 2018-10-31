@@ -78,6 +78,13 @@ emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledg
                 -n 4 \
                 -o figs/food-volume-alluvial.pdf
 
+../ledger-plots --generate-price-table \
+                -q "food: -H -X EUR" \
+                -f "min :: mean :: tail" \
+                --ledger-options='-f food.ledger' \
+                --conversion="1kg = 1l ;; 1kg = 1x ;; 1kg = 1qb" \
+                -o "figs/price-table.tex"
+
 # convert images to png
 files=()
 files+=("figs/assets.pdf")
@@ -94,6 +101,3 @@ for file in ${files[@]}
 do
     convert -density 200 "${file}" "${file%.*}.png"
 done
-
-# generate price table
-./generate-price-table.R 
