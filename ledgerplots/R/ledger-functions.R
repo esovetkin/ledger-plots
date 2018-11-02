@@ -263,13 +263,36 @@ complete_dataframe_missing_dates <- function(X, dates.series,
 
   colnames(data) <- c("Date","Amount")
 
-  # calculate functions on the data
-  data[,as.character(FUN)] <- sapply(FUN,
-                                     function(f)
-                                       do.call(eval(parse(text=f)),
-                                               args=list(data[,"Amount"])))
-
+  # evaluate functions on the data
+  x <- lapply(FUN,
+              function(f)
+                do.call(eval(parse(text=f)),
+                        args=list(data[,"Amount"])))
+  # remove original column
   data[,"Amount"] <- NULL
+
+  # evaluate length of the computed statistic
+  m <- max(sapply(x,length))
+
+  # append or prepend NA
+  x <- lapply(x,
+              function(x) {
+                # push data to the most latest available if it is too short
+                if (length(x) <= nrow(data))
+                  return(c(rep(NA,nrow(data)-length(x)),x,rep(NA,m-nrow(data))))
+
+                return(c(x,rep(NA,m-length(x))))
+              })
+  x <- simplify2array(x)
+
+  # add extra dates
+  m_date_old <- max(data[,"Date"])
+  data <- rbind(data,
+                data.frame("Date"=seq(m_date_old+1,by=1,length.out = m-nrow(data))))
+
+
+  # append computed values and remove original column
+  data[,as.character(FUN)] <- x
 
   return(data)
 }
