@@ -317,9 +317,11 @@ generates an alluvial plot for different expenses categories.
 
 ## Example of forecasts
 
-It is possible to compute and plot forecasts as well. For that you
-need to specify a function that returns a larger vector than the input
-vector.
+It is possible to compute and plot forecasts as well (otherwise, why
+on earth do we need to use R for ledger plots, when there are
+[GNUplot scripts](https://www.sundialdreams.com/report-scripts-for-ledger-cli-with-gnuplot/)
+available). For that you need to specify a function that
+returns a larger vector than the input vector.
 
 The following example plots cumulative value of the assets with
 forecast for 2 years using linear regression and SSA method. To use
