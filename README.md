@@ -322,7 +322,7 @@ need to specify a function that returns a larger vector than the input
 vector.
 
 The following example plots cumulative value of the assets with
-forecast for 60 days using linear regression and SSA method. To use
+forecast for 2 years using linear regression and SSA method. To use
 the latter you need to install
 [this R-package](https://cran.r-project.org/package=Rssa).
 ```
@@ -331,24 +331,31 @@ cd examples
     -f "cumsum :::
         function(x) {
             i <- 1:length(x);
-            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))
+            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+2*365)))
         } :::
         function(x) {
             require(Rssa)
             tryCatch({
-                p <- predict(ssa(cumsum(x)),groups=list(1:5),method=\"recurrent\",len=60);
+                p <- predict(ssa(cumsum(x)),groups=list(1:20),method=\"recurrent\",len=2*365);
+                c(rep(NA,length(x)),p)
+            }, error = function(e) rep(NA,length(x)))
+        } :::
+        function(x) {
+            require(Rssa)
+            tryCatch({
+                p <- predict(ssa(cumsum(x)),groups=list(1:10),method=\"recurrent\",len=2*365);
                 c(rep(NA,length(x)),p)
             }, error = function(e) rep(NA,length(x)))
         }" \
     --queries="^assets " \
-    --ledger-options='-f expenses.ledger ' \
+    --ledger-options='-f expenses-realistic.ledger -b 2013-01-01' \
     -n 1 \
     --output-pdf-ncol=1 \
     --output-pdf-nrow=1 \
     -o "figs/assets-forecast.pdf"
 ```
 
-![example of forecast plot](examples/figs/assets-forecast-1.png?raw=true)
+![example of forecast plot](examples/figs/assets-forecast.png?raw=true)
 
 # Food prices and volumes
 

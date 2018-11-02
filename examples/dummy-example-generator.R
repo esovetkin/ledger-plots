@@ -84,3 +84,59 @@ food <- data.frame("date" = seq(Sys.Date()-N+1,Sys.Date(),by=1),
 
 # save food entries
 save_dataframe(data=food, file = "food.ledger", volume = TRUE, tags = FALSE)
+
+# more realistic expenses (for plotting nice forecasts)
+set.seed(3)
+
+# dates for salary
+N <- 365*10
+d <- seq(Sys.Date()-N+1,Sys.Date(),by=30) # payday every 30 days
+d <- d + sample(c(-2,-1,0,1,2),length(d),TRUE) # plus random changes
+
+# we are getting paid about 1000 that increases 1% per year
+# (also, exp modulated periodic)
+expenses2 <- data.frame("date" = d,
+                        "payee" = "payee",
+                        "from" = "Income",
+                        "to" = "Assets",
+                        "value" = round((1+0.03/12)^(1:length(d))*runif(length(d),min=900,max=1100),digits=2),
+                        "currency" = "X")
+
+# we have housing expenses (we are lucky and it is constant)
+d <- seq(Sys.Date()-N+1,Sys.Date(),by=30)
+d <- d + sample(c(-1,0,1),length(d),TRUE)
+expenses2 <- rbind(expenses2,
+                   data.frame("date"=d,
+                              "payee" = "payee",
+                              "from" = "Assets",
+                              "to" = "Expenses:Housing",
+                              "value" = 500,
+                              "currency" = "X"))
+
+# we have some taxes that we pay every 90 days or so
+d <- seq(Sys.Date()-N+1,Sys.Date(),by=90)
+d <- d + sample(c(-1,0,1),length(d),TRUE)
+expenses2 <- rbind(expenses2,
+                   data.frame("date"=d,
+                              "payee" = "payee",
+                              "from" = "Assets",
+                              "to" = "Expenses:Taxes",
+                              "value" = round(runif(length(d),min=100,max=150),digits=2),
+                              "currency" = "X"))
+
+# and, of course, we need to eat something (say about every three days)
+d <- sample(seq(Sys.Date()-N+1,Sys.Date(),by=1),N/3)
+expenses2 <- rbind(expenses2,
+                   data.frame("date"=d,
+                              "payee" = "payee",
+                              "from" = "Assets",
+                              "to" = "Expenses:Food",
+                              "value" = round(runif(length(d),min=10,max=50),digits=2),
+                              "currency" = "X"))
+
+
+# order entries by date
+expenses2 <- expenses2[order(expenses2$date),]
+
+# save expenses
+save_dataframe(data=expenses2, file = "expenses-realistic.ledger", volume = FALSE, tags = FALSE)

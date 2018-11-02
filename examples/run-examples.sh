@@ -7,14 +7,10 @@ mkdir -p figs
 ./dummy-example-generator.R
 
 # indent ledger entries
-emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "expenses.ledger") \
-                                                 (ledger-mode) (mark-whole-buffer) \
-                                                 (indent-region (point-min) \
-                                                 (point-max) nil) (save-buffer))'
-emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") \
-                                                 (ledger-mode) (mark-whole-buffer) \
-                                                 (indent-region (point-min) \
-                                                 (point-max) nil) (save-buffer))'
+emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "expenses.ledger") (ledger-mode) (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))'
+emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledger-mode) (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))'
+emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "expenses-realistic.ledger") (ledger-mode) (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))'
+
 
 # generate plots using ledger-plots
 ../ledger-plots -q "\^assets" \
@@ -114,20 +110,27 @@ emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") \
                 -o "figs/price-table.tex"
 
 ../ledger-plots \
-    -f "cumsum ::: \
-        function(x) {\
-            i <- 1:length(x); \
-            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))\
-        } ::: \
-        function(x) {\
+    -f "cumsum :::
+        function(x) {
+            i <- 1:length(x);
+            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+2*365)))
+        } :::
+        function(x) {
             require(Rssa)
             tryCatch({
-                p <- predict(ssa(cumsum(x)),groups=list(1:5),method=\"recurrent\",len=60); \
-                c(rep(NA,length(x)),p)\
-            }, error = function(e) rep(NA,length(x)))\
+                p <- predict(ssa(cumsum(x)),groups=list(1:20),method=\"recurrent\",len=2*365);
+                c(rep(NA,length(x)),p)
+            }, error = function(e) rep(NA,length(x)))
+        } :::
+        function(x) {
+            require(Rssa)
+            tryCatch({
+                p <- predict(ssa(cumsum(x)),groups=list(1:10),method=\"recurrent\",len=2*365);
+                c(rep(NA,length(x)),p)
+            }, error = function(e) rep(NA,length(x)))
         }" \
     --queries="^assets " \
-    --ledger-options='-f expenses.ledger ' \
+    --ledger-options='-f expenses-realistic.ledger -b 2013-01-01' \
     -n 1 \
     --output-pdf-ncol=1 \
     --output-pdf-nrow=1 \
