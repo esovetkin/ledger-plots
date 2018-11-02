@@ -69,14 +69,14 @@ option_list <- list(
               help = "output pdf file name", metavar="character"),
   make_option(c("-q","--queries"), type="character", default=NULL,
               help = paste0("Query in a ledger query syntax. Multiple queries are ",
-                            "separated by ';;'. All plots for each query are ",
+                            "separated by ';;;'. All plots for each query are ",
                             "generated separately one after another."),
               metavar="character"),
   make_option(c("-f","--functions"), type="character",
               default="cumsum",
               help = paste0("Function (statistic) applied to each of the transaction vectors. ",
-                            "Multiple functions that are separated by ';;' correspondingly to the queries. ",
-                            "Multiple functions that are separated by '::' correspond to various function ",
+                            "Multiple functions that are separated by ';;;' correspondingly to the queries. ",
+                            "Multiple functions that are separated by ':::' correspond to various function ",
                             "to be calculated on each transaction vector and be ploted in one figure. ",
                             "This argument can be any R-function (e.g. cumsum, monthly). ",
                             "Default: %default"),
@@ -87,7 +87,7 @@ option_list <- list(
                             "price, volume, revalued. ",
                             "Revalued type plots only <Revalued> values. ",
                             "Price and volumes are parsed from comments to transactions. ",
-                            "Multiple functions are separated by ';;' correspondingly to the queries. ",
+                            "Multiple functions are separated by ';;;' correspondingly to the queries. ",
                             "Default: %default."),
               metavar="character"),
   make_option(c("-C","--categorise-by"), type="character",
@@ -108,7 +108,7 @@ option_list <- list(
               help = paste0("Unit conversion rules given in the format ",
                             "<left_value><left_unit> = <right_value><right_unit>. ",
                             "All <right_unit> are converted to <left_unit>. ",
-                            "Multiple rules are separated by ';;'. Default: %default."),
+                            "Multiple rules are separated by ';;;'. Default: %default."),
               metavar="character"),
   make_option(c("--order-function"), type="character",
               default="function(x) sum(abs(x))",
@@ -210,10 +210,10 @@ if (! is.null(opt$queries)) {
   require("ledgerplots", quietly = TRUE)
 
   # split on queries and functions
-  q <- unlist(strsplit(opt$queries,split=";;"))
-  f <- unlist(strsplit(opt$functions,split=";;"))
-  t <- unlist(strsplit(opt$type,split=";;"))
-  conversion <- trimws(unlist(strsplit(opt$"unit-conversion", split=";;")))
+  q <- unlist(strsplit(opt$queries,split=";;;"))
+  f <- unlist(strsplit(opt$functions,split=";;;"))
+  t <- unlist(strsplit(opt$type,split=";;;"))
+  conversion <- trimws(unlist(strsplit(opt$"unit-conversion", split=";;;")))
 
   # make functions the same length
   if (length(f) < length(q)) {
@@ -229,7 +229,7 @@ if (! is.null(opt$queries)) {
   if (opt$"generate-price-table") {
 
     # do a single query ignore others
-    generate.price.table(FUN = unlist(strsplit(f[1],split="::")),
+    generate.price.table(FUN = unlist(strsplit(f[1],split=":::")),
                          query = q[1],
                          ofile = opt$output,
                          ledger.options = opt$"ledger-options-full",
@@ -263,7 +263,7 @@ if (! is.null(opt$queries)) {
                min_tags_entries = opt$"min-tags-entries",
                account_depth_for_each_tag = opt$"min-tags-account-depth",
                conversion = conversion,
-               FUN=unlist(strsplit(f[i],split="::")),
+               FUN=unlist(strsplit(f[i],split=":::")),
                if_legend = opt$"plot-legend")
   })
 

@@ -7,20 +7,34 @@ mkdir -p figs
 ./dummy-example-generator.R
 
 # indent ledger entries
-emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "expenses.ledger") (ledger-mode) (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))'
-emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledger-mode) (mark-whole-buffer) (indent-region (point-min) (point-max) nil) (save-buffer))'
+emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "expenses.ledger") \
+                                                 (ledger-mode) (mark-whole-buffer) \
+                                                 (indent-region (point-min) \
+                                                 (point-max) nil) (save-buffer))'
+emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") \
+                                                 (ledger-mode) (mark-whole-buffer) \
+                                                 (indent-region (point-min) \
+                                                 (point-max) nil) (save-buffer))'
 
 # generate plots using ledger-plots
 ../ledger-plots -q "\^assets" \
-                -f "cumsum :: function(x) {i<-1:length(x); predict(lm(cumsum(x)~i))}" \
+                -f "cumsum :::
+                    function(x) {
+                        i<-1:length(x);
+                        predict(lm(cumsum(x)~i))
+                    }" \
                 --ledger-options='-f expenses.ledger' \
                 --output-pdf-ncol=1 \
                 --output-pdf-nrow=1 \
                 -n 1 \
                 -o figs/assets.pdf
 
-../ledger-plots --queries="-X EUR ;; -X USD" \
-                -f "cumsum :: function(x) {i<-1:length(x); predict(lm(cumsum(x)~i))}" \
+../ledger-plots --queries="-X EUR ;;; -X USD" \
+                -f "cumsum :::
+                    function(x) {
+                        i<-1:length(x);
+                        predict(lm(cumsum(x)~i))
+                    }" \
                 --ledger-options='-f expenses.ledger \^assets' \
                 --type "revalued" \
                 --output-pdf-ncol=2 \
@@ -29,13 +43,25 @@ emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledg
                 -o figs/assets-revalued.pdf
 
 ../ledger-plots -q "\^expenses" \
-                -f "monthly :: function(x) yearly(x)/12 :: function(x) { res <- 30*cumsum(x)/(1:length(x)); res[1:100]<-NA; res }" \
+                -f "monthly :::
+                    function(x) yearly(x)/12 :::
+                    function(x) {
+                        res <- 30*cumsum(x)/(1:length(x));
+                        res[1:100]<-NA;
+                        res
+                    }" \
                 --ledger-options='-f expenses.ledger -H -X EUR' \
                 -n 4 \
                 -o figs/expenses.pdf
 
 ../ledger-plots -q "\^expenses" \
-                -f "monthly :: function(x) yearly(x)/12 :: function(x) { res <- 30*cumsum(x)/(1:length(x)); res[1:100]<-NA; res }" \
+                -f "monthly :::
+                    function(x) yearly(x)/12 :::
+                    function(x) {
+                        res <- 30*cumsum(x)/(1:length(x));
+                        res[1:100] <- NA;
+                        res
+                    }" \
                 --ledger-options='-f expenses.ledger -H -X EUR' \
                 -C "tags" \
                 -n 4 \
@@ -51,20 +77,22 @@ emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledg
                 -o figs/expenses-alluvial.pdf
 
 ../ledger-plots -q "\^food" \
-                -f "monthly :: function(x) quarterly(x)/3 :: function(x) yearly(x)/12 " \
+                -f "monthly :::
+                    function(x) quarterly(x)/3 :::
+                    function(x) yearly(x)/12 " \
                 --ledger-options="-f food.ledger -H -X EUR" \
                 -n 4 \
                 -o figs/food.pdf
 
 ../ledger-plots -q "\^food" \
-                -f "monthly.price :: quarterly.price :: yearly.price" \
+                -f "monthly.price ::: quarterly.price ::: yearly.price" \
                 --type "price" \
                 --ledger-options="-f food.ledger -H -X EUR" \
                 -n 4 \
                 -o figs/food-price.pdf
 
 ../ledger-plots -q "\^food" \
-                -f "monthly :: function(x) quarterly(x)/3 :: function(x) yearly(x)/12 " \
+                -f "monthly ::: function(x) quarterly(x)/3 ::: function(x) yearly(x)/12 " \
                 --type "volume" \
                 --ledger-options="-f food.ledger -H -X EUR" \
                 -n 4 \
@@ -80,17 +108,17 @@ emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledg
 
 ../ledger-plots --generate-price-table \
                 -q "food: -H -X EUR" \
-                -f "min :: mean :: tail" \
+                -f "min ::: mean ::: tail" \
                 --ledger-options='-f food.ledger' \
-                --conversion="1kg = 1l ;; 1kg = 1x ;; 1kg = 1qb" \
+                --conversion="1kg = 1l ;;; 1kg = 1x ;;; 1kg = 1qb" \
                 -o "figs/price-table.tex"
 
 ../ledger-plots \
-    -f "cumsum :: \
+    -f "cumsum ::: \
         function(x) {\
             i <- 1:length(x); \
             predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))\
-        } :: \
+        } ::: \
         function(x) {\
             require(Rssa)
             tryCatch({

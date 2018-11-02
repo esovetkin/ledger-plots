@@ -80,9 +80,9 @@ invokes the OS command.
 
 The query is specified using `-q` (`--queries`) option. Ledger-plots
 passes the specified query string to the ledger. You may also specify
-several queries together separating them by two semi-colons (";;")
+several queries together separating them by two semi-colons (";;;")
 ```
-ledger-plots -q "^assets: -X EUR ;; ^liability: -X EUR"
+ledger-plots -q "^assets: -X EUR ;;; ^liability: -X EUR"
 ```
 This will make plots for each query one after another.
 
@@ -119,14 +119,14 @@ There are several query statistic functions available: `weekly`,
 `monthly`, `quarterly` and `yearly`.
 
 Multiple function can be combined together for multiple queries by
-separating them by two semi-colons (";;"). The first function in
+separating them by two semi-colons (";;;"). The first function in
 the list of functions corresponds to the first query, second function
 corresponds to the second query, etc. For example,
 ```
-ledger-plots -f "cumsum ;;
-                 monthly ;;
+ledger-plots -f "cumsum ;;;
+                 monthly ;;;
                  function(x) -cumsum(x)" \
-             -q "^assets:;;^expenses: -H;;^income:" \
+             -q "^assets:;;;^expenses: -H;;;^income:" \
              --ledger-options="-X EUR"
 ```
 for the query "^assets:" accumulated sum is calculated, for the query
@@ -135,9 +135,9 @@ inverted accumulated sum.
 
 One can also calculate and plot in one figure several function
 statistics. These functions can be specified by separating them with
-"::" symbol. For example,
+":::" symbol. For example,
 ```
-ledger-plots -f "cumsum ::
+ledger-plots -f "cumsum :::
                  function(x) {
                      i <- 1:length(x);
                      predict(lm(cumsum(x)~i))
@@ -154,7 +154,7 @@ For example consider the following call.
 ```
 cd examples
 ../ledger-plots -q "\^assets" \
-                -f "cumsum ::
+                -f "cumsum :::
                     function(x) {
                         i<-1:length(x);
                         predict(lm(cumsum(x)~i))
@@ -175,8 +175,8 @@ The following example queries expenses.
 ```
 cd examples
 ../ledger-plots -q "\^expenses" \
-                -f "monthly ::
-                    function(x) yearly(x)/12 ::
+                -f "monthly :::
+                    function(x) yearly(x)/12 :::
                     function(x) {
                         res <- 30*cumsum(x)/(1:length(x));
                         res[1:100]<-NA;
@@ -221,7 +221,7 @@ gained/lost"
 ```
 ledger-plots -t "revalued" \
              -f "cumsum" \
-             -q "-X EUR ;; -X GBP ;; -X USD ;; -X XBT" \
+             -q "-X EUR ;;; -X GBP ;;; -X USD ;;; -X XBT" \
              --ledger-options="^assets:"
 ```
 
@@ -232,8 +232,8 @@ Note that this feature relies on your ledger price database.
 As an example consider the following call.
 ```
 cd examples
-../ledger-plots --queries="-X EUR ;; -X USD" \
-                -f "cumsum ::
+../ledger-plots --queries="-X EUR ;;; -X USD" \
+                -f "cumsum :::
                     function(x) {
                         i<-1:length(x);
                         predict(lm(cumsum(x)~i))
@@ -279,8 +279,8 @@ The following example
 ```
 cd examples
 ../ledger-plots -q "\^expenses" \
-                -f "monthly ::
-                    function(x) yearly(x)/12 ::
+                -f "monthly :::
+                    function(x) yearly(x)/12 :::
                     function(x) {
                         res <- 30*cumsum(x)/(1:length(x));
                         res[1:100]<-NA;
@@ -328,11 +328,11 @@ the latter you need to install
 ```
 cd examples
 ../ledger-plots \
-    -f "cumsum ::
+    -f "cumsum :::
         function(x) {
             i <- 1:length(x);
             predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))
-        } ::
+        } :::
         function(x) {
             require(Rssa)
             tryCatch({
@@ -413,8 +413,8 @@ Here is an example of the consumed food volumes.
 ```
 cd examples
 ../ledger-plots -q "\^food" \
-                -f "monthly ::
-                    function(x) quarterly(x)/3 ::
+                -f "monthly :::
+                    function(x) quarterly(x)/3 :::
                     function(x) yearly(x)/12 " \
                 --type "volume" \
                 --ledger-options="-f food.ledger -H -X EUR" \
@@ -428,8 +428,8 @@ The price can be generated with a similar call.
 ```
 cd examples
 ../ledger-plots -q "\^food" \
-                -f "monthly ::
-                    function(x) quarterly(x)/3 ::
+                -f "monthly :::
+                    function(x) quarterly(x)/3 :::
                     function(x) yearly(x)/12 " \
                 --type "price" \
                 --ledger-options="-f food.ledger -H -X EUR" \
@@ -472,9 +472,9 @@ The following example generates the table prices
 cd examples
 ../ledger-plots --generate-price-table \
                 -q "food: -H -X EUR" \
-                -f "min :: mean :: tail" \
+                -f "min ::: mean ::: tail" \
                 --ledger-options='-f food.ledger' \
-                --conversion="1kg = 1l ;; 1kg = 1x ;; 1kg = 1qb" \
+                --conversion="1kg = 1l ;;; 1kg = 1x ;;; 1kg = 1qb" \
                 -o "figs/price-table.tex"
 ```
 resulting in a table with the following first entries
