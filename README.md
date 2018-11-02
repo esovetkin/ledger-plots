@@ -89,7 +89,7 @@ This will make plots for each query one after another.
 You may also pass a function to be calculated on the transaction
 vector. This can be specified in `-f` (`--functions`) option. The
 function can be any R function that takes a vector as an arguments and
-returns a vector.
+returns a vector (not necessarily the same length).
 
 For different type of accounts it is reasonable to calculate different
 functions. For instance, for assets you can calculate accumulated sum
@@ -314,6 +314,41 @@ cd examples
 generates an alluvial plot for different expenses categories.
 
 ![example of alluvial plot](examples/figs/expenses-alluvial.png?raw=true)
+
+## Example of forecasts
+
+It is possible to compute and plot forecasts as well. For that you
+need to specify a function that returns a larger vector than the input
+vector.
+
+The following example plots cumulative value of the assets with
+forecast for 60 days using linear regression and SSA method. To use
+the latter you need to install
+[this R-package](https://cran.r-project.org/package=Rssa).
+```
+cd examples
+../ledger-plots \
+    -f "cumsum :: \
+        function(x) {\
+            i <- 1:length(x); \
+            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))\
+        } :: \
+        function(x) {\
+            require(Rssa)
+            tryCatch({
+                p <- predict(ssa(cumsum(x)),groups=list(1:5),method=\"recurrent\",len=60); \
+                c(rep(NA,length(x)),p)\
+            }, error = function(e) rep(NA,length(x)))\
+        }" \
+    --queries="^assets " \
+    --ledger-options='-f expenses.ledger ' \
+    -n 1 \
+    --output-pdf-ncol=1 \
+    --output-pdf-nrow=1 \
+    -o "figs/assets-forecast.pdf"
+```
+
+![example of forecast plot](examples/figs/assets-forecast-1.png?raw=true)
 
 # Food prices and volumes
 

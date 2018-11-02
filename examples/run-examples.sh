@@ -85,10 +85,31 @@ emacs --batch -l ~/.emacs-minimal --eval='(progn (find-file "food.ledger") (ledg
                 --conversion="1kg = 1l ;; 1kg = 1x ;; 1kg = 1qb" \
                 -o "figs/price-table.tex"
 
+../ledger-plots \
+    -f "cumsum :: \
+        function(x) {\
+            i <- 1:length(x); \
+            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))\
+        } :: \
+        function(x) {\
+            require(Rssa)
+            tryCatch({
+                p <- predict(ssa(cumsum(x)),groups=list(1:5),method=\"recurrent\",len=60); \
+                c(rep(NA,length(x)),p)\
+            }, error = function(e) rep(NA,length(x)))\
+        }" \
+    --queries="^assets " \
+    --ledger-options='-f expenses.ledger ' \
+    -n 1 \
+    --output-pdf-ncol=1 \
+    --output-pdf-nrow=1 \
+    -o "figs/assets-forecast.pdf"
+
 # convert images to png
 files=()
 files+=("figs/assets.pdf")
 files+=("figs/assets-revalued.pdf")
+files+=("figs/assets-forecast.pdf")
 files+=("figs/expenses.pdf")
 files+=("figs/expenses-tags.pdf")
 files+=("figs/expenses-alluvial.pdf")
