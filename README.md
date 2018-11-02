@@ -109,8 +109,8 @@ More generally, you can specify any R function. For instance, a 7-days
 average can be specified as
 
 ```
-ledger-plots -f "function(x) {\
-                     filter(x,rep(1,7),sides=1)\
+ledger-plots -f "function(x) {
+                     filter(x,rep(1,7),sides=1)
                  }" \
              -q "^expenses: -X EUR"
 ```
@@ -123,9 +123,9 @@ separating them by two semi-colons (";;"). The first function in
 the list of functions corresponds to the first query, second function
 corresponds to the second query, etc. For example,
 ```
-ledger-plots -f "cumsum ;; \
-                 monthly ;; \
-                 function(x) {-cumsum(x)}" \
+ledger-plots -f "cumsum ;;
+                 monthly ;;
+                 function(x) -cumsum(x)" \
              -q "^assets:;;^expenses: -H;;^income:" \
              --ledger-options="-X EUR"
 ```
@@ -137,10 +137,10 @@ One can also calculate and plot in one figure several function
 statistics. These functions can be specified by separating them with
 "::" symbol. For example,
 ```
-ledger-plots -f "cumsum :: \
-                 function(x) {\
-                     i <- 1:length(x); \
-                     predict(lm(cumsum(x)~i))\
+ledger-plots -f "cumsum ::
+                 function(x) {
+                     i <- 1:length(x);
+                     predict(lm(cumsum(x)~i))
                  }" \
              -q "^assets: -X EUR"
 ```
@@ -154,10 +154,10 @@ For example consider the following call.
 ```
 cd examples
 ../ledger-plots -q "\^assets" \
-                -f "cumsum :: \
-                    function(x) {\
-                        i<-1:length(x); \
-                        predict(lm(cumsum(x)~i))\
+                -f "cumsum ::
+                    function(x) {
+                        i<-1:length(x);
+                        predict(lm(cumsum(x)~i))
                     }" \
                 --ledger-options='-f expenses.ledger' \
                 --output-pdf-ncol=1 \
@@ -175,12 +175,12 @@ The following example queries expenses.
 ```
 cd examples
 ../ledger-plots -q "\^expenses" \
-                -f "monthly :: \
-                    function(x) yearly(x)/12 :: \
-                    function(x) { \
-                        res <- 30*cumsum(x)/(1:length(x)); \
-                        res[1:100]<-NA; \
-                        res \
+                -f "monthly ::
+                    function(x) yearly(x)/12 ::
+                    function(x) {
+                        res <- 30*cumsum(x)/(1:length(x));
+                        res[1:100]<-NA;
+                        res
                     }" \
                 --ledger-options='-f expenses.ledger -H -X EUR' \
                 -n 4 \
@@ -233,10 +233,10 @@ As an example consider the following call.
 ```
 cd examples
 ../ledger-plots --queries="-X EUR ;; -X USD" \
-                -f "cumsum :: \
-                    function(x) {\
-                        i<-1:length(x); \
-                        predict(lm(cumsum(x)~i))\
+                -f "cumsum ::
+                    function(x) {
+                        i<-1:length(x);
+                        predict(lm(cumsum(x)~i))
                     }" \
                 --ledger-options='-f expenses.ledger \^assets' \
                 --type "revalued" \
@@ -279,12 +279,12 @@ The following example
 ```
 cd examples
 ../ledger-plots -q "\^expenses" \
-                -f "monthly :: \
-                    function(x) yearly(x)/12 :: \
-                    function(x) { \
-                        res <- 30*cumsum(x)/(1:length(x)); \
-                        res[1:100]<-NA; \
-                        res \
+                -f "monthly ::
+                    function(x) yearly(x)/12 ::
+                    function(x) {
+                        res <- 30*cumsum(x)/(1:length(x));
+                        res[1:100]<-NA;
+                        res
                     }" \
                 --ledger-options='-f expenses.ledger -H -X EUR' \
                 -C "tags" \
@@ -328,17 +328,17 @@ the latter you need to install
 ```
 cd examples
 ../ledger-plots \
-    -f "cumsum :: \
-        function(x) {\
-            i <- 1:length(x); \
-            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))\
-        } :: \
-        function(x) {\
+    -f "cumsum ::
+        function(x) {
+            i <- 1:length(x);
+            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+60)))
+        } ::
+        function(x) {
             require(Rssa)
             tryCatch({
-                p <- predict(ssa(cumsum(x)),groups=list(1:5),method=\"recurrent\",len=60); \
-                c(rep(NA,length(x)),p)\
-            }, error = function(e) rep(NA,length(x)))\
+                p <- predict(ssa(cumsum(x)),groups=list(1:5),method=\"recurrent\",len=60);
+                c(rep(NA,length(x)),p)
+            }, error = function(e) rep(NA,length(x)))
         }" \
     --queries="^assets " \
     --ledger-options='-f expenses.ledger ' \
@@ -413,8 +413,8 @@ Here is an example of the consumed food volumes.
 ```
 cd examples
 ../ledger-plots -q "\^food" \
-                -f "monthly :: \
-                    function(x) quarterly(x)/3 :: \
+                -f "monthly ::
+                    function(x) quarterly(x)/3 ::
                     function(x) yearly(x)/12 " \
                 --type "volume" \
                 --ledger-options="-f food.ledger -H -X EUR" \
@@ -428,8 +428,8 @@ The price can be generated with a similar call.
 ```
 cd examples
 ../ledger-plots -q "\^food" \
-                -f "monthly :: \
-                    function(x) quarterly(x)/3 :: \
+                -f "monthly ::
+                    function(x) quarterly(x)/3 ::
                     function(x) yearly(x)/12 " \
                 --type "price" \
                 --ledger-options="-f food.ledger -H -X EUR" \
