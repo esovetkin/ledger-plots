@@ -115,3 +115,20 @@ weekly.price <- function(x) {
   n[! abs(n) > 0] <- 1
   stats::filter(x,rep(1,7),sides=1)
 }
+
+#' @title linear regression forecast
+#'
+#' @param using_last number of days to use in the forecast
+#'
+#' @param forecast_for number of days to forecast
+#'
+#' @export
+lm_forecast <- function(x, using_last = 365, forecast_for = 365) {
+  i <- tail(1:length(x),n=using_last)
+
+  newdata <- data.frame("i"=c(tail(i,n=using_last),(length(x)+1):(length(x)+forecast_for)))
+
+  res <- predict(lm(tail(x,n=using_last)~i),newdata=newdata)
+
+  c(rep(NA,length(x)-using_last-1),res)
+}
