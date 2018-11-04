@@ -132,3 +132,32 @@ lm_forecast <- function(x, using_last = 365, forecast_for = 365) {
 
   c(rep(NA,length(x)-using_last-1),res)
 }
+
+#' @title forecast values adjust
+#'
+#' adjust forecast values with known future transaction amounts
+#'
+#' @param dates future dates of transactions
+#'
+#' @param values values of transactions
+#'
+#' @param forecast vector of the forecasted values
+#'
+#' @param FUN function to be aplied to the adjusted values
+#'
+#' @export
+adjust_forecast <- function(forecast,dates,values,FUN="cumsum") {
+  # compute position in the forecast vector
+  dates_idx <- as.numeric(difftime(as.Date(dates),Sys.Date(),units="days"))
+
+  # select only values with positive position
+  values <- values[(dates_idx > 0) & (dates_idx <= length(forecast))]
+  dates_idx <- dates_idx[(dates_idx > 0) & (dates_idx <= length(forecast))]
+
+  # get adjusted vector
+  adj <- rep(0,length(forecast))
+  adj[dates_idx] <- values
+  adj <- FUN(adj)
+
+  return(forecast+adj)
+}
