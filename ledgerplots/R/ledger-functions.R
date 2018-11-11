@@ -445,7 +445,7 @@ series.plot <- function(data,currency,title,if_legend=FALSE) {
   data <- reshape2::melt(data,id="Date")
 
   # main plot
-  g <- ggplot2::ggplot(data, ggplot2::aes(x=Date,y=value,colour=variable))
+  g <- ggplot2::ggplot(data, ggplot2::aes(x=data$Date,y=data$value,colour=data$variable))
   # line type plot
   g <- g + ggplot2::geom_line()
   # add legend
@@ -499,16 +499,16 @@ alluvial.plot <- function(data,currency,title)
     dplyr::group_by(
       dplyr::mutate(data,
                     Date = lubridate::floor_date(data$Date,"month")),
-      Date, Category),
-    value = mean(value))
+      .data$Date, .data$Category),
+    value = mean(.data$value))
 
   # generate a plot
   g <- ggplot2::ggplot(data = z,
-                       ggplot2::aes(x = Date,
-                                    y = value,
-                                    alluvium = Category)) +
+                       ggplot2::aes(x = z$Date,
+                                    y = z$value,
+                                    alluvium = z$Category)) +
     ggalluvial::geom_alluvium(
-      ggplot2::aes(fill = Category, colour = Category),
+      ggplot2::aes(fill = z$Category, colour = z$Category),
       alpha = .75, decreasing = FALSE)
 
   # minor grid: weeks, major grid: months
