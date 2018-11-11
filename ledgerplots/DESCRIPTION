@@ -15,6 +15,7 @@ Imports:
     devtools,
     ggplot2,
     gridExtra,
+    ggalluvial,
     dplyr,
     lubridate,
     reshape2,

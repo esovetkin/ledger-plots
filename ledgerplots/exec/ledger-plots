@@ -10,56 +10,7 @@ check.writable <- function(path) {
                              recursive = TRUE)})
 }
 
-#' Install missing packages for this script
-install.missing.packages <- function() {
-  # default mirror
-  mirror <- "https://cloud.r-project.org/"
-
-  # check that R_LIBS_USER directory is writable
-  if (!check.writable(Sys.getenv("R_LIBS_USER"))) {
-    stop(paste("Directory",Sys.getenv("R_LIBS_USER"),
-               "is not writable (configure Renviron (/etc/Renviron))."))
-  }
-
-  # argument parsing
-  if (!require("optparse", quietly = TRUE)) install.packages("optparse", repo = mirror)
-
-
-  # devtools for installing ledgerplots package
-  if (!require("devtools", quietly = TRUE)) install.packages("devtools", repo = mirror)
-
-  # install ledger-plots
-  devtools::install_github("esovetkin/ledger-plots/ledgerplots")
-
-  # install ggplot2
-  if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2", repo = mirror)
-  if (!require("gridExtra", quietly = TRUE)) install.packages("gridExtra", repo = mirror)
-  if (!require("ggalluvial", quietly = TRUE)) install.packages("ggalluvial", repo = mirror)
-  if (!require("dplyr", quietly = TRUE)) install.packages("dplyr", repo = mirror)
-  if (!require("lubridate", quietly = TRUE)) install.packages("lubridate", repo = mirror)
-
-  # for "melt" function
-  if (!require("reshape2", quietly = TRUE)) install.packages("reshape2", repo = mirror)
-
-  # install xtable for plotting latex tables
-  if (!require("xtable", quietly = TRUE)) install.packages("xtable", repo = mirror)
-
-  # install stringr for some regex functions
-  if (!require("stringr", quietly = TRUE)) install.packages("stringr", repo = mirror)
-
-  # install tools package (needed for latex compile)
-  if (!require("tools", quietly = TRUE)) install.packages("tools", repo = mirror)
-}
-
-# to install missing dependencies
-if (any(c("--install-dependencies","-u") %in% commandArgs(trailingOnly = TRUE))) {
-  install.missing.packages()
-}
-
 # parse arguments
-if (!require("optparse", quietly = TRUE)) {
-  stop("optparse R-package is missing! Use -u,--install-dependencies")
-}
 require("optparse", quietly = TRUE)
 
 # available options
@@ -134,9 +85,8 @@ option_list <- list(
   make_option(c("--ledger-bin-path"), type="character", default=NULL,
               help = "Specify path to the ledger executable file",
               metavar="character"),
-  make_option(c("-u","--install-dependencies"), action = "store_true", default = FALSE,
-              help = paste0("Install missing dependencies. It also updates ",
-                            "ledgerplots package. Default: %default")),
+  make_option(c("-u","--update-github"), action = "store_true", default = FALSE,
+              help = paste0("Install latest ledger-plots from github")),
   make_option(c("--output-pdf-ncol"),
               type="numeric", default = 2,
               help = paste0("Number of plots columns on one page. Default: %default ")),
@@ -191,6 +141,19 @@ opt_parser <- OptionParser(option_list = option_list,
                                     "Generate plot for assets:\n",
                                     "ledger-plots -q \"^assets: -X EUR\" -f \"cumsum\"\n\n"))
 opt <- parse_args(opt_parser)
+
+if (opt$"update-github") {
+  # check that R_LIBS_USER directory is writable
+  if (!check.writable(Sys.getenv("R_LIBS_USER"))) {
+    stop(paste("Directory",Sys.getenv("R_LIBS_USER"),
+               "is not writable (configure Renviron (/etc/Renviron))."))
+  }
+
+  # install ledger-plots
+  devtools::install_github("esovetkin/ledger-plots/ledgerplots")
+
+  quit(save="no")
+}
 
 # parse ledger-options
 opt$"ledger-options-full" <- ""
