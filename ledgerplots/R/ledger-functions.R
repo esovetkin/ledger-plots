@@ -435,9 +435,8 @@ account.plot <- function(X,title,
 #' @export
 series.plot <- function(data,currency,title,if_legend=FALSE) {
   require("ggplot2", quietly = TRUE)
-  require("reshape2", quietly = TRUE)
 
-  data <- melt(data,id="Date")
+  data <- reshape2::melt(data,id="Date")
 
   # main plot
   g <- ggplot(data, aes(x=Date,y=value,colour=variable))
@@ -481,10 +480,8 @@ series.plot <- function(data,currency,title,if_legend=FALSE) {
 alluvial.plot <- function(data,currency,title)
 {
   require("ggplot2", quietly = TRUE)
-  require("ggalluvial", quietly = TRUE)
-  require("reshape2", quietly = TRUE)
 
-  data <- melt(data,id=c("Date","Category"))
+  data <- reshape2::melt(data,id=c("Date","Category"))
 
   # convert value column to numeric (lubridate argues)
   data$value <- as.numeric(data$value)
@@ -502,8 +499,8 @@ alluvial.plot <- function(data,currency,title)
   # generate a plot
   g <- ggplot(data = z,
          aes(x = Date, y = value, alluvium = Category)) +
-    geom_alluvium(aes(fill = Category, colour = Category),
-                  alpha = .75, decreasing = FALSE)
+    ggalluvial::geom_alluvium(aes(fill = Category, colour = Category),
+                              alpha = .75, decreasing = FALSE)
 
   # minor grid: weeks, major grid: months
   g <- g + theme(panel.grid.minor = element_line(size=0.1),
@@ -573,10 +570,8 @@ account.tree.depth <- function(names) {
 #' @export
 get_tags <- function(data)
 {
-  require("stringr",quietly = TRUE)
-
   notes <- data$Notes
-  notes <- str_match(notes,"^.*?:([[:alnum:]:]+):.*?$")[,2]
+  notes <- stringr::str_match(notes,"^.*?:([[:alnum:]:]+):.*?$")[,2]
 
   tags <- unique(unlist(strsplit(notes,":")))
 
