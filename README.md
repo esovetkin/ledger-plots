@@ -6,12 +6,39 @@ Make plots for your ledger entries and save them to a pdf file.
 
 # Installation
 
-The program consists of a single script (*ledger-plots*) and this is
-the only file you need to manually copy on your machine.
+The program consist of an R-package and an executable script written
+in R.
 
-Alternatively, you can install the script as an AUR
-package
+The simplest way to install the package is to run the following
+command in the R console.
+```
+> install.packages("ledgerplots")
+```
+It will install `ledgerplots` package from CRAN repository along with
+all the necessary dependencies.
+
+The `ledger-plot` executable is located in the `exec` directory of the
+installed package. You can add this directory to your `$PATH` or add a
+symbolic link to `ledger-plot` in your preferred location.
+
+The path to `ledger-plot` can be queried with the following bash command:
+```
+echo "cat(paste0(Sys.getenv('R_LIBS_USER'),'ledgerplots/exec/ledger-plots'))" | Rscript -
+```
+
+The current master version can be installed from github:
+```
+> devtools::install_github("esovetkin/ledger-plots/ledgerplots")
+```
+
+Alternatively, you can install the AUR package
 [ledger-plots-git](https://aur.archlinux.org/packages/ledger-plots-git/).
+
+The script can be updated either by reinstalling the `ledgerplots`
+package (from CRAN or github) or by running
+```
+ledger-plots -u
+```
 
 ## Dependencies
 
@@ -22,14 +49,9 @@ The script is written in [R](https://www.r-project.org/) and this is
 the only dependency. However, you need to install extra R-packages to
 make it work.
 
-In order to install missing R-package dependencies run
-```
-ledger-plots --install-dependencies
-```
-or, equivalently,
-```
-ledger-plots -u
-```
+
+
+
 
 ## Getting help
 
