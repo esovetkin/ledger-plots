@@ -1,6 +1,6 @@
 Package: ledgerplots
 Title: Create plots for ledger
-Version: 0.0.0.9000
+Version: 1.0-1
 Authors@R: person("Jenya", "Sovetkin", email = "e.sovetkin@gmail.com", role = c("aut", "cre"))
 Description: Functions to create plots for your ledger (http://ledger-cli.org/)
     transactions.
