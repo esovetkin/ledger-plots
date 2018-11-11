@@ -65,7 +65,7 @@ yearly.price <- function(x) {
   if (length(x) < 365)
     return(rep(NA,length(x)))
 
-  n <- filter(abs(x) > 0,rep(1,365),sides=1)
+  n <- stats::filter(abs(x) > 0,rep(1,365),sides=1)
   n[! abs(n) > 0] <- 1
   stats::filter(x,rep(1,365),sides=1)/n
 }
@@ -81,7 +81,7 @@ quarterly.price <- function(x) {
   if (length(x) < 90)
     return(rep(NA,length(x)))
 
-  n <- filter(abs(x) > 0,rep(1,90),sides=1)
+  n <- stats::filter(abs(x) > 0,rep(1,90),sides=1)
   n[! abs(n) > 0] <- 1
   stats::filter(x,rep(1,90),sides=1)/n
 }
@@ -97,7 +97,7 @@ monthly.price <- function(x) {
   if (length(x) < 30)
     return(rep(NA,length(x)))
 
-  n <- filter(abs(x) > 0,rep(1,30),sides=1)
+  n <- stats::filter(abs(x) > 0,rep(1,30),sides=1)
   n[! abs(n) > 0] <- 1
   stats::filter(x,rep(1,30),sides=1)/n
 }
@@ -111,12 +111,14 @@ weekly.price <- function(x) {
   if (length(x) < 7)
     return(rep(NA,length(x)))
 
-  n <- filter(abs(x) > 0,rep(1,7),sides=1)
+  n <- stats::filter(abs(x) > 0,rep(1,7),sides=1)
   n[! abs(n) > 0] <- 1
   stats::filter(x,rep(1,7),sides=1)
 }
 
 #' @title linear regression forecast
+#'
+#' @param x a numeric vector
 #'
 #' @param using_last number of days to use in the forecast
 #'

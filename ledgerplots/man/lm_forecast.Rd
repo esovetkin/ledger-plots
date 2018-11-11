@@ -7,6 +7,8 @@
 lm_forecast(x, using_last = 365, forecast_for = 365)
 }
 \arguments{
+\item{x}{a numeric vector}
+
 \item{using_last}{number of days to use in the forecast}
 
 \item{forecast_for}{number of days to forecast}

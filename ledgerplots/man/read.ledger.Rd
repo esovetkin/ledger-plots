@@ -28,8 +28,10 @@ The function make the following call in shell:
 One may pass extra argument to ledger this way.
 }
 \examples{
+\dontrun{
 expenses <- read.ledger("^expenses: -X EUR")
 
 assets <- read.ledger("^assets: -X EUR")
+}
 
 }

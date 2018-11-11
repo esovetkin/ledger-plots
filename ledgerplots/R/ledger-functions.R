@@ -1,3 +1,6 @@
+#' @import stats
+#' @importFrom utils "head" "read.csv" "tail"
+
 #' @title Make quries to ledger
 #'
 #' @description Call a shell and execute ledger command with a given
@@ -18,9 +21,11 @@
 #' One may pass extra argument to ledger this way.
 #'
 #' @examples
+#' \dontrun{
 #' expenses <- read.ledger("^expenses: -X EUR")
 #'
 #' assets <- read.ledger("^assets: -X EUR")
+#' }
 #'
 #' @export
 read.ledger <- function(query, options = "", ledger.path = NULL) {
@@ -309,6 +314,9 @@ complete_dataframe_missing_dates <- function(X, dates.series,
 #'
 #' @param type type of the plot to make
 #'
+#' @param categorise_accounts if is not NULL plot alluvial instead of
+#'   series
+#'
 #' @param date.interval dates period between which the plots should be
 #'   done (default for one year)
 #'
@@ -434,33 +442,31 @@ account.plot <- function(X,title,
 #'
 #' @export
 series.plot <- function(data,currency,title,if_legend=FALSE) {
-  require("ggplot2", quietly = TRUE)
-
   data <- reshape2::melt(data,id="Date")
 
   # main plot
-  g <- ggplot(data, aes(x=Date,y=value,colour=variable))
+  g <- ggplot2::ggplot(data, ggplot2::aes(x=Date,y=value,colour=variable))
   # line type plot
-  g <- g + geom_line()
+  g <- g + ggplot2::geom_line()
   # add legend
   if (if_legend) {
-    g <- g + theme(legend.position="bottom",
-                   legend.text = element_text(size=7),
-                   legend.title = element_blank())
+    g <- g + ggplot2::theme(legend.position="bottom",
+                            legend.text = ggplot2::element_text(size=7),
+                            legend.title = ggplot2::element_blank())
   } else {
-    g <- g + theme(legend.position="none")
+    g <- g + ggplot2::theme(legend.position="none")
   }
   # minor grid: weeks, major grid: months
-  g <- g + theme(panel.grid.minor = element_line(size=0.1),
-                 panel.grid.major = element_line(size=0.5)) +
-    scale_x_date(minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
-                 breaks = data$Date[format(data$Date,"%d") == "01"],
-                 date_labels = "%b %Y")
+  g <- g + ggplot2::theme(panel.grid.minor = ggplot2::element_line(size=0.1),
+                          panel.grid.major = ggplot2::element_line(size=0.5)) +
+    ggplot2::scale_x_date(minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
+                          breaks = data$Date[format(data$Date,"%d") == "01"],
+                          date_labels = "%b %Y")
   # labs and title
-  g <- g + labs(title=title,x="Date",y=currency) +
-    theme(plot.title = element_text(hjust = 0.5, face="bold"))
+  g <- g + ggplot2::labs(title=title,x="Date",y=currency) +
+    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5, face="bold"))
   # xlab
-  g <- g + theme(axis.text.x = element_text(angle=90, size=5))
+  g <- g + ggplot2::theme(axis.text.x = ggplot2::element_text(angle=90, size=5))
 
   g
 }
@@ -479,8 +485,6 @@ series.plot <- function(data,currency,title,if_legend=FALSE) {
 #' @export
 alluvial.plot <- function(data,currency,title)
 {
-  require("ggplot2", quietly = TRUE)
-
   data <- reshape2::melt(data,id=c("Date","Category"))
 
   # convert value column to numeric (lubridate argues)
@@ -488,32 +492,41 @@ alluvial.plot <- function(data,currency,title)
 
   # remove na data, since alluvium plots require now NA present (NA
   # may happen due to filter function)
-  data <- na.omit(data)
+  data <- stats::na.omit(data)
 
   # reduce data to a monthly data
   z <- dplyr::summarise(
-    dplyr::group_by(dplyr::mutate(data, Date = lubridate::floor_date(data$Date,"month")),
-                    Date, Category),
+    dplyr::group_by(
+      dplyr::mutate(data,
+                    Date = lubridate::floor_date(data$Date,"month")),
+      Date, Category),
     value = mean(value))
 
   # generate a plot
-  g <- ggplot(data = z,
-         aes(x = Date, y = value, alluvium = Category)) +
-    ggalluvial::geom_alluvium(aes(fill = Category, colour = Category),
-                              alpha = .75, decreasing = FALSE)
+  g <- ggplot2::ggplot(data = z,
+                       ggplot2::aes(x = Date,
+                                    y = value,
+                                    alluvium = Category)) +
+    ggalluvial::geom_alluvium(
+      ggplot2::aes(fill = Category, colour = Category),
+      alpha = .75, decreasing = FALSE)
 
   # minor grid: weeks, major grid: months
-  g <- g + theme(panel.grid.minor = element_line(size=0.1),
-                 panel.grid.major = element_line(size=0.5)) +
-    scale_x_date(minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
-                 breaks = data$Date[format(data$Date,"%d") == "01"],
-                 date_labels = "%b %Y")
+  g <- g + ggplot2::theme(
+    panel.grid.minor = ggplot2::element_line(size=0.1),
+    panel.grid.major = ggplot2::element_line(size=0.5)) +
+    ggplot2::scale_x_date(
+      minor_breaks = data$Date[weekdays(data$Date) == "Monday"],
+      breaks = data$Date[format(data$Date,"%d") == "01"],
+      date_labels = "%b %Y")
 
   # labs and title
-  g <- g + labs(title=title,x="Date",y=currency) +
-    theme(plot.title = element_text(hjust = 0.5, face="bold"))
+  g <- g + ggplot2::labs(title=title,x="Date",y=currency) +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(hjust = 0.5, face="bold"))
   # xlab
-  g <- g + theme(axis.text.x = element_text(angle=90, size=5))
+  g <- g + ggplot2::theme(
+    axis.text.x = ggplot2::element_text(angle=90, size=5))
 
   g
 }
@@ -827,14 +840,12 @@ generate.price.table <- function(FUN, query, ofile="food-prices.tex",
   # positions of the horizontal lines
   hline.after <- c(-1,0,which(diff(as.numeric(data$category)) > 0),nrow(data))
 
-  require(xtable, quietly = TRUE)
-
   # write table to the latex file
   write(paste("\\documentclass[a4paper]{article} \\pagestyle{empty}",
               " \\usepackage[utf8]{inputenc} \\usepackage{longtable}",
               " \\usepackage[left=1cm, right=1cm, bottom=1cm,top=1cm]{geometry}",
               "\\begin{document}"),file=ofile)
-  print(xtable(data,digits=2),type="latex",file=ofile,
+  print(xtable::xtable(data,digits=2),type="latex",file=ofile,
         append=TRUE,tabular.environment = 'longtable',
         include.rownames=FALSE,floating=FALSE,
         hline.after = hline.after)

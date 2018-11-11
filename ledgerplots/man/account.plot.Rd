@@ -15,6 +15,9 @@ account.plot(X, title, type, categorise_accounts = NULL,
 
 \item{type}{type of the plot to make}
 
+\item{categorise_accounts}{if is not NULL plot alluvial instead of
+series}
+
 \item{date.interval}{dates period between which the plots should be
 done (default for one year)}
 
