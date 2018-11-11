@@ -1,0 +1,282 @@
+#!/usr/bin/env Rscript
+
+#' check if R_LIBS_USER writable
+#' @param path directory path
+check.writable <- function(path) {
+  # check if writable
+  tryCatch(dir.create(paste0(path,"/ledger-plots.dummy")),
+           warning = function(w) {return(FALSE)},
+           finally = {unlink(paste0(path,"/ledger-plots.dummy"),
+                             recursive = TRUE)})
+}
+
+#' Install missing packages for this script
+install.missing.packages <- function() {
+  # default mirror
+  mirror <- "https://cloud.r-project.org/"
+
+  # check that R_LIBS_USER directory is writable
+  if (!check.writable(Sys.getenv("R_LIBS_USER"))) {
+    stop(paste("Directory",Sys.getenv("R_LIBS_USER"),
+               "is not writable (configure Renviron (/etc/Renviron))."))
+  }
+
+  # argument parsing
+  if (!require("optparse", quietly = TRUE)) install.packages("optparse", repo = mirror)
+
+
+  # devtools for installing ledgerplots package
+  if (!require("devtools", quietly = TRUE)) install.packages("devtools", repo = mirror)
+
+  # install ledger-plots
+  devtools::install_github("esovetkin/ledger-plots/ledgerplots")
+
+  # install ggplot2
+  if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2", repo = mirror)
+  if (!require("gridExtra", quietly = TRUE)) install.packages("gridExtra", repo = mirror)
+  if (!require("ggalluvial", quietly = TRUE)) install.packages("ggalluvial", repo = mirror)
+  if (!require("dplyr", quietly = TRUE)) install.packages("dplyr", repo = mirror)
+  if (!require("lubridate", quietly = TRUE)) install.packages("lubridate", repo = mirror)
+
+  # for "melt" function
+  if (!require("reshape2", quietly = TRUE)) install.packages("reshape2", repo = mirror)
+
+  # install xtable for plotting latex tables
+  if (!require("xtable", quietly = TRUE)) install.packages("xtable", repo = mirror)
+
+  # install stringr for some regex functions
+  if (!require("stringr", quietly = TRUE)) install.packages("stringr", repo = mirror)
+
+  # install tools package (needed for latex compile)
+  if (!require("tools", quietly = TRUE)) install.packages("tools", repo = mirror)
+}
+
+# to install missing dependencies
+if (any(c("--install-dependencies","-u") %in% commandArgs(trailingOnly = TRUE))) {
+  install.missing.packages()
+}
+
+# parse arguments
+if (!require("optparse", quietly = TRUE)) {
+  stop("optparse R-package is missing! Use -u,--install-dependencies")
+}
+require("optparse", quietly = TRUE)
+
+# available options
+option_list <- list(
+  make_option(c("-o","--output"), type="character", default="ledger.pdf",
+              help = "output pdf file name", metavar="character"),
+  make_option(c("-q","--queries"), type="character", default=NULL,
+              help = paste0("Query in a ledger query syntax. Multiple queries are ",
+                            "separated by ';;;'. All plots for each query are ",
+                            "generated separately one after another."),
+              metavar="character"),
+  make_option(c("-f","--functions"), type="character",
+              default="cumsum",
+              help = paste0("Function (statistic) applied to each of the transaction vectors. ",
+                            "Multiple functions that are separated by ';;;' correspondingly to the queries. ",
+                            "Multiple functions that are separated by ':::' correspond to various function ",
+                            "to be calculated on each transaction vector and be ploted in one figure. ",
+                            "This argument can be any R-function (e.g. cumsum, monthly). ",
+                            "Default: %default"),
+              metavar="character"),
+  make_option(c("-t","--type"), type="character",
+              default = "amount",
+              help = paste0("Type of values to plots. Possible values: amount, ",
+                            "price, volume, revalued. ",
+                            "Revalued type plots only <Revalued> values. ",
+                            "Price and volumes are parsed from comments to transactions. ",
+                            "Multiple functions are separated by ';;;' correspondingly to the queries. ",
+                            "Default: %default."),
+              metavar="character"),
+  make_option(c("-C","--categorise-by"), type="character",
+              default = "account",
+              help = paste0("The way plots are categorised. Possible values: ",
+                            "account, tags, alluvial. ",
+                            "Default: %default."),
+              metavar = "character"),
+  make_option(c("--generate-price-table"), action="store_true",
+              default=FALSE,
+              help = paste0("Specify this argument to generate price LaTeX table. ",
+                            "Script also tries to run pdflatex. ",
+                            "Functions in -f argument must return a single value, ",
+                            "otherwise only the last value is used. ",
+                            "Currently, multiple queries are not supported and ignored.")),
+  make_option(c("-c","--unit-conversion"), type="character",
+              default = "1kg = 1000g",
+              help = paste0("Unit conversion rules given in the format ",
+                            "<left_value><left_unit> = <right_value><right_unit>. ",
+                            "All <right_unit> are converted to <left_unit>. ",
+                            "Multiple rules are separated by ';;;'. Default: %default."),
+              metavar="character"),
+  make_option(c("--order-function"), type="character",
+              default="function(x) sum(abs(x))",
+              help = "Function that specifies how to order the plots. Default: %default",
+              metavar="character"),
+  make_option(c("--no-depth-order"), action = "store_false",
+              default = TRUE,
+              help = paste0("Do not sort plots by depth. Plots are ordered only ",
+                            "wrt --order-function. Default: %default")),
+  make_option(c("-n","--number-of-plots"),
+              type="numeric", default = Inf,
+              help = paste0("Maximum number of plots per query. ",
+                            "Two plots with different currencies are counted as one plot. ",
+                            "Default: %default ")),
+  make_option(c("-l","--ledger-options"), type="character",
+              default=NULL,
+              help = "String with extra options passed to ledger",
+              metavar="character"),
+  make_option(c("--ledger-options-file"), type="character",
+              default=NULL,
+              help = paste0("Path to a file containing ledger options. Same format as .ledgerrc. ",
+                            "The options from file are appended to the --ledger-options argument."),
+              metavar="character"),
+  make_option(c("--ledger-bin-path"), type="character", default=NULL,
+              help = "Specify path to the ledger executable file",
+              metavar="character"),
+  make_option(c("-u","--install-dependencies"), action = "store_true", default = FALSE,
+              help = paste0("Install missing dependencies. It also updates ",
+                            "ledgerplots package. Default: %default")),
+  make_option(c("--output-pdf-ncol"),
+              type="numeric", default = 2,
+              help = paste0("Number of plots columns on one page. Default: %default ")),
+  make_option(c("--output-pdf-nrow"),
+              type="numeric", default = 2,
+              help = paste0("Number of plots rows on one page. Default: %default ")),
+  make_option(c("--output-pdf-width"),
+              type="numeric", default = 13,
+              help = paste0("Page width (in inches). Default: %default ")),
+  make_option(c("--output-pdf-height"),
+              type="numeric", default = 7,
+              help = paste0("Page height (in inches). Default: %default ")),
+  make_option(c("--max-tags-tuples"),
+              type="numeric", default = 3,
+              help = paste0("Maximum length of tags combinations. Default: %default")),
+  make_option(c("--min-tags-entries"),
+              type="numeric", default = 5,
+              help = paste0("Minimum number of transaction for ",
+                            "a plot with tags to appear. Default: %default")),
+  make_option(c("--min-tags-account-depth"),
+              type="numeric", default = 1,
+              help = paste0("Depth of account to plot in combination with different tags. ",
+                            "Default: %default")),
+  make_option(c("--plot-legend"), action = "store_true",
+              default = FALSE,
+              help = paste0("Add legend to plots indicating which query statistic ",
+                            "function has been used. Default: %default "))
+)
+
+opt_parser <- OptionParser(option_list = option_list,
+                           prog = "ledger-plots",
+                           description =
+                             paste0("\n\n",
+                                    "Using ledger get and plot transactions to a pdf file. \n",
+                                    "You may specify the query in -q options. The program plots \n",
+                                    "the daily value of a statistic function evaluated on the transactions. \n",
+                                    "The statistic function can be specified with -f option.\n\n",
+                                    "Multiple plots are ordered with respect to the depth of the \n",
+                                    "account names (e.g. Assets:Cash has depth 2) and function \n",
+                                    "evaluated on transactions vector (--order-function argument, see also --no-depth-order).\n\n",
+                                    "Extra option to be passed to ledger may be specified using the \n",
+                                    "--ledger-options argument.\n\n",
+                                    "In case your ledger executable file is located in a non-$PATH directory \n",
+                                    "then you can specify the correct path with --ledger-bin-path argument.\n\n",
+                                    "You can install missing R-package dependencies using the \n",
+                                    "--install-dependencies argument. This also updates the \n",
+                                    "ledgerplots R-package.\n\n"),
+                           epilogue =
+                             paste0("Examples:\n\n",
+                                    "Install dependencies and update ledgerplots R-package:\n",
+                                    "ledger-plots -u\n\n",
+                                    "Generate plot for assets:\n",
+                                    "ledger-plots -q \"^assets: -X EUR\" -f \"cumsum\"\n\n"))
+opt <- parse_args(opt_parser)
+
+# parse ledger-options
+opt$"ledger-options-full" <- ""
+if (! is.null(opt$"ledger-options"))
+  opt$"ledger-options-full" <- paste(opt$"ledger-options")
+if (! is.null(opt$"ledger-options-file"))
+  opt$"ledger-options-full" <- paste(opt$"ledger-options-full",
+                                     paste(readLines(opt$"ledger-options-file"),collapse=" "))
+
+# in case there are some queries, plot them
+if (! is.null(opt$queries)) {
+
+  if (!require("ledgerplots", quietly = TRUE)) {
+    stop("ledgerplots R-package is missing! Use -u,--install-dependencies")
+  }
+  require("ledgerplots", quietly = TRUE)
+
+  # split on queries and functions
+  q <- unlist(strsplit(gsub("\n"," ",opt$queries,fixed=TRUE),split=";;;"))
+  f <- unlist(strsplit(opt$functions,split=";;;"))
+  t <- unlist(strsplit(opt$type,split=";;;"))
+  conversion <- trimws(unlist(strsplit(opt$"unit-conversion", split=";;;")))
+
+  # make functions the same length
+  if (length(f) < length(q)) {
+    f <- f[(1:length(q) - 1) %% length(f) + 1]
+  }
+
+  # make type the same length
+  if (length(t) < length(q)) {
+    t <- t[(1:length(q) - 1) %% length(t) + 1]
+  }
+
+  # in case only one needs to generate table
+  if (opt$"generate-price-table") {
+
+    # do a single query ignore others
+    ledgerplots::generate.price.table(FUN = unlist(strsplit(f[1],split=":::")),
+                                      query = q[1],
+                                      ofile = opt$output,
+                                      ledger.options = opt$"ledger-options-full",
+                                      ledger.path = opt$"ledger-bin-path",
+                                      conversion = conversion)
+
+    # generate pdf
+    dir <- dirname(opt$output)
+    file  <- basename(opt$output)
+    old.dir <- setwd(dir)
+    tools::texi2pdf(file=file)
+    setwd(old.dir)
+
+    quit(save="no")
+  }
+
+  # make plot for each query
+  plots <- lapply(1:length(q), function(i) {
+    ledgerplots::query.plot(q[i],
+                            type = t[i],
+                            categorise_by = opt$"categorise-by",
+                            order.depth = opt$"no-depth-order",
+                            order.function = function(x)
+                              do.call(eval(parse(text=opt$"order-function")),args=list(x)),
+                            max.num.plots = opt$"number-of-plots",
+                            ledger.options = opt$"ledger-options-full",
+                            ledger.path = opt$"ledger-bin-path",
+                            max_tags_tuples = opt$"max-tags-tuples",
+                            min_tags_entries = opt$"min-tags-entries",
+                            account_depth_for_each_tag = opt$"min-tags-account-depth",
+                            conversion = conversion,
+                            FUN=unlist(strsplit(f[i],split=":::")),
+                            if_legend = opt$"plot-legend")
+  })
+
+  # remove recursive lists
+  plots <- unlist(plots, recursive = FALSE)
+
+  cat(paste("Saving plots to",opt$output,"\n"))
+  # workaround due to the blank page
+  plots <- lapply(plots, ggplot2::ggplotGrob)
+
+  # arrange plots in a grid
+  plots <- gridExtra::marrangeGrob(plots,
+                                   nrow=opt$"output-pdf-nrow",
+                                   ncol=opt$"output-pdf-ncol",
+                                   top=NULL)
+  ggplot2::ggsave(opt$output, plots,
+                  width = opt$"output-pdf-width",
+                  height = opt$"output-pdf-height")
+}
