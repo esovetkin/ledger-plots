@@ -494,6 +494,8 @@ alluvial.plot <- function(data,currency,title)
   # may happen due to filter function)
   data <- stats::na.omit(data)
 
+  .data <- NULL
+
   # reduce data to a monthly data
   z <- dplyr::summarise(
     dplyr::group_by(
