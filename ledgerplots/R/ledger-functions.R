@@ -605,7 +605,6 @@ get_tags <- function(data)
 #' @export
 get_tuples_tags <- function(tags, n=3, min_num=5)
 {
-
   res <- tags
   k <- 2
   tags.tuple <- tags
@@ -702,7 +701,6 @@ parse_at_entries <- function(data,
                              re = "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)") {
   re.at <- paste0(re,"[ ]?@[ ]?",re)
 
-
   x <- as.numeric(gsub(re.at,"\\1",data$matches)) *
     as.numeric(gsub(re.at,"\\3",data$matches))
   x <- as.character(x)
@@ -716,10 +714,6 @@ parse_at_entries <- function(data,
   return(data)
 }
 
-
-  ## # experiments
-  ## data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger_2016.log -f ~/bank/food-ledger.log")
-
 #' @title convert units one to another
 #'
 #' @description convert all right units to left units
@@ -731,7 +725,6 @@ parse_at_entries <- function(data,
 #'
 #' @export
 convert.units <- function(data, conversion = c("1kg = 1000g")) {
-
   for (conv in conversion) {
     re <- "([0-9]+[.0-9]*)[ ]?([[:alpha:]]+)"
     re <- paste0(re,"[ ]?=[ ]?",re)
@@ -785,28 +778,6 @@ parse.notes <- function(data, conversion = c("1kg = 1000g")) {
   data$matches <- NULL
 
   return(data)
-}
-
-#' @title estimate average/variance of transaction expense per given
-#'   period using Poisson compound process
-#'
-#' @param data transactions data.frame. Default is one year
-#'
-#' @param period period in days of which the average is calculated
-#'
-#' @export
-compound.poisson <- function(data, period = 365) {
-
-  data <- read.ledger(query="",options="-f ~/bank/food-ledger_2013.log -f ~/bank/food-ledger_2014.log -f ~/bank/food-ledger_2015.log -f ~/bank/food-ledger.log -X EUR")
-
-  data <- data[grep("Food:Cookies",data$Category),c("Date","Amount")]
-
-  # remove zero period time jumps
-  data <- aggregate(data$Amount, by = list("Date"=data$Date), FUN = sum)
-
-  lambda.t <- (period/as.numeric(mean(diff(data[,1]))))
-
-  c(lambda.t*mean(data[,2]), sqrt(lambda.t*mean(data[,2]^2)))
 }
 
 #' Generate a latex table with food prices
