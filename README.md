@@ -30,15 +30,16 @@ The current master version can be installed from github:
 ```
 > devtools::install_github("esovetkin/ledger-plots/ledgerplots")
 ```
+For that you need to install `devtools` package.
 
+You can also install the package by running the command from the root
+directory of the repository
+```
+R CMD INSTALL ledgerplots
+```
 Alternatively, you can install the AUR package
 [ledger-plots-git](https://aur.archlinux.org/packages/ledger-plots-git/).
 
-The script can be updated either by reinstalling the `ledgerplots`
-package (from CRAN or github) or by running
-```
-ledger-plots -u
-```
 
 ## Dependencies
 
@@ -46,12 +47,7 @@ It is assumed that you have [ledger](http://ledger-cli.org/) installed
 and you know its query syntax.
 
 The script is written in [R](https://www.r-project.org/) and this is
-the only dependency. However, you need to install extra R-packages to
-make it work.
-
-
-
-
+the only dependency.
 
 ## Getting help
 
