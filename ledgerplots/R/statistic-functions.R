@@ -117,7 +117,7 @@ lm_forecast <- function(x, using_last = 365, forecast_for = 365) {
 
   res <- predict(lm(tail(x,n=using_last)~i),newdata=newdata)
 
-  c(rep(NA,length(x)-using_last-1),res)
+  c(rep(NA,length(x)-using_last),res)
 }
 
 #' @title forecast values adjust
