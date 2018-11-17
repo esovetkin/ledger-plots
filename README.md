@@ -343,28 +343,15 @@ returns a larger vector than the input vector.
 
 The following example plots cumulative value of the assets with
 forecast for 2 years using linear regression (2 regressions that take
-all available time and last year) and SSA method. To use the latter
-you need to install [this R-package](https://cran.r-project.org/package=Rssa).
+all available time and last year) and [SSA method](https://en.wikipedia.org/wiki/Singular_spectrum_analysis#Forecasting_by_SSA).
 ```
 cd examples
 ../ledger-plots \
-    -f "cumsum                                              :::
-        function(x) lm_forecast(cumsum(x),length(x),2*365)  :::
-        function(x) lm_forecast(cumsum(x),365,2*365)        :::
-        function(x) {
-            require(Rssa)
-            tryCatch({
-                p <- predict(ssa(cumsum(x)),groups=list(1:20),method=\"recurrent\",len=2*365);
-                c(rep(NA,length(x)),p)
-            }, error = function(e) rep(NA,length(x)))
-        } :::
-        function(x) {
-            require(Rssa)
-            tryCatch({
-                p <- predict(ssa(cumsum(x)),groups=list(1:10),method=\"recurrent\",len=2*365);
-                c(rep(NA,length(x)),p)
-            }, error = function(e) rep(NA,length(x)))
-        }" \
+    -f "cumsum                                                :::
+        function(x) lm_forecast(cumsum(x),length(x),2*365)    :::
+        function(x) lm_forecast(cumsum(x),365,2*365)          :::
+        function(x) ssa_forecast(cumsum(x),group=1:20,2*365)  :::
+        function(x) ssa_forecast(cumsum(x),group=1:10,2*365)" \
     --queries="^assets " \
     --ledger-options='-f expenses-realistic.ledger -b 2013-01-01' \
     -n 1 \
