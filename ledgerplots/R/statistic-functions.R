@@ -188,3 +188,21 @@ alltime.price <- function(x, ignore.days = 30) {
   # compute average price
   cumsum(x)/n
 }
+
+#' @title ssa forecast
+#'
+#' @param x a numeric vector
+#'
+#' @param group vector indicating which components to choose
+#'
+#' @param forecast_for number of days to forecast
+#'
+#' @export
+ssa_forecast <- function(x,group,forecast_for = 365) {
+  tryCatch({
+    p <- predict(Rssa::ssa(x),groups=list(group),
+                 method="recurrent",len=forecast_for)
+
+    c(rep(NA,length(x)),p)
+  }, error = function(e) rep(NA,length(x)))
+}

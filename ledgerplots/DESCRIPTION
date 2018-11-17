@@ -25,4 +25,5 @@ Imports:
     reshape2,
     xtable,
     stringr,
-    tools
+    tools,
+    Rssa
