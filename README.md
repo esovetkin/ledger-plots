@@ -138,7 +138,8 @@ ledger-plots -f "function(x) {
 ```
 
 There are several query statistic functions available: `weekly`,
-`monthly`, `quarterly` and `yearly`.
+`monthly`, `quarterly`, `yearly` and `alltime` (the latter evaluates
+cumulative average).
 
 Multiple function can be combined together for multiple queries by
 separating them by two semi-colons (";;;"). The first function in
@@ -361,6 +362,10 @@ cd examples
 ```
 
 ![example of forecast plot](examples/figs/assets-forecast.png?raw=true)
+
+For forecast like SSA it is also possible to specify some irregular
+transaction that will happen in the future using the `adjust_forecast`
+function.
 
 # Food prices and volumes
 
