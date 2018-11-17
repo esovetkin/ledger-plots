@@ -497,6 +497,9 @@ alluvial.plot <- function(data,currency,title)
   # this removes the CRAN check warning as .data is undeclared
   # variable
   .data <- NULL
+  Date <- NULL
+  value <- NULL
+  Category <- NULL
 
   # reduce data to a monthly data
   z <- dplyr::summarise(
@@ -508,11 +511,11 @@ alluvial.plot <- function(data,currency,title)
 
   # generate a plot
   g <- ggplot2::ggplot(data = z,
-                       ggplot2::aes(x = z$Date,
-                                    y = z$value,
-                                    alluvium = z$Category)) +
+                       ggplot2::aes(x = Date,
+                                    y = value,
+                                    alluvium = Category)) +
     ggalluvial::geom_alluvium(
-      ggplot2::aes(fill = z$Category, colour = z$Category),
+      ggplot2::aes(fill = Category, colour = Category),
       alpha = .75, decreasing = FALSE)
 
   # minor grid: weeks, major grid: months
