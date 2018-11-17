@@ -148,3 +148,43 @@ adjust_forecast <- function(forecast,dates,values,FUN="cumsum") {
 
   return(forecast+adj)
 }
+
+#' @title Compute all-time-running daily average
+#'
+#' @param x a numeric vector
+#'
+#' @param ignore.days number of first days to ignore
+#'
+#' @return a numeric vector of the same size
+#'
+#' @export
+alltime <- function(x, ignore.days = 30) {
+  if (length(x) < ignore.days)
+    return(rep(NA,length(x)))
+
+  res <- cumsum(x)/(1:length(x))
+  res[1:ignore.days] <- NA
+
+  return(res)
+}
+
+#' @title Compute all-time-running daily average price
+#'
+#' @param x a numeric vector
+#'
+#' @param ignore.days number of first days to ignore
+#'
+#' @return a numeric vector of the same size
+#'
+#' @export
+alltime.price <- function(x, ignore.days = 30) {
+  if (length(x) < ignore.days)
+    return(rep(NA,length(x)))
+
+  # number of price observations in a window
+  n <- cumsum(abs(x) > 0)
+  n[! abs(n) > 0] <- 1
+
+  # compute average price
+  cumsum(x)/n
+}
