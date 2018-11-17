@@ -1,6 +1,6 @@
 Package: ledgerplots
 Title: Create Plots for Ledger
-Version: 1.0-1
+Version: 1.1-1
 Authors@R: person("Jenya", "Sovetkin", email = "e.sovetkin@gmail.com", role = c("aut", "cre"))
 Maintainer: Jenya Sovetkin <e.sovetkin@gmail.com>
 URL: https://github.com/esovetkin/ledger-plots
