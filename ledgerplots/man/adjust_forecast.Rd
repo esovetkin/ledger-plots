@@ -4,18 +4,24 @@
 \alias{adjust_forecast}
 \title{forecast values adjust
 
-adjust forecast values with known future transaction amounts}
+adjust forecast values with known transaction amounts and dates}
 \usage{
-adjust_forecast(forecast, dates, values, FUN = "cumsum")
+adjust_forecast(forecast, dates, values, FUN = "cumsum",
+  forecast_length = length(forecast), last_series_date = Sys.Date())
 }
 \arguments{
 \item{forecast}{vector of the forecasted values}
 
-\item{dates}{future dates of transactions}
+\item{dates}{dates of transactions}
 
 \item{values}{values of transactions}
 
 \item{FUN}{function to be aplied to the adjusted values}
+
+\item{forecast_length}{length of the forecast}
+
+\item{last_series_date}{last date of the data before forecast
+starts. default assumes it is current date}
 }
 \value{
 vector adjusted forecast vector
@@ -23,5 +29,5 @@ vector adjusted forecast vector
 \description{
 forecast values adjust
 
-adjust forecast values with known future transaction amounts
+adjust forecast values with known transaction amounts and dates
 }
