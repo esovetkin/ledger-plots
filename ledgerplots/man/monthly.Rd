@@ -10,6 +10,5 @@ monthly(x)
 \item{x}{a numeric vector}
 }
 \description{
-example of a functions can be used to be appled for
-  the transaction vectors
+Calculate 30 days average of the given vector
 }

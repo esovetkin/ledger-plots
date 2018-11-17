@@ -109,6 +109,8 @@ weekly.price <- function(x) .period_price(x=x,days=7)
 #'
 #' @param forecast_for number of days to forecast
 #'
+#' @return vector, regression line values
+#'
 #' @export
 lm_forecast <- function(x, using_last = 365, forecast_for = 365) {
   i <- tail(1:length(x),n=using_last)
@@ -131,6 +133,8 @@ lm_forecast <- function(x, using_last = 365, forecast_for = 365) {
 #' @param forecast vector of the forecasted values
 #'
 #' @param FUN function to be aplied to the adjusted values
+#'
+#' @return vector adjusted forecast vector
 #'
 #' @export
 adjust_forecast <- function(forecast,dates,values,FUN="cumsum") {

@@ -17,6 +17,9 @@ adjust_forecast(forecast, dates, values, FUN = "cumsum")
 
 \item{FUN}{function to be aplied to the adjusted values}
 }
+\value{
+vector adjusted forecast vector
+}
 \description{
 forecast values adjust
 

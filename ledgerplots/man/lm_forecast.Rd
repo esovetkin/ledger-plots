@@ -13,6 +13,9 @@ lm_forecast(x, using_last = 365, forecast_for = 365)
 
 \item{forecast_for}{number of days to forecast}
 }
+\value{
+vector, regression line values
+}
 \description{
 linear regression forecast
 }

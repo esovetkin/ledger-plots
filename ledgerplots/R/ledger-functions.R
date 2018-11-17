@@ -494,6 +494,8 @@ alluvial.plot <- function(data,currency,title)
   # may happen due to filter function)
   data <- stats::na.omit(data)
 
+  # this removes the CRAN check warning as .data is undeclared
+  # variable
   .data <- NULL
 
   # reduce data to a monthly data
