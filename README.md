@@ -199,11 +199,7 @@ cd examples
 ../ledger-plots -q "\^expenses" \
                 -f "monthly :::
                     function(x) yearly(x)/12 :::
-                    function(x) {
-                        res <- 30*cumsum(x)/(1:length(x));
-                        res[1:100]<-NA;
-                        res
-                    }" \
+                    function(x) alltime(x)*30" \
                 --ledger-options='-f expenses.ledger -H -X EUR' \
                 -n 4 \
                 -o figs/expenses.pdf
@@ -346,17 +342,15 @@ available). For that you need to specify a function that
 returns a larger vector than the input vector.
 
 The following example plots cumulative value of the assets with
-forecast for 2 years using linear regression and SSA method. To use
-the latter you need to install
-[this R-package](https://cran.r-project.org/package=Rssa).
+forecast for 2 years using linear regression (2 regressions that take
+all available time and last year) and SSA method. To use the latter
+you need to install [this R-package](https://cran.r-project.org/package=Rssa).
 ```
 cd examples
 ../ledger-plots \
-    -f "cumsum :::
-        function(x) {
-            i <- 1:length(x);
-            predict(lm(cumsum(x)~i),newdata=data.frame(\"i\"=1:(length(x)+2*365)))
-        } :::
+    -f "cumsum                                              :::
+        function(x) lm_forecast(cumsum(x),length(x),2*365)  :::
+        function(x) lm_forecast(cumsum(x),365,2*365)        :::
         function(x) {
             require(Rssa)
             tryCatch({
