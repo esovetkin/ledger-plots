@@ -23,7 +23,7 @@ symbolic link to `ledger-plot` in your preferred location.
 
 The path to `ledger-plot` can be queried with the following bash command:
 ```
-echo "cat(paste0(Sys.getenv('R_LIBS_USER'),'ledgerplots/exec/ledger-plots'))" | Rscript -
+$ Rscript -e "system.file('exec/ledger-plots', package='ledgerplots')"
 ```
 
 The current master version can be installed from github:
