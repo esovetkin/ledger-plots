@@ -98,7 +98,9 @@ weekly.price <- function(x) .period_price(x=x,days=7)
   n[! abs(n) > 0] <- 1
 
   # compute average price in a window
-  stats::filter(x,rep(1,days),sides=1)/n
+  res <- stats::filter(x,rep(1,days),sides=1)/n
+  res[!abs(res) > 0] <- NA
+  res
 }
 
 #' @title linear regression forecast
@@ -199,7 +201,9 @@ alltime.price <- function(x, ignore.days = 30) {
   n[! abs(n) > 0] <- 1
 
   # compute average price
-  cumsum(x)/n
+  res <- cumsum(x)/n
+  res[!abs(res) > 0] <- NA
+  res
 }
 
 #' @title ssa forecast
