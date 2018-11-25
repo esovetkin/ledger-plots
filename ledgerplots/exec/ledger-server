@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# initialise server
+function init_server {
+    args="$@"
+    
+    dir="$(mktemp -d)"
+
+    # create fifo
+    mkfifo "${dir}/input"
+    
+    # keep cat fifo alive
+    sleep 1d > "${dir}/input" &
+    echo $! > "${dir}/pid_sleep"
+
+    # run ledger and listen for input from fifo
+    (cat "${dir}/input" & echo $! >&3) 3>"${dir}/pid_cat" | \
+        ledger ${args} > "${dir}/output" &
+    echo $! > "${dir}/pid_ledger"
+    
+    # return directory path
+    echo "${dir}"
+}
+
+# run a query
+function query {
+    dir="$1"
+    query="${@:2}"
+
+    # cleanup the previous output of ledger
+    sync
+    echo -n > "${dir}/output"
+    echo "${query}" > "${dir}/input"
+    #echo "query is done" > "${dir}/input"
+
+    echo "${dir}/output"
+}
+
+# cleanup server
+function cleanup {
+    dir="$1"
+
+    kill "$(cat ${dir}/pid_cat)"
+    kill "$(cat ${dir}/pid_sleep)"
+
+    rm "${dir}/pid_cat"
+    rm "${dir}/pid_sleep"
+    rm "${dir}/pid_ledger"
+    rm "${dir}/input"
+    rm "${dir}/output"
+    rmdir "${dir}"
+}
+
+# print command line usage
+function cmd_usage() {
+    cat <<-_EOF
+    Name:
+        $PROGRAM 
+
+    Usage:
+        $PROGRAM <command> [options]
+
+    Commands:
+        init [args]
+                Initialise ledger server
+
+                [args] are the arguments that are passed to ledger
+
+                The command returns a path string to the directory,
+                where ledger is initialised
+
+        query <path> [args]
+                Run query on the ledger-server initialised in the
+                specified <path>.
+
+                [args] are the arguments that are passed to ledger
+                
+                The command returns a path to a file containing query
+                output result.
+
+        stop <path>
+                Kill server and cleanup the files for the
+                ledger-server running in the directory specified
+                <path>
+
+
+_EOF
+}
+
+init_server
