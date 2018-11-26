@@ -9,13 +9,19 @@ Make plots for your ledger entries and save them to a pdf file.
 The program consist of an R-package and an executable script written
 in R.
 
-The simplest way to install the package is to run the following
-command in the R console.
+<!-- The simplest way to install the package is to run the following -->
+<!-- command in the R console. -->
+<!-- ``` -->
+<!-- > install.packages("ledgerplots") -->
+<!-- ``` -->
+<!-- It will install `ledgerplots` package from CRAN repository along with -->
+<!-- all the necessary dependencies. -->
+
+The current master version can be installed from github:
 ```
-> install.packages("ledgerplots")
+> devtools::install_github("esovetkin/ledger-plots/ledgerplots")
 ```
-It will install `ledgerplots` package from CRAN repository along with
-all the necessary dependencies.
+For that you need to install `devtools` package.
 
 The `ledger-plot` executable is located in the `exec` directory of the
 installed package. You can add this directory to your `$PATH` or add a
@@ -26,17 +32,11 @@ The path to `ledger-plot` can be queried with the following bash command:
 $ Rscript -e "system.file('exec/ledger-plots', package='ledgerplots')"
 ```
 
-The current master version can be installed from github:
-```
-> devtools::install_github("esovetkin/ledger-plots/ledgerplots")
-```
-For that you need to install `devtools` package.
-
-You can also install the package by running the command from the root
-directory of the repository
-```
-R CMD INSTALL ledgerplots
-```
+<!-- You can also install the package by running the command from the root -->
+<!-- directory of the repository -->
+<!-- ``` -->
+<!-- R CMD INSTALL ledgerplots -->
+<!-- ``` -->
 Alternatively, you can install the AUR package
 [ledger-plots-git](https://aur.archlinux.org/packages/ledger-plots-git/).
 
