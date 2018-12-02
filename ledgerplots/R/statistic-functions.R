@@ -147,19 +147,17 @@ lm_forecast <- function(x, using_last = 365, forecast_for = 365) {
 adjust_forecast <- function(forecast,dates,values,FUN="cumsum",
                             forecast_length = length(forecast),
                             last_series_date = Sys.Date()) {
-  # compute position in the forecast vector
-  dates_idx <- as.numeric(difftime(as.Date(dates),last_series_date,units="days"))
+  # get dates list
+  d <- seq(min(as.Date(c(dates,as.character(last_series_date)))),
+           max(as.Date(c(dates,as.character(last_series_date + forecast_length)))),
+           by=1)
 
-  # select only values with positive position
-  idx <- (dates_idx > 0) & (dates_idx <= forecast_length)
-  values <- values[idx]
-  dates_idx <- dates_idx[idx]
-
-  # get adjusted vector
-  adj <- rep(0,forecast_length)
-  adj[dates_idx] <- values
-  adj <- c(rep(0,length(forecast) - forecast_length),adj)
+  adj <- rep(0,length(d))
+  names(adj) <- d
+  adj[dates] <- values
   adj <- FUN(adj)
+  adj <- adj[names(adj) >= last_series_date & names(adj) < (last_series_date + forecast_length)]
+  adj <- c(rep(0,length(forecast) - forecast_length),adj)
 
   return(forecast+adj)
 }
