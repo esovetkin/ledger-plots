@@ -114,7 +114,7 @@ read.ledger <- function(query, options = "", ledger.path = NULL) {
 #' @export
 query.plot <- function(query,
                        type = c("amount","price","volume","revalued"),
-                       categorise_by = c("account","tags","alluvial"),
+                       categorise_by = c("account","tags","alluvial","pie"),
                        order.depth = TRUE,
                        order.function = function(x) sum(abs(x)),
                        max.num.plots,
@@ -148,7 +148,11 @@ query.plot <- function(query,
 
   # in case there is no transactions
   if (! nrow(transactions))
-    return(list())
+      return(list())
+
+  if ( "pie" == categorise_by ) {
+      return(pie.plots(transactions, title = query))
+  }
 
   # get account tree
   tree <- account.tree.depth(transactions$Category)
@@ -469,6 +473,89 @@ series.plot <- function(data,currency,title,if_legend=FALSE) {
   g <- g + ggplot2::theme(axis.text.x = ggplot2::element_text(angle=90, size=5))
 
   g
+}
+
+#' @title pie plot for each currency
+#'
+#' @param data ledger entries
+#'
+#' @return list of ggplot objects
+#'
+#' @export
+pie.plots <- function(data, title)
+{
+    require("ggplot2")
+    lapply(sort(unique(data$Currency)), function(currency)
+    {
+        x <- data[data$Currency %in% currency,]
+
+        pie.plot(data=x) + ggtitle(paste0(title,"; ",currency))
+    })
+}
+
+#' @title a single pie plot
+#'
+#' @param data ledger entries
+#'
+#' @return ggplot object
+#'
+#' @export
+pie.plot <- function(data)
+{
+    accs <- strsplit(as.character(data$Category),split=":")
+
+    for (i in 1:max(sapply(accs,length))) {
+        data[,paste0("Category_",i)] <-
+            sapply(accs, function(x)
+                if (length(x) < i)
+                    paste(x[1:length(x)], collapse=":")
+                else
+                    paste(x[1:i],collapse=":"))
+    }
+
+    cols <- sort(colnames(data)[grep("^Category_[0-9]+$",colnames(data))])
+
+    for (x in cols) {
+        d <- aggregate(data$Amount,list(data[,x]),sum)
+        rownames(d) <- d$Group.1
+        data[,paste0("Amount_",x)] <- d[data[,x],"x"]
+    }
+
+    data <- data[do.call(order,data[,paste0("Amount_",cols)]),]
+
+    d <- lapply(1:length(cols), function(i)
+    {
+        x <- cols[i]
+        ymax <- data[! duplicated(data[,x]),paste0("Amount_",x)]
+        idx <- ymax > 0
+        ymax <- cumsum(ymax[idx])
+        ymax <- ymax + 2*(if (min(ymax) < 0) -min(ymax) else 0)
+        d <- data.frame("Category" = data[! duplicated(data[,x]),x][idx],
+                        "xmin" = i-1,
+                        "xmax" = i,
+                        "ymax" = ymax,
+                        "ymin" = c(0,ymax[-length(ymax)]))
+    })
+    d <- do.call(rbind,d)
+
+    d$Category <- as.character(d$Category)
+    d$size <- (d$ymax - d$ymin) > 2 * (max(d$ymax) - min(d$ymin)) / 360
+    d[! d$size,"Category"] <- ""
+
+    require("ggplot2")
+    g <- ggplot(d, aes(xmin = xmin, xmax = xmax,
+                       ymin = ymin, ymax = ymax)) +
+        geom_rect(color="white") +
+        geom_text(subset(d,xmax == max(d$xmax)),
+                  mapping = aes(x = max(d$xmax), y = (ymax + ymin)/2, label = Category,
+                                angle = - 90 - 360 * (ymax + ymin) / 2 / max(d$ymax)
+                                ),
+                  hjust = 1, size=2) +
+        xlim(0,max(d$xmax) + 4) +
+        coord_polar(theta = "y") +
+        theme_void()
+
+   return(g)
 }
 
 #' @title alluvium plots
