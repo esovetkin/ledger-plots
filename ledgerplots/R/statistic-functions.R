@@ -172,11 +172,14 @@ adjust_forecast <- function(forecast,dates,values,FUN="cumsum",
 #'
 #' @export
 alltime <- function(x, ignore.days = 30) {
+  f0 <- which(x > 0)[1]
+  f0 <- if (is.na(f0)) 0 else f0
+
   if (length(x) < ignore.days)
     return(rep(NA,length(x)))
 
-  res <- cumsum(x)/(1:length(x))
-  res[1:ignore.days] <- NA
+  res <- cumsum(x)/((1:length(x)) - f0)
+  res[1:(f0 + ignore.days)] <- NA
 
   return(res)
 }
